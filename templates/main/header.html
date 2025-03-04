@@ -110,7 +110,7 @@
                             </div>
                             
                             <!-- Subcategories Column -->
-                            <div class="col-md-10">
+                            <!-- <div class="col-md-10">
                                 <div class="row">
                                     {% for category in categories %}
                                         <div id="category{{ category.id }}" class="content-column-header" style="display: none;">
@@ -129,53 +129,21 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                            </div>
-
-
-                           
-
-
-                            
-                            
-                    
-                            <!-- Right Column: Items -->
-                            <!-- <div class="col-md-8">
-                                <div id="subcategory1-1" class="content-column-header">
-                                    <div class="row">
-                                        <div class="col-lg-2 mb-5 sub-item-header">
-                                            <img src="{% static 'assets/images/1.jpg' %}" alt="">
-                                            <a href="#" class="subitem">Item 1.1.1</a>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div id="subcategory1-2" class="content-column-header">
-                                    <div class="row">
-                                        <div class="col-lg-2 mb-5 sub-item-header">
-                                            <img src="{% static 'assets/images/1.jpg' %}" alt="">
-                                            <a href="#" class="subitem">Item 1.2.1</a>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div id="subcategory2-1" class="content-column-header">
-                                    <div class="row">
-                                        <div class="col-lg-2 mb-5 sub-item-header">
-                                            <img src="{% static 'assets/images/1.jpg' %}" alt="">
-                                            <a href="#" class="subitem">Item 2.1.1</a>
-                                        </div>
-                                    </div>
-                                </div>
-                    
-                                <div id="subcategory2-2" class="content-column-header">
-                                    <div class="row">
-                                        <div class="col-lg-2 mb-5 sub-item-header">
-                                            <img src="{% static 'assets/images/1.jpg' %}" alt="">
-                                            <a href="#" class="subitem">Item 2.2.1</a>
-                                        </div>
-                                    </div>
-                                </div>
                             </div> -->
+                            <div class="col-md-10">
+                                <div class="row text-center">
+                                    {% for category in categories %}
+                                        {% for subcategory in category.subcategories.all %}
+                                            <div class="col-4 col-lg-2 col-md-2">
+                                                <a href="{% url 'subcategory_products' subcategory.id %}" class="test-subcat d-flex flex-column align-items-center justify-content-center text-decoration-none">
+                                                    <i class="fa {{ subcategory.icon }} fa-2x mb-2 pt-4"></i>
+                                                    <p class="mb-0">{{ subcategory.name }}</p>
+                                                </a>
+                                            </div>
+                                        {% endfor %}
+                                    {% endfor %}
+                                </div>
+                            </div>             
                         </div>
                     </div>
                     
@@ -251,19 +219,25 @@
         margin-bottom: 10px;
     }
 
-    .subcategory {
-        text-align: center;
-        text-decoration: none;
-        color: inherit;
+    .test-subcat {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        color: black;
+        margin: 10px;
         padding: 10px;
-        height: 130px;
+        text-align: center;
+        border-radius: 8px;
+        transition: background-color 0.3s ease;
+        text-decoration: none; 
     }
 
-    .subcategory:hover {
+    .test-subcat:hover {
         background-color: #343a40;
-        border-radius: 5px;
-        color: aliceblue;
+        color: white;
     }
+
 
     .subcategory .fa {
         display: block;

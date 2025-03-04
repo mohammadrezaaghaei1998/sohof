@@ -133,14 +133,18 @@
                             <div class="col-md-10">
                                 <div class="row text-center">
                                     {% for category in categories %}
-                                        {% for subcategory in category.subcategories.all %}
-                                            <div class="col-4 col-lg-2 col-md-2">
-                                                <a href="{% url 'subcategory_products' subcategory.id %}" class="test-subcat d-flex flex-column align-items-center justify-content-center text-decoration-none">
-                                                    <i class="fa {{ subcategory.icon }} fa-2x mb-2 pt-4"></i>
-                                                    <p class="mb-0">{{ subcategory.name }}</p>
-                                                </a>
+                                        <div id="category{{ category.id }}" class="content-column-header" style="display: none;">
+                                            <div class="subcategory-container">
+                                                {% for subcategory in category.subcategories.all %}
+                                                    <div class="col-4 col-lg-2 col-md-2">
+                                                        <a href="{% url 'subcategory_products' subcategory.id %}" class="test-subcat d-flex flex-column align-items-center justify-content-center text-decoration-none">
+                                                            <i class="fa {{ subcategory.icon }} fa-2x mb-2 pt-4"></i>
+                                                            <p class="mb-0">{{ subcategory.name }}</p>
+                                                        </a>
+                                                    </div>
+                                                {% endfor %}
                                             </div>
-                                        {% endfor %}
+                                        </div>
                                     {% endfor %}
                                 </div>
                             </div>             

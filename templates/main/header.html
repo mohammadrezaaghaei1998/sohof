@@ -116,10 +116,10 @@
                                         <div id="category{{ category.id }}" class="content-column-header" style="display: none;">
                                             <div class="subcategory-container">
                                                 {% for subcategory in category.subcategories.all %}
-                                                    <div class="col-3 col-md-2 mb-4">  <!-- 4 items on mobile (col-3), 8 items on PC (col-md-1) -->
+                                                    <div class="col-3 col-lg-2 col-md-2 mb-4"> 
                                                         <div class="subcategory-item">
                                                             <a href="{% url 'subcategory_products' subcategory.id %}" class="list-group-item list-group-item-action subcategory">
-                                                                <i class="fa {{ subcategory.icon }} fa-2x mb-2"></i> <!-- Icon -->
+                                                                <i class="fa {{ subcategory.icon }} fa-2x mb-2"></i> 
                                                                 <div>{{ subcategory.name }}</div>
                                                             </a>
                                                         </div>

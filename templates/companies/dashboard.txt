@@ -1,0 +1,241 @@
+
+        <section id="add-info">
+            <div id="step-form">
+                <!-- Step form content will be dynamically inserted here -->
+                <div class="container animate__animated animate__fadeInUp">
+                    <div id="form-1" class="form-step business-information-form">
+                        <h3 class="text-center mb-5">Company Information</h3>
+                        <form action="/submit-business-info" method="POST" enctype="multipart/form-data" id="company-info-form">
+                            <div class="row">
+                                <!-- Company Name -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="company-name"><span class="required-star"></span>Company Name:</label>
+                                    <input type="text" id="company-name" name="company_name" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.company_name }}" disabled>
+                                </div>
+                                <!-- Website URL -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="website-url"><span class="required-star"></span>Where Your Company Located At?</label>
+                                    <input type="text" id="company_location" name="company_location" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.company_location }}" disabled>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <!-- Company Description -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="company-description"><span class="required-star"></span>Description:</label>
+                                    <textarea id="company-description" name="company_description" class="form-control border-bottom-style-business-info" rows="5" disabled>{{ sellerprofile.company_description }}</textarea>
+                                </div>
+                                <!-- Company Registration Date -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="registration-date"><span class="required-star"></span>Company Registration Date:</label>
+                                    <input type="date" id="registration-date" name="registration_date" class="form-control border-bottom-style-business-info" disabled>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <!-- Fields of Work -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="fields-of-work"><span class="required-star"></span>Fields of Work:</label>
+                                    <select id="fields-of-work" name="fields_of_work" class="form-control border-bottom-style-business-info" required disabled>
+                                        <option value="">Select a category</option>
+                                        <option value="technology">Technology</option>
+                                        <option value="consulting">Consulting</option>
+                                        <option value="manufacturing">Manufacturing</option>
+                                    </select>
+                                </div>
+                                <!-- Accepted Languages -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="accepted-languages"><span class="required-star"></span>Accepted Languages:</label>
+                                    <input type="url" id="accepted-languages" name="accepted_languages" class="form-control border-bottom-style-business-info" placeholder="Enter Language" disabled>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <!-- Floor Space -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="floor-space"><span class="required-star"></span>Floor Space (㎡):</label>
+                                    <input type="number" id="floor-space" name="floor_space" class="form-control border-bottom-style-business-info" required placeholder="228" min="1" step="1" disabled>
+                                </div>
+                                <!-- Years Exporting -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="year-established"><span class="required-star"></span>Years Exporting:</label>
+                                    <input type="number" id="year-established" name="year_established" class="form-control border-bottom-style-business-info" placeholder="Experience In Exporting" disabled>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <!-- Annual Export Revenue -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="annual-revenue"><span class="required-star"></span>Annual Export Revenue (USD):</label>
+                                    <input type="number" id="annual-revenue" name="annual_revenue" class="form-control border-bottom-style-business-info" placeholder="145,000" disabled>
+                                </div>
+        
+                                <!-- Years in Industry -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="years-in-industry"><span class="required-star"></span>Years in Industry:</label>
+                                    <input type="number" id="years-in-industry" name="years_in_industry" class="form-control border-bottom-style-business-info" placeholder="10" disabled>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <!-- Production Lines -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="production-lines"><span class="required-star"></span>Production lines:</label>
+                                    <input type="number" id="production-lines" name="production_lines" class="form-control border-bottom-style-business-info" placeholder="3" disabled>
+                                </div>
+        
+                                <!-- Production Machines -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="production-machines"><span class="required-star"></span>Production machines:</label>
+                                    <input type="number" id="production-machines" name="production_machines" class="form-control border-bottom-style-business-info" placeholder="5" disabled>
+                                </div>
+                            </div>
+        
+                            <div class="row">
+                                <!-- Product Support traceability -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="traceability"><span class="required-star"></span>Product Support traceability of raw materials:</label>
+                                    <select id="traceability" name="traceability" class="form-control border-bottom-style-business-info" disabled>
+                                        <option value="">Yes</option>
+                                        <option value="">No</option>
+                                        <option value="">-</option>
+                                    </select>
+                                </div>
+        
+                                <!-- Product inspection method -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="inspection-method"><span class="required-star"></span>Product inspection method:</label>
+                                    <input type="text" id="inspection-method" name="inspection_method" class="form-control border-bottom-style-business-info" placeholder="Inspection of all products, Random inspection..." disabled>
+                                </div>
+                            </div>
+                             
+                            <div class="row">
+                                <!-- Fields of Work -->
+                                <div class="col-lg-6 form-group mb-5">
+                                        <label for="Product Support traceability of raw materials"><span class="required-star"></span>Quality control conducted on all production lines:</label>
+                                        <select id="Product Support traceability of raw materials" name="fields_of_work" class="form-control border-bottom-style-business-info" disabled>
+                                            <option value="">Yes</option>
+                                            <option value="">No</option>
+                                            <option value="">-</option>
+                                        </select>
+                                </div>
+                                <!-- Company Description -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="company-description "><span class="required-star"></span>QA/QC inspectors: </label>
+                                    <input type="number" id="Product-inspection-method" name="website_url" class="form-control border-bottom-style-business-info" placeholder="2" disabled>
+                                </div>
+                            </div>
+
+
+                            <div class="row">
+                                <!-- Company Location -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="year-established"><span class="required-star"></span>Main markets:</label>
+                                    <input type="text" id="year-established" name="year_established" class="form-control border-bottom-style-business-info"  placeholder=" South America(20%), Domestic Market(20%), Southeast Asia(17%)" disabled>
+                                </div>
+                              
+                                  <!-- Year Established -->
+                                  <div class="col-lg-6 form-group mb-5">
+                                      <label for="year-established"><span class="required-star"></span>Supply chain partners:</label>
+                                      <input type="text" id="year-established" name="year_established" class="form-control border-bottom-style-business-info"  placeholder="3" disabled>
+                                  </div>
+                            </div>
+
+
+                            <div class="row">
+                                <!-- Company Location -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="year-established"><span class="required-star"></span>Main client types:</label>
+                                    <input type="text" id="year-established" name="year_established" class="form-control border-bottom-style-business-info"  placeholder="Retailer, Engineer, other|Distributors, Wholesaler, Brand business..." disabled>
+                                </div>
+                            
+                                <!-- Year Established -->
+                                <div class="col-lg-6 form-group mb-5">
+                                    <label for="year-established"><span class="required-star"></span>Customization options: </label>
+                                    <input type="text" id="year-established" name="year_established" class="form-control border-bottom-style-business-info"  placeholder=" sample processing, graphic processing, customized on dema..." disabled>
+                                </div>
+                            </div>
+
+                            <div class="mb-4 p-2 border rounded"  id="certifications-container">
+                                <div class="row certification-entry mb-4">
+                                    <div class="col-lg-3 form-group">
+                                        <label>Certificate Title:</label>
+                                        <input type="text" name="title[]" class="form-control" placeholder="ISO 9001">
+                                    </div>
+                                    <div class="col-lg-4 form-group">
+                                        <label>Certificate Description:</label>
+                                        <textarea name="description[]" class="form-control" rows="2" placeholder="Occupational Health and Safety Certification"></textarea>
+                                    </div>
+                                    <div class="col-lg-4 form-group">
+                                        <label>Upload Certificate Image:</label>
+                                        <div class="d-flex">
+                                            <input type="file" name="image[]" class="form-control me-2">
+                                            <button type="button" class="btn btn-danger remove-certification" style="display:none;">X</button> 
+                                        </div>
+                                    </div>
+                                </div>
+                                <hr>
+                            
+                                <div class="col-lg-12 d-flex justify-content-end" id="add-certification">
+                                    <button type="button" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mt-3">Add More</button>
+                                </div>
+                            </div>
+        
+                            <!-- Logo Upload -->
+                            <div class="col-lg-6 form-group">
+                                <div class="row">
+                                    <label for="company-logo"><span class="required-star"></span>Upload Company Logo:</label>
+                                    <input type="file" id="company-logo" name="company_logo" class="col-lg-6 form-control-file" accept="image/*" disabled>
+                                </div>
+                            </div>
+        
+                            <!-- Edit Button -->
+                            <div class="col-lg-12 d-flex justify-content-end">
+                                <button type="button" id="edit-btn" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mt-3">Edit</button>
+                                <button type="submit" id="submit-btn" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mt-3 ml-2" style="display:none;">Save</button>
+                            </div>
+                            
+                        </form>
+
+                       
+                    
+
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        

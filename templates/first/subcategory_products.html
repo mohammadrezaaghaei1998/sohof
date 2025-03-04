@@ -1,0 +1,377 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section style="padding: 50px;">
+<!-- <div class="container"> -->
+	<div class="row">
+        <aside class="col-md-3">
+            <form method="GET" action="">
+                <div class="card" style="box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.11), -8px -8px 15px rgba(0, 0, 0, 0.055); border-radius: 20px;">
+                    <!-- Category Filter -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_4" aria-expanded="true">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Filter by Category</h6>
+                            </a>
+                        </header>
+
+                        
+                        <div class="filter-content collapse show" id="collapse_4">
+                            <div class="card-body mr-3 mt-2">
+                                <label class="custom-control custom-radio">
+                                    <select id="category" name="category" class="form-control" style="border-radius: 20px;">
+                                        <option value="">Select Category</option>
+                                        {% for category in categories %}
+                                            <option value="{{ category.id }}" {% if request.GET.category == category.id|stringformat:"s" %}selected{% endif %}>{{ category.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Subcategory Filter -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="true">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Filter by Subcategory</h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_5">
+                            <div class="card-body mr-3 mt-2">
+                                <label class="custom-control custom-radio">
+                                    <select id="subcategory" name="subcategory" class="form-control" style="border-radius: 20px;" disabled>
+                                        <option value="">Select Subcategory</option>
+                                        {% for subcategory in subcategories %}
+                                            <option value="{{ subcategory.id }}" {% if request.GET.subcategory == subcategory.id|stringformat:"s" %}selected{% endif %}>{{ subcategory.name }}</option>
+                                        {% endfor %}
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Origin Filter -->
+                    <article class="filter-group">
+                        <header class="card-header" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Search by Origin</h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_1">
+                            <div class="card-body mr-3 mt-2">
+                                <label class="custom-control custom-checkbox">
+                                    <input type="text" name="origin" class="form-control " placeholder="Search by origin" value="{{ request.GET.origin }}"  style="border-radius: 20px;">
+                                </label>
+                            </div>
+                        </div>
+                    </article>
+        
+                    <!-- Availability Filter -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Availability</h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_2">
+                            <div class="card-body">
+                                <label class="custom-control custom-radio">
+                                    <!-- Reset option to clear the availability filter -->
+                                    <input type="radio" name="availability" value="" {% if not request.GET.availability %}checked{% endif %} class="custom-control-input">
+                                    <div class="custom-control-label">None</div>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" name="availability" value="in_stock" {% if request.GET.availability == 'in_stock' %}checked{% endif %} class="custom-control-input">
+                                    <div class="custom-control-label">In Stock</div>
+                                </label>
+        
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" name="availability" value="out_of_stock" {% if request.GET.availability == 'out_of_stock' %}checked{% endif %} class="custom-control-input">
+                                    <div class="custom-control-label">Out of Stock</div>
+                                </label>
+                            </div>
+                        </div>
+                    </article>
+        
+                    <!-- Sorting Options -->
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true">
+                                <i class="icon-control fa fa-chevron-down"></i>
+                                <h6 class="title">Sort By</h6>
+                            </a>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_3">
+                            <div class="card-body">
+                                <label class="custom-control custom-radio">
+                                    <!-- Reset option to clear the sort filter -->
+                                    <input type="radio" name="sort_by" value="" {% if not request.GET.sort_by %}checked{% endif %} class="custom-control-input">
+                                    <div class="custom-control-label">None</div>
+                                </label>
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" name="sort_by" value="newest" {% if request.GET.sort_by == 'newest' %}checked{% endif %} class="custom-control-input">
+                                    <div class="custom-control-label">Newest</div>
+                                </label>
+        
+                                <label class="custom-control custom-radio">
+                                    <input type="radio" name="sort_by" value="most_popular" {% if request.GET.sort_by == 'most_popular' %}checked{% endif %} class="custom-control-input">
+                                    <div class="custom-control-label">Most Popular</div>
+                                </label>
+                            </div>
+                        </div>
+                    </article>
+        
+                    <!-- Apply Button -->
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mb-5 mt-5">Apply Filters</button>
+                    </div>
+                </div>
+            </form>
+        </aside>
+        
+        
+		<main class="col-md-9">
+
+			<header class="border-bottom mb-4 pb-3">
+                <div class="form-inline">
+                    <span class="mr-md-auto mt-2 ml-2">{{ item_count }} Items found</span>
+                </div>    
+            </header>
+			<!-- sect-heading -->
+			<div class="row product-row">
+                {% for product in products %}
+                    <div class="column-product col-md-4 ">
+                        <figure class="card card-product-grid">
+                            <div id="carouselProduct{{ product.id }}" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    {% for image in product.images.all %}
+                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                            <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.image_title }}" style="max-height: 250px; object-fit: contain;">
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselProduct{{ product.id }}" role="button" data-slide="prev" style="background-color: red; height: 40px; width: 40px; position: absolute; top: 50%; left: 0; margin: 2px; transform: translateY(-50%); border-radius: 50%;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselProduct{{ product.id }}" role="button" data-slide="next" style="background-color: red; height: 40px; width: 40px; position: absolute; top: 50%; right: 0; margin: 2px; transform: translateY(-50%); border-radius: 50%;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                             
+                            </div>
+                            <figcaption class="info-wrap">
+                                <div class="fix-height">
+                                    <a href="#" class="title">{{ product.name }}</a>
+                                    <p><strong>Description:</strong> {{ product.description|truncatewords:10 }}</p>
+                                    <div class="price-wrap mt-2">
+                                        <p><strong>origin:</strong>{{ product.origin }}</p>
+                                    </div> <!-- price-wrap.// -->
+                                    <p><strong>Availability:</strong> {{ product.get_availability_display }}</p>
+                                </div>
+                                <hr>
+                               <div class="col-lg-12 text-right">
+                                    <a href="{% url 'product_detail' product.id %}" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s">View details</a>
+                               </div>
+                            </figcaption>
+                        </figure>
+                    </div> <!-- col.// -->
+                {% empty %}
+                    <p>No products available in this subcategory.</p>
+                {% endfor %}
+				
+			</div> <!-- row end.// -->
+
+			<hr>
+            <div class="container d-flex justify-content-end">
+                <nav class="mt-4" aria-label="Page navigation sample">
+                    <ul class="pagination">
+                        {% if products.has_previous %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ base_url }}&page={{ products.previous_page_number }}" aria-label="Previous">Previous</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+                        {% endif %}
+
+                        <li class="page-item active"><a class="page-link" href="#">{{ products.number }}</a></li>
+
+                        {% if products.has_next %}
+                            <li class="page-item">
+                                <a class="page-link" href="{{ base_url }}&page={{ products.next_page_number }}" aria-label="Next">Next</a>
+                            </li>
+                        {% else %}
+                            <li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+            </div>
+
+		</main>
+	</div>
+<!-- </div> -->
+</section>
+
+
+
+<footer class="bg-dark text-white pt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">About Us</h5>
+                <p>
+
+                    We promote businesses through our catalog and strategic advertising, connecting them with global markets to enhance visibility and growth.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'catalogues' %}" class="text-white text-decoration-none">Catalogues</a></li>
+                    <li><a href="{% url 'company_signup' %}" class="text-white text-decoration-none">Become a supplier</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">Smart and Targeted Advertising</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> Connection to Global Markets</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Specialized Commercial Support</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> International Transportation</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Secure International Financial Transactions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media and Subscribe -->
+            <div class="col-md-3 text-center">
+                <h5 class="mb-4 footer-top-title">Follow Us</h5>
+                <div class="mb-3">
+                    {% for link in socialmedia %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-facebook fa-2x"></i></a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-instagram fa-2x"></i></a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-linkedin fa-2x"></i></a>
+                        {% elif 'youtube' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-youtube fa-2x"></i></a>
+                        {% endif %}
+                    {% empty %}
+                        <p>No social media links available</p>
+                    {% endfor %}
+                </div>
+                <!-- <h5 class="mt-4 subscrribe-title">Subscribe to Our Newsletter</h5>
+                <form class="d-flex mt-2">
+                    <div class="input-group" style="border:none; border-bottom: 2px solid white;">
+                        <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="row text-center pb-4">
+            <div class="col">
+                <p class="mb-0">&copy; 2025 Sohof. All Rights Reserved.</p>
+                <!-- <p class="mb-0"><a href="#" class="text-white text-decoration-none">Privacy Policy</a> | <a href="#" class="text-white text-decoration-none">Terms of Service</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+	.subscribe-button{
+
+		background: transparent;
+		color: rgb(255, 255, 255);
+	}
+	.subscribe-button:hover{
+
+		background: transparent;
+		color: black;
+	}
+	.subscrribe-title ,  .footer-top-title{
+		font-weight: bold;
+		color: white;
+	}
+
+</style>
+
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const categorySelect = document.getElementById('category');
+        const subcategorySelect = document.getElementById('subcategory');
+        
+        function toggleSubcategory() {
+            const firstOption = subcategorySelect.querySelector('option');
+            
+            if (categorySelect.value === '') {
+                subcategorySelect.disabled = true;
+                subcategorySelect.value = ''; 
+                firstOption.textContent = "Select Category First";  
+            } else {
+                subcategorySelect.disabled = false;
+                firstOption.textContent = "Select Subcategory";  
+            }
+        }
+
+        toggleSubcategory();
+
+        categorySelect.addEventListener('change', toggleSubcategory);
+    });
+</script> -->
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+    const categorySelect = document.getElementById('category');
+    const subcategorySelect = document.getElementById('subcategory');
+    
+    function toggleSubcategory() {
+        const firstOption = subcategorySelect.querySelector('option');
+        
+        if (categorySelect.value === '') {
+            subcategorySelect.disabled = true;
+            subcategorySelect.value = ''; 
+            firstOption.textContent = "Select Category First";  
+        } else {
+            subcategorySelect.disabled = false;
+            firstOption.textContent = "Select Subcategory";  
+            loadSubcategories(categorySelect.value);  
+        }
+    }
+
+    function loadSubcategories(categoryId) {
+        fetch(`/get_subcategories/${categoryId}/`)
+            .then(response => response.json())
+            .then(data => {
+                subcategorySelect.innerHTML = '<option value="">Select Subcategory</option>'; 
+                data.subcategories.forEach(subcategory => {
+                    const option = document.createElement('option');
+                    option.value = subcategory.id;
+                    option.textContent = subcategory.name;
+                    subcategorySelect.appendChild(option);
+                });
+            });
+    }
+
+    toggleSubcategory();
+
+    categorySelect.addEventListener('change', toggleSubcategory);
+});
+
+</script>
+
+{% endblock content %}

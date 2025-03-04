@@ -1,0 +1,529 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<style>
+    .carousel-container-category-index {
+        position: relative;
+        width: 90%;
+        margin: auto;
+        overflow: hidden;
+    }
+    .carousel-category-index {
+        display: flex;
+        gap: 20px;
+        padding: 20px;
+        overflow-x: scroll;
+        scroll-behavior: smooth;
+        scrollbar-width: none;
+        cursor: grab;
+    }
+    .carousel-category-index::-webkit-scrollbar {
+        display: none; 
+    }
+    .carousel-category-index.grabbing-category-index {
+        cursor: grabbing;
+    }
+    .category-item-category-index {
+        flex: 0 0 auto;
+        width: 150px;
+        height: 150px;
+        border: 2px solid red;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 16px;
+        user-select: none;
+        background-color: white;
+    }
+    .controls-category-index {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: red;
+        color: white;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        cursor: pointer;
+        font-size: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .prev-category-index { left: 0; }
+    .next-category-index { right: 0; }
+</style>
+
+<body>
+<main class="carousel-container-category-index">
+    <div class="container-category-index">
+        <button class="controls-category-index prev-category-index" id="prevBtn-category-index">&#10094;</button>
+        <div class="carousel-category-index" id="carousel-category-index">
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 1</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 2</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 3</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 4</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 5</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 6</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 1</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 2</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 3</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 4</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 5</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 6</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 1</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 2</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 3</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 4</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 5</div>
+            <div class="category-item-category-index"><i class="fa fa-pagelines"></i><br>Category 6</div>
+        </div>
+        <button class="controls-category-index next-category-index" id="nextBtn-category-index">&#10095;</button>
+    </div>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const carousel = document.getElementById("carousel-category-index");
+    const prevBtn = document.getElementById("prevBtn-category-index");
+    const nextBtn = document.getElementById("nextBtn-category-index");
+    
+    let isDragging = false;
+    let startX, scrollLeft;
+
+    carousel.addEventListener("mousedown", (e) => {
+        isDragging = true;
+        carousel.classList.add("grabbing-category-index");
+        startX = e.pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+    });
+
+    document.addEventListener("mouseup", () => {
+        isDragging = false;
+        carousel.classList.remove("grabbing-category-index");
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        const x = e.pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 2;
+        carousel.scrollLeft = scrollLeft - walk;
+    });
+
+    carousel.addEventListener("touchstart", (e) => {
+        isDragging = true;
+        startX = e.touches[0].pageX - carousel.offsetLeft;
+        scrollLeft = carousel.scrollLeft;
+    });
+
+    document.addEventListener("touchend", () => {
+        isDragging = false;
+    });
+
+    carousel.addEventListener("touchmove", (e) => {
+        if (!isDragging) return;
+        const x = e.touches[0].pageX - carousel.offsetLeft;
+        const walk = (x - startX) * 2;
+        carousel.scrollLeft = scrollLeft - walk;
+    });
+
+    prevBtn.addEventListener("click", () => {
+        carousel.scrollBy({ left: -200, behavior: "smooth" });
+    });
+
+    nextBtn.addEventListener("click", () => {
+        carousel.scrollBy({ left: 200, behavior: "smooth" });
+    });
+});
+</script>
+
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<main class="container my-5 animate__animated animate__bounceIn animate__delay-1s">
+
+    <div id="catCarousel" class="carousel slide" data-ride="carousel">
+     <div class="carousel-inner">
+         <!-- Slide 1 -->
+         <div class="carousel-item active">
+             <div class="container">
+                 <div class="row justify-content-center">
+
+
+
+<!-- 
+                     <a href="#" class="col-md-2 col-6 mb-4 cat-row-items">
+                         <div class="category-body">
+                             <div class="category-icon">
+                                 <i class="fa fa-pagelines"></i> 
+                             </div>
+                             <div class="category-title">Environment</div>
+                         </div>
+                     </a> -->
+
+
+                     <!-- Row 1 -->
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                        <a href="">
+                         <div class="category-icon">
+                             <i class="fa fa-pagelines"></i> 
+                         </div>
+                         <div class="cat-card text-center">Cat Card 1</div>
+                        </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 2</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 3</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 4</div>
+                         </a>
+                     </div>
+                   
+                    
+                 </div>
+                 <div class="row justify-content-center mt-3">
+                     <!-- Row 2 -->
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 5</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 6</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 7</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 8</div>
+                         </a>
+                     </div>
+                    
+                 </div>
+             </div>
+         </div>
+         <!-- Slide 2 -->
+         <div class="carousel-item">
+             <div class="container">
+                 <div class="row justify-content-center">
+                     <!-- Row 1 -->
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 9</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 10</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 11</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 12</div>
+                         </a>
+                     </div>
+                     
+                 </div>
+                 <div class="row justify-content-center mt-3">
+                     <!-- Row 2 -->
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 13</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 14</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 15</div>
+                         </a>
+                     </div>
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 16</div>
+                         </a>
+                     </div>
+                     
+                    
+                 </div>
+             </div>
+         </div>
+
+         <div class="carousel-item">
+             <div class="container">
+                 <div class="row justify-content-center">
+                     <!-- Row 1 -->
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 17</div>
+                         </a>
+                      </div>
+                      <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 18</div>
+                         </a>
+                      </div>
+                      <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 19</div>
+                         </a>
+                      </div>
+                      <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 20</div>
+                         </a>
+                      </div>
+                     
+                    
+                 </div>
+                 <div class="row justify-content-center mt-3">
+                     <!-- Row 3 -->
+                     <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 21</div>
+                         </a>
+                      </div>
+                      <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 24</div>
+                         </a>
+                      </div>
+                      <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 25</div>
+                         </a>
+                      </div>
+                      <div class="col-md-2 col-4 cat-items-index-page">
+                         <a href="">
+                          <div class="category-icon">
+                              <i class="fa fa-pagelines"></i> 
+                          </div>
+                          <div class="cat-card text-center">Cat Card 25</div>
+                         </a>
+                      </div>
+                    
+                    
+                 </div>
+             </div>
+         </div>
+          <!-- Controls -->
+     <a class="carousel-control-prev" href="#catCarousel" role="button" data-slide="prev" style="background-color: red; height: 50px; width: 50px; position: relative; top: 50%; margin: 2px;">
+         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+         <span class="sr-only">Previous</span>
+     </a>
+     <a class="carousel-control-next" href="#catCarousel" role="button" data-slide="next" style="background-color: red; height: 50px; width: 50px; position: relative; top: 50%; margin:2px;">
+         <span class="carousel-control-next-icon" aria-hidden="true"></span>
+         <span class="sr-only">Next</span>
+     </a>
+     </div>
+    
+ </div>
+   
+</main>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

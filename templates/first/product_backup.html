@@ -1,0 +1,48 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ subcategory.name }}</h2>
+
+    <!-- Filter Form -->
+    <form method="get" class="mb-3">
+        <!-- Origin Filter -->
+        <input type="text" name="origin" class="form-control" placeholder="Search by origin" value="{{ request.GET.origin }}">
+
+        <!-- Availability Filter -->
+        <select name="availability" class="form-select">
+            <option value="">Select Availability</option>
+            <option value="in_stock" {% if request.GET.availability == 'in_stock' %}selected{% endif %}>In Stock</option>
+            <option value="out_of_stock" {% if request.GET.availability == 'out_of_stock' %}selected{% endif %}>Out of Stock</option>
+        </select>
+
+        <!-- Sorting Options -->
+        <select name="sort_by" class="form-select">
+            <option value="">Sort By</option>
+            <option value="newest" {% if request.GET.sort_by == 'newest' %}selected{% endif %}>Newest</option>
+            <option value="most_popular" {% if request.GET.sort_by == 'most_popular' %}selected{% endif %}>Most Popular</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary mt-3">Apply Filters</button>
+    </form>
+
+    <!-- Product Listing -->
+    <div class="row">
+        {% for product in products %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text">{{ product.description }}</p>
+                        <p><strong>Origin:</strong> {{ product.origin }}</p>
+                        <p><strong>Availability:</strong> {{ product.get_availability_display }}</p>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No products available in this subcategory.</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
+

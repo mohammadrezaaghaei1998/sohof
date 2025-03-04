@@ -1,0 +1,602 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+
+<section class="company-detail">
+    
+    <div class="container p-5 mb-5 mt-5">
+        <div class="row align-items-center">
+            <div class="col-lg-4 d-flex justify-content-center">
+                {% if seller.company_logo %}
+                    <img src="{{ seller.company_logo.url }}" alt="{{ seller.company_name }} Logo" class="img-fluid rounded-circle" style="width: 350px; height: 350px; object-fit: contain;"> 
+                {% endif %}            </div>
+            <div class="col-lg-8 mt-5">
+                <div class="col-lg-12">
+                    <h2 class="company-detail-name">{{ seller.company_name|default:"-" }}</h2>
+                </div>
+                <div class="col-lg-12">
+                    <h5 class="company-detail-location">{{ seller.company_location|default:"-" }}</h5>
+                </div>
+                <div class="col-lg-12">
+                    <p class="company-detail-activity">{{ seller.fields_of_work|default:"-" }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+    <div class="container mb-3" style="position: sticky; top: 0; z-index: 1000;">
+        <div class="d-flex justify-content-center bg-dark rounded py-2 flex-nowrap">
+            <a href="#profile" class="nav-link-company-page flex-fill text-center">Profile</a>
+            <a href="#products" class="nav-link-company-page flex-fill text-center">Products</a>
+            <a href="#videos" class="nav-link-company-page flex-fill text-center">Videos</a>
+            <a href="#contact" class="nav-link-company-page flex-fill text-center">Contact</a>
+            <a href="#website" class="nav-link-company-page flex-fill text-center">Website</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <!-- Profile Start -->
+        <div class="col-lg-12 content-sections"  style="border-radius: 10px; box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.151), 
+              -8px -8px 15px rgba(0, 0, 0, 0.082); padding: 10px;">
+            <div class="content-section" id="profile">
+                <div class="row">
+                    <!-- Company Description -->
+                    <div class="col-lg-4">
+                        <h3>Description</h3>
+                       
+                    </div>
+                    <!-- Company Details -->
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-10">
+                                <p>{{ seller.company_description|default:"-" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <!-- Company Overview -->
+                    <div class="col-lg-4">
+                        <h3>Overview</h3>
+                    </div>
+            
+                    <!-- Company Details -->
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p><strong>Company Registration Date :</strong> {{ seller.year_established|default:"-" }}</p>
+                                <p><strong>Floor Space (&#13217;) :</strong> {{ seller.floor_space|default:"-" }}</p>
+                                <p><strong>Annual Export Revenue (USD) :</strong> ${{ seller.annual_export_revenue|default:"-" }}</p>
+                            </div>
+                            <div class="col-lg-6">
+                                <p><strong>Accepted Languages :</strong> {{ seller.accepted_languages|default:"-" }}</p>
+                                <p><strong>Years Exporting :</strong> {{ seller.years_exporting|default:"-" }}</p>
+                                <p><strong>Years in Industry :</strong> {{ seller.years_in_industry|default:"-" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <hr>
+            
+                <!-- Certifications Section -->
+                <div class="row mt-4">
+                    <!-- Certifications Description -->
+                    <div class="col-lg-4">
+                        <h3>Certifications</h3>
+                        <!-- <p>We are certified by leading industry organizations, ensuring that our products and services meet international standards.</p> -->
+                    </div>
+                
+                    <!-- Certifications Carousel -->
+                    
+
+                    <div class="col-lg-8">
+                        {% if certificates %}
+                            <div id="certificationsCarousel" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <!-- Loop through certificates -->
+                                    {% for certificate in certificates %}
+                                        {% if forloop.counter0|divisibleby:2 %}
+                                            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                <div class="row">
+                                        {% endif %}
+                                        
+                                        <div class="col-12 col-md-6">
+                                            <div class="card" data-toggle="modal" data-target="#certificatesModal">
+                                                <!-- Use dynamic image from certification -->
+                                                <img src="{{ certificate.image.url }}" class="card-img-top" alt="{{ certificate.title }}" style="max-height: 300px; object-fit: contain;">
+                                                <div class="card-body">
+                                                    <h5 class="card-title">{{ certificate.title }}</h5>
+                                                    <p class="card-text">{{ certificate.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                    
+                                        {% if forloop.counter|divisibleby:2 or forloop.last %}
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+                    
+                                <!-- Carousel Controls -->
+                                <a class="carousel-control-prev" href="#certificationsCarousel" role="button" data-slide="prev" style="background-color: rgb(0, 0, 0); height: 40px; width: 40px; border-radius: 50%; top: 47%;">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#certificationsCarousel" role="button" data-slide="next" style="background-color: rgb(0, 0, 0); height: 40px; width: 40px; border-radius: 50%; top: 47%;">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        {% else %}
+                            <p class="ml-3">This company doesn't have any certificates at the moment.</p>
+                        {% endif %}
+                    </div>
+                    
+                </div>
+                <hr>
+                <div class="row">
+                    <!-- Company Overview -->
+                    <div class="col-lg-4">
+                        <h3>Production capabilities</h3>
+                    </div>
+            
+                    <!-- Company Details -->
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-6 mt-2">
+                                <p><strong>Production lines :</strong>{{ seller.production_lines|default:"-" }}</p>
+                            </div>
+                            <div class="col-lg-6 mt-2">
+                                <p><strong>Production machines :</strong>{{ seller.production_machines|default:"-" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            
+                <hr>
+                <div class="row">
+                    <!-- Company Overview -->
+                    <div class="col-lg-4">
+                        <h3>Quality control</h3>
+                    </div>
+            
+                    <!-- Company Details -->
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-6 mt-2">
+                                <p><strong>Product Support traceability of raw materials :</strong> {{ seller.product_support_traceability|default:"-" }}</p>
+                                <p><strong>Quality control conducted on all production lines :</strong>{{ seller.quality_control_on_lines|default:"-" }}</p>
+                            </div>
+                            <div class="col-lg-6 mt-2">
+                                <p><strong>Product inspection method :</strong>{{ seller.product_inspection_method|default:"-" }}</p>
+                                <p><strong>QA/QC inspectors :</strong>{{ seller.qa_qc_inspectors|default:"-" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <!-- Company Overview -->
+                    <div class="col-lg-4">
+                        <h3>Trade background</h3>
+                    </div>
+            
+                    <!-- Company Details -->
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-6 mt-2">
+                                <p><strong>Main markets :</strong> {{ seller.main_markets|default:"-" }}</p>
+                                <p><strong>Main client types :</strong>{{ seller.main_client_types|default:"-" }}</p>
+                            </div>
+                            <div class="col-lg-6 mt-2">
+                                <p><strong>Supply chain partners :</strong> {{ seller.supply_chain_partners|default:"-" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <!-- Company Overview -->
+                    <div class="col-lg-4">
+                        <h3>R&D capabilities</h3>
+                    </div>
+            
+                    <!-- Company Details -->
+                    <div class="col-lg-8">
+                        <div class="row">
+                            <div class="col-lg-6 mt-2">
+                                <p><strong>Customization options :</strong> s {{ seller.customization_options|default:"-" }}</p>
+                                <p><strong>R&D engineers :</strong> {{ seller.rd_engineers|default:"-" }}</p>
+                            </div>
+                            <div class="col-lg-6 mt-2">
+                                <p><strong>New products launched in last year :</strong>  {{ seller.new_products_last_year|default:"-" }}</p>
+                                <p><strong>R&D engineer education levels :</strong> {{ seller.rd_engineer_education_levels|default:"-" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                
+                     <!-- Modal -->
+                     <div class="modal fade" id="certificatesModal" tabindex="-1" role="dialog" aria-labelledby="certificatesModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-xl" role="document" style="max-width: 95%; ">
+                            <div class="modal-content" id="certificate-modal">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="certificatesModalLabel">Certificates</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div id="modalCarousel" class="carousel slide" data-ride="carousel">
+                                        <div class="carousel-inner">
+                                            <!-- Loop through certificates -->
+                                            {% for certificate in certificates %}
+                                                {% if forloop.counter0|divisibleby:2 %}
+                                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                        <div class="row">
+                                                {% endif %}
+                                                
+                                                <div class="col-12 col-md-6 text-center">
+                                                    <div class="card">
+                                                        <!-- Use dynamic image from certification -->
+                                                        <img src="{{ certificate.image.url }}" class="card-img-top" alt="{{ certificate.title }}" style="max-height: 300px; object-fit: contain;">
+                                                        <div class="card-body">
+                                                            <h5 class="card-title">{{ certificate.title }}</h5>
+                                                            <p class="card-text">{{ certificate.description }}</p>
+                                                            
+                                                            <!-- Download Button -->
+                                                            <a href="{{ certificate.image.url }}" download="{{ certificate.title }}.jpg" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s">
+                                                                Download
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                
+                                                {% if forloop.counter|divisibleby:2 or forloop.last %}
+                                                        </div>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        <!-- Modal Carousel Controls -->
+                                        <a class="carousel-control-prev" href="#modalCarousel" role="button" data-slide="prev" style="background-color: rgb(0, 0, 0); height: 40px; width: 40px; border-radius: 50%; top: 47%;">
+                                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Previous</span>
+                                        </a>
+                                        <a class="carousel-control-next" href="#modalCarousel" role="button" data-slide="next" style="background-color: rgb(0, 0, 0); height: 40px; width: 40px; border-radius: 50%; top: 47%;">
+                                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                            <span class="sr-only">Next</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <!-- Profile End -->
+
+        <!-- Products Start -->
+        <div class="col-lg-12 content-sections mt-5" id="products" style="border-radius: 10px; box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.151), 
+            -8px -8px 15px rgba(0, 0, 0, 0.082); padding: 10px;">
+            <div class="content-section">
+                <div class="row">
+                    <!-- Company Description -->
+                    <div class="col-lg-12">
+                        <h3>Products</h3>
+                        <hr>
+                    </div>
+                    
+                    <div class="col-lg-12">
+                        <div class="row" id="product-container">
+                            {% for product in products %}
+                                <div class="col-lg-4 mb-3 product-card">
+                                    <div class="card company-product-card-company-detail-page">
+                                        <div class="card-body">
+                                            <!-- Image Carousel -->
+                                            <div id="carouselProduct{{ product.id }}" class="carousel slide" data-ride="carousel">
+                                                <div class="carousel-inner">
+                                                    {% for image in product.images.all %}
+                                                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                            <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.image_title }}" style="max-height: 250px; object-fit: contain;">
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <a class="carousel-control-prev" href="#carouselProduct{{ product.id }}" role="button" data-slide="prev" style="background-color: red; height: 40px; width: 40px; position: absolute; top: 50%; left: 0; margin: 2px; transform: translateY(-50%); border-radius: 50%;">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </a>
+                                                <a class="carousel-control-next" href="#carouselProduct{{ product.id }}" role="button" data-slide="next" style="background-color: red; height: 40px; width: 40px; position: absolute; top: 50%; right: 0; margin: 2px; transform: translateY(-50%); border-radius: 50%;">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </a>
+                                            </div>
+                                            <!-- Product Details -->
+                                            <h5 class="card-title mt-3">{{ product.name }}</h5>
+                                            <p class="card-text">{{ product.description|truncatewords:10 }}</p>
+
+                                            <hr>
+                                            <div class="text-right mb-3">
+                                                <a href="{% url 'product_detail' product.id %}" class="btn btn-md btn-custom">
+                                                    Details
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                <p>No products available for this seller.</p>
+                            {% endfor %}   
+                        </div>
+                        <!-- See More Button -->
+                        <div class="text-center mt-4">
+                            <button id="add-more-btn" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s" style="display: none;">Add More</button>
+                            <button id="show-less-btn" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s" style="display: none;">Show Less</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Products End -->
+
+        <!-- Videos Start -->
+        <div class="col-lg-12 content-sections mt-5" id="videos" style="border-radius: 10px; box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.151), -8px -8px 15px rgba(0, 0, 0, 0.082); padding: 10px;">
+            <div class="content-section">
+                <div class="row">
+                    <!-- Company Description -->
+                    <div class="col-lg-12">
+                        <h3>Videos</h3>
+                        <hr>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row" id="product-video">
+                            <!-- Loop through the first 2 videos (visible by default) -->
+                            {% for video in videos %}
+                                {% if forloop.counter <= 2 %}
+                                    <div class="col-md-6 mb-4 video">
+                                        <video width="100%" controls style="border-radius: 20px; max-height: 200px;">
+                                            <source src="{{ video.video_file.url }}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                {% else %}
+                                    <!-- Hide remaining videos -->
+                                    <div class="col-md-6 mb-4 video hidden">
+                                        <video width="100%" controls style="border-radius: 20px; max-height: 200px;">
+                                            <source src="{{ video.video_file.url }}" type="video/mp4">
+                                        </video>
+                                    </div>
+                                {% endif %}
+                            {% empty %}
+                                <p>No videos available.</p>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Conditionally display the "See More" button -->
+            {% if videos|length > 2 %}
+                <div class="text-center mt-4">
+                    <button id="see-more-btn-video" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s">See More</button>
+                    <button id="see-less-btn-video" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s" style="display: none;">See Less</button>
+                </div>
+            {% endif %}
+        </div>
+        
+        
+        <!-- Videos End -->
+
+        <!-- Contact Start -->
+        <div class="col-lg-12 content-sections mt-5 mb-5" id="contact" style="border-radius: 10px; box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.151), -8px -8px 15px rgba(0, 0, 0, 0.082); padding: 10px;">
+            <div  class="content-section">
+                <div class="row">
+                    <!-- Company Description -->
+                    <div class="col-lg-12">
+                        <h3>Company contact information</h3>
+                        <hr>
+                    </div>
+                    <div class="col-lg-12 mb-5">
+                        <div class="row align-items-center">
+                            <!-- <img src="{% static 'assets/images/confident2.jpg' %}" alt="" class="img-fluid rounded-circle ml-2" style="width: 100px; height: 100px; object-fit: cover;"> -->
+                            <div class="col-lg-6 d-flex flex-column">
+                                <h5 class="company-detail-location mb-1">{{ seller.export_manager_name|default:"-" }}</h5>
+                                <p class="company-detail-activity mb-0">{{ seller.responsible_person_name|default:"-" }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <p><i class="fa fa-phone company-contact-icons" aria-hidden="true"></i> <strong>Company phone:</strong>  {{ seller.company_phone|default:"-" }}</p>
+                                <p><i class="fa fa-globe company-contact-icons" aria-hidden="true"></i> <strong>Company website:</strong> <a href="{{ seller.website_url }}" target="_blank">{{ seller.website_url }}</a></p>
+                                
+
+                            </div>
+                            <div class="col-lg-6">
+                                <p><i class="fa fa-fax company-contact-icons" aria-hidden="true"></i> <strong>Company fax:</strong>  {{ seller.company_fax|default:"-" }}</p>
+                                <div class="social-media">
+                                    <p class="mb-0 d-flex">
+                                        {% if seller.facebook %}
+                                        <a href="{{ seller.facebook }}" class="d-flex align-items-center justify-content-center" style="margin: 5px;">
+                                            <span class="fa fa-facebook"><i class="sr-only"></i></span>
+                                        </a>
+                                        {% endif %}
+                                        
+                                        {% if seller.twitter %}
+                                        <a href="{{ seller.twitter }}" class="d-flex align-items-center justify-content-center" style="margin: 5px;">
+                                            <span class="fa fa-twitter"><i class="sr-only"></i></span>
+                                        </a>
+                                        {% endif %}
+                                        
+                                        {% if seller.instagram %}
+                                        <a href="{{ seller.instagram }}" class="d-flex align-items-center justify-content-center" style="margin: 5px;">
+                                            <span class="fa fa-instagram"><i class="sr-only"></i></span>
+                                        </a>
+                                        {% endif %}
+                                        
+                                        {% if seller.youtube %}
+                                        <a href="{{ seller.youtube }}" class="d-flex align-items-center justify-content-center" style="margin: 5px;">
+                                            <span class="fa fa-youtube"><i class="sr-only"></i></span>
+                                        </a>
+                                        {% endif %}
+                                        
+                                        {% if seller.linkedin %}
+                                        <a href="{{ seller.linkedin }}" class="d-flex align-items-center justify-content-center" style="margin: 5px;">
+                                            <span class="fa fa-linkedin"><i class="sr-only"></i></span>
+                                        </a>
+                                        {% endif %}
+                                    </p>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12 mt-5">
+                        <h3>Company location</h3>
+                        <hr>
+                        <p>
+                            <i class="fa fa-map-marker company-contact-icons" aria-hidden="true"></i>
+                            {{ seller.company_location|default:"-" }}
+                        </p>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <!-- Contact End -->
+        
+        <!-- Website Start -->
+        <div class="col-lg-12 content-sections mt-5 mb-5" id="website" style="border-radius: 10px; box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.151), -8px -8px 15px rgba(0, 0, 0, 0.082); padding: 10px;">
+            <div  class="content-section">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h3>Website</h3>
+                        <h6>If you can't see the website, it's due to security restrictions set by the website's host provider.</h6>
+                        <hr>
+                    </div>
+                    
+                    <iframe src="{{ seller.website_url }}" width="100%" height="600" style="border: none;"></iframe>
+                </div>
+               
+            </div>
+        </div>
+
+        
+        
+        <script>
+            function showError() {
+                // Hide the iframe and show the error message
+                document.getElementById('websiteIframe').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
+        </script>
+        <!-- Website End -->
+    </div>
+</section>
+
+<footer class="bg-dark text-white pt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">About Us</h5>
+                <p>
+
+                    We promote businesses through our catalog and strategic advertising, connecting them with global markets to enhance visibility and growth.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'catalogues' %}" class="text-white text-decoration-none">Catalogues</a></li>
+                    <li><a href="{% url 'company_signup' %}" class="text-white text-decoration-none">Become a supplier</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">Smart and Targeted Advertising</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> Connection to Global Markets</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Specialized Commercial Support</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> International Transportation</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Secure International Financial Transactions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media and Subscribe -->
+            <div class="col-md-3 text-center">
+                <h5 class="mb-4 footer-top-title">Follow Us</h5>
+                <div class="mb-3">
+                    {% for link in socialmedia %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-facebook fa-2x"></i></a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-instagram fa-2x"></i></a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-linkedin fa-2x"></i></a>
+                        {% elif 'youtube' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-youtube fa-2x"></i></a>
+                        {% endif %}
+                    {% empty %}
+                        <p>No social media links available</p>
+                    {% endfor %}
+                </div>
+                <!-- <h5 class="mt-4 subscrribe-title">Subscribe to Our Newsletter</h5>
+                <form class="d-flex mt-2">
+                    <div class="input-group" style="border:none; border-bottom: 2px solid white;">
+                        <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="row text-center pb-4">
+            <div class="col">
+                <p class="mb-0">&copy; 2025 Sohof. All Rights Reserved.</p>
+                <!-- <p class="mb-0"><a href="#" class="text-white text-decoration-none">Privacy Policy</a> | <a href="#" class="text-white text-decoration-none">Terms of Service</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<style>
+    .subscribe-button{
+
+        background: transparent;
+        color: rgb(255, 255, 255);
+    }
+    .subscribe-button:hover{
+
+        background: transparent;
+        color: black;
+    }
+    .subscrribe-title ,  .footer-top-title{
+        font-weight: bold;
+        color: white;
+    }
+    .d-none {
+        display: none !important;
+    }
+    .product-card {
+        transition: opacity 0.5s ease-in-out; 
+    }
+</style>
+
+{% endblock content %}
+
+

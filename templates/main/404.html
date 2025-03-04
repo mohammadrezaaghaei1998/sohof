@@ -1,0 +1,149 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sohof 404 - Page Not Found</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+
+    <style>
+        #oopss {
+            background: linear-gradient(-45deg, #343a40, rgb(82, 82, 82));
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            line-height: 1.5em;
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #oopss #error-text {
+            font-size: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: 'Shabnam', Tahoma, sans-serif;
+            color: #ffffff;
+            text-align: center;
+            direction: rtl;
+        }
+
+        #oopss #error-text img {
+            width: 100%;
+            max-width: 342px;
+            height: auto;
+            margin: 20px auto 30px;
+        }
+
+        #oopss #error-text span {
+            font-size: 3.3em;
+            font-weight: 900;
+            margin-bottom: 20px;
+        }
+
+        #oopss #error-text p.p-a {
+            font-size: 19px;
+            margin: 20px 0;
+        }
+
+        #oopss #error-text p.p-b {
+            font-size: 15px;
+            margin: 10px 0;
+        }
+
+        #oopss #error-text .back {
+            background: #fff;
+            color: #000;
+            font-size: 18px;
+            text-decoration: none;
+            margin: 2em auto;
+            padding: .7em 2em;
+            border-radius: 500px;
+            box-shadow: 0 20px 70px 4px rgba(0, 0, 0, 0.1), inset 7px 33px 0 0px rgb(82, 82, 82);
+            font-weight: 900;
+            transition: all 300ms ease;
+        }
+
+        #oopss #error-text .back:hover {
+            transform: translateY(-13px);
+            box-shadow: 0 35px 90px 4px rgba(102, 102, 102, 0.3), inset 0px 0 0 3px #000;
+        }
+
+        @font-face {
+            font-family: Shabnam;
+            src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.eot");
+            src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.eot?#iefix") format("embedded-opentype"),
+                 url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.woff") format("woff"),
+                 url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.woff2") format("woff2"),
+                 url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam-Bold.ttf") format("truetype");
+            font-weight: bold;
+        }
+
+        @font-face {
+            font-family: Shabnam;
+            src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.eot");
+            src: url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.eot?#iefix") format("embedded-opentype"),
+                 url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.woff") format("woff"),
+                 url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.woff2") format("woff2"),
+                 url("https://cdn.rawgit.com/ahmedhosna95/upload/ba6564f8/fonts/Shabnam/Shabnam.ttf") format("truetype");
+            font-weight: normal;
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            #oopss #error-text span {
+                font-size: 2.5em;
+            }
+
+            #oopss #error-text p.p-a {
+                font-size: 16px;
+            }
+
+            #oopss #error-text p.p-b {
+                font-size: 14px;
+            }
+
+            #oopss #error-text .back {
+                font-size: 16px;
+                padding: .5em 1.5em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            #oopss #error-text span {
+                font-size: 1.5em;
+            }
+
+            #oopss #error-text p.p-a {
+                font-size: 14px;
+            }
+
+            #oopss #error-text p.p-b {
+                font-size: 12px;
+            }
+
+            #oopss #error-text .back {
+                font-size: 14px;
+                padding: .5em 1em;
+            }
+        }
+    </style>
+
+</head>
+<body>
+
+    <div id='oopss'>
+        <div id='error-text'>
+            <img src="https://cdn.rawgit.com/ahmedhosna95/upload/1731955f/sad404.svg" alt="404">
+            <span>Oops! Page Not Found</span>
+            <p class="p-a">The page you were looking for could not be found</p>
+            <p class="p-b">... Back to Home page</p>
+            <a href='{% url 'index' %}' class="back">... Back to Home page</a>
+        </div>
+    </div>
+
+</body>
+</html>

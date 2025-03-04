@@ -1,0 +1,97 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+
+
+    
+    
+    <section class="company-login-page-section">
+        
+    
+            
+            <!-- <div class="col-lg-12">
+                <div class="background">
+                    <div class="shape"></div>
+                    <div class="shape"></div>
+                </div>
+            </div> -->
+            
+            <div class="col-lg-12 p-5 animate__animated animate__fadeIn">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-lg-6" style="display: flex; justify-content: center;">
+                        <video width="800" autoplay loop muted style="object-fit: cover; height: 500px;">
+                            <source src="{% static 'assets/images/bt.mp4' %}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="col-lg-6">
+                        <form class="company-login-form" method="POST">
+                            {% csrf_token %}
+                            <h3>Login Here</h3>
+            
+                            {% if messages %}
+                                <div class="alert alert-danger">
+                                    {% for message in messages %}
+                                        <p>{{ message }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+            
+                            <div class="company-login-username">
+                                <label for="username">Username</label>
+                                <input type="text" placeholder="Enter Your Username" id="username" name="username">
+                            </div>
+            
+                            <div class="company-login-password" style="position: relative;">
+                                <label for="password">Password</label>
+                                <input type="password" placeholder="Enter Your Password" id="password" name="password">
+                                <span class="input-group-text toggle-password" onclick="togglePasswordVisibility('password', this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; background-color: transparent; border: none;">
+                                    <i class="fa fa-eye"></i>
+                                </span>
+                            </div>
+            
+                            <button type="submit" class="company-login-button">Log In</button>
+            
+                            <a class="text-white" href="{% url 'company_signup' %}">
+                                <button type="button" class="company-login-button-create-business-account">
+                                    Create Business Account
+                                </button>
+                            </a>
+                        </form>
+                    </div>
+                </div>
+            </div>
+         
+            
+        </section>
+    
+       
+    
+        
+    
+        <!-- Add JavaScript to handle show/hide password -->
+        <script>
+            function togglePasswordVisibility(inputId, icon) {
+                var inputField = document.getElementById(inputId);
+                var iconElement = icon.querySelector("i");
+        
+                if (inputField.type === "password") {
+                    inputField.type = "text"; // Change input type to text to show password
+                    iconElement.classList.remove("fa-eye");
+                    iconElement.classList.add("fa-eye-slash"); // Change icon to 'eye-slash' to indicate visible password
+                } else {
+                    inputField.type = "password"; // Change input type back to password
+                    iconElement.classList.remove("fa-eye-slash");
+                    iconElement.classList.add("fa-eye"); // Change icon back to 'eye'
+                }
+            }
+        </script>
+        
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+   
+{% endblock content %}
+
+
+

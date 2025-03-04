@@ -1,0 +1,318 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section style="padding: 50px;">
+<!-- <div class="container"> -->
+	<div class="row">
+
+    <article class="col-md-2 filter-group mt-4">
+      <header class="card-header">
+          <h6 class="title">Sort By</h6>
+      </header>
+    
+      <div class="filter-content" id="collapse_6">
+          <div class="card-body">
+              <form method="GET" id="sortForm">
+                  <label class="custom-control custom-radio">
+                      <input type="radio" name="sort" value="newest" class="custom-control-input" 
+                      {% if sort_option == "newest" %}checked{% endif %} onchange="this.form.submit()">
+                      <div class="custom-control-label">Newest Catalogs</div>
+                  </label>
+    
+                  <label class="custom-control custom-radio">
+                      <input type="radio" name="sort" value="most_downloaded" class="custom-control-input" 
+                      {% if sort_option == "most_downloaded" %}checked{% endif %} onchange="this.form.submit()">
+                      <div class="custom-control-label">Most Downloaded</div>
+                  </label>
+    
+                  <label class="custom-control custom-radio">
+                      <input type="radio" name="sort" value="most_viewed" class="custom-control-input" 
+                      {% if sort_option == "most_viewed" %}checked{% endif %} onchange="this.form.submit()">
+                      <div class="custom-control-label">Most Popular</div>
+                  </label>
+              </form>
+          </div>
+      </div>
+    </article>
+  
+		<main class="col-md-10">
+
+			<header class="border-bottom mb-4 pb-3">
+					<div class="form-inline">
+            <span class="mr-md-auto mt-2 ml-2">{{ total_catalogues }} Items found</span>
+
+					</div>	
+			</header><!-- sect-heading -->
+			<!-- <div class="row product-row">
+				<div class="column-product col-md-4">
+                    <figure class="card card-product-grid">
+                      <div class="img-wrap-catalogues"> 
+                        <img src="{% static 'assets/images/cat3.jpg' %}" class="img-fluid-catalogues">
+                        <div class="img-overlay-catalogues">
+							<div class="overlay-title-catalogues">
+								<p><strong>Catalogue No:</strong> 131</p>
+								<p><strong>Published On:</strong> 12 JAN 2025</p>
+							</div>
+                        </div>
+                      </div> 
+                    </figure>
+                    <div class="text-center">
+                        <button class="button button2">See Catalogue</button>
+                    </div>	
+                </div> 
+                <div class="column-product col-md-4">
+                    <figure class="card card-product-grid">
+                      <div class="img-wrap-catalogues"> 
+                        <img src="{% static 'assets/images/cat3.jpg' %}" class="img-fluid-catalogues">
+                        <div class="img-overlay-catalogues">
+							<div class="overlay-title-catalogues">
+								
+								<p><strong>Catalogue No:</strong> 131</p>
+								<p><strong>Published On:</strong> 12 JAN 2025</p>
+							</div>
+                        </div>
+                      </div> 
+                    </figure>
+                    <div class="text-center">
+                        <button class="button button2">See Catalogue</button>
+                    </div>	
+                </div> 
+                <div class="column-product col-md-4">
+                    <figure class="card card-product-grid">
+                      <div class="img-wrap-catalogues"> 
+                        <img src="{% static 'assets/images/cat3.jpg' %}" class="img-fluid-catalogues">
+                        <div class="img-overlay-catalogues">
+							<div class="overlay-title-catalogues">
+							
+								<p><strong>Catalogue No:</strong> 131</p>
+								<p><strong>Published On:</strong> 12 JAN 2025</p>
+							</div>
+                        </div>
+                      </div> 
+                    </figure>
+                    <div class="text-center">
+                        <button class="button button2">See Catalogue</button>
+                    </div>	
+                </div> 
+                <div class="column-product col-md-4">
+                    <figure class="card card-product-grid">
+                      <div class="img-wrap-catalogues"> 
+                        <img src="{% static 'assets/images/cat3.jpg' %}" class="img-fluid-catalogues">
+                        <div class="img-overlay-catalogues">
+							<div class="overlay-title-catalogues">
+							
+								<p><strong>Catalogue No:</strong> 131</p>
+								<p><strong>Published On:</strong> 12 JAN 2025</p>
+							</div>
+                        </div>
+                      </div>
+                    </figure>
+                    <div class="text-center">
+                        <button class="button button2">See Catalogue</button>
+                    </div>	
+                </div> 
+                <div class="column-product col-md-4">
+                    <figure class="card card-product-grid">
+                      <div class="img-wrap-catalogues"> 
+                        <img src="{% static 'assets/images/cat3.jpg' %}" class="img-fluid-catalogues">
+                        <div class="img-overlay-catalogues">
+							<div class="overlay-title-catalogues">
+							
+								<p><strong>Catalogue No:</strong> 131</p>
+								<p><strong>Published On:</strong> 12 JAN 2025</p>
+							</div>
+                        </div>
+                      </div> 
+                    </figure>
+                    <div class="text-center">
+                        <button class="button button2">See Catalogue</button>
+                    </div>	
+                </div> 
+                <div class="column-product col-md-4">
+                    <figure class="card card-product-grid">
+                      <div class="img-wrap-catalogues"> 
+                        <img src="{% static 'assets/images/cat3.jpg' %}" class="img-fluid-catalogues">
+                        <div class="img-overlay-catalogues">
+							<div class="overlay-title-catalogues">
+								
+								<p><strong>Catalogue No:</strong> 131</p>
+								<p><strong>Published On:</strong> 12 JAN 2025</p>
+							</div>
+                        </div>
+                      </div> 
+                    </figure>
+                    <div class="text-center">
+                        <button class="button button2">See Catalogue</button>
+                    </div>	
+                </div> 
+			</div>  -->
+      <div class="row product-row">
+        {% for catalogue in catalogues %}
+        <div class="column-product col-md-4">
+            <figure class="card card-product-grid">
+                <div class="img-wrap-catalogues">
+                    {% if catalogue.cover_image %}
+                    <img src="{{ catalogue.cover_image.url }}" class="img-fluid-catalogues">
+                    {% else %}
+                    <p>No Catalogue to display</p>
+                    {% endif %}
+                    <div class="img-overlay-catalogues">
+                        <div class="overlay-title-catalogues">
+                            <p><strong>Catalogue No:</strong> {{ catalogue.id }}</p>
+                            <p><strong>Published On:</strong> {{ catalogue.publish_date|date:"d M Y" }}</p>
+                        </div>
+                    </div>
+                </div> <!-- img-wrap.// -->
+            </figure>
+            <div class="text-center">
+                <a href="{% url 'catalogue_detail' catalogue.id %}" class="button button2">See Catalogue</a>
+            </div>    
+        </div> <!-- col.// -->
+        {% endfor %}
+    </div> <!-- row end.// -->
+    
+
+
+
+			<hr>
+			<!-- <div class="container d-flex justify-content-end">
+				<nav class="mt-4" aria-label="Page navigation sample">
+					<ul class="pagination">
+						<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						<li class="page-item active"><a class="page-link" href="#">1</a></li>
+						<li class="page-item"><a class="page-link" href="#">2</a></li>
+						<li class="page-item"><a class="page-link" href="#">3</a></li>
+						<li class="page-item"><a class="page-link" href="#">Next</a></li>
+					</ul>
+				</nav>
+			</div> -->
+
+		</main>
+	</div>
+<!-- </div> -->
+</section>
+
+
+<footer class="bg-dark text-white pt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">About Us</h5>
+                <p>
+
+                    We promote businesses through our catalog and strategic advertising, connecting them with global markets to enhance visibility and growth.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'catalogues' %}" class="text-white text-decoration-none">Catalogues</a></li>
+                    <li><a href="{% url 'company_signup' %}" class="text-white text-decoration-none">Become a supplier</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">Smart and Targeted Advertising</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> Connection to Global Markets</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Specialized Commercial Support</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> International Transportation</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Secure International Financial Transactions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media and Subscribe -->
+            <div class="col-md-3 text-center">
+                <h5 class="mb-4 footer-top-title">Follow Us</h5>
+                <div class="mb-3">
+                    {% for link in socialmedia %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-facebook fa-2x"></i></a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-instagram fa-2x"></i></a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-linkedin fa-2x"></i></a>
+                        {% elif 'youtube' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-youtube fa-2x"></i></a>
+                        {% endif %}
+                    {% empty %}
+                        <p>No social media links available</p>
+                    {% endfor %}
+                </div>
+                <!-- <h5 class="mt-4 subscrribe-title">Subscribe to Our Newsletter</h5>
+                <form class="d-flex mt-2">
+                    <div class="input-group" style="border:none; border-bottom: 2px solid white;">
+                        <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="row text-center pb-4">
+            <div class="col">
+                <p class="mb-0">&copy; 2025 Sohof. All Rights Reserved.</p>
+                <!-- <p class="mb-0"><a href="#" class="text-white text-decoration-none">Privacy Policy</a> | <a href="#" class="text-white text-decoration-none">Terms of Service</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<style>
+    .subscribe-button{
+
+        background: transparent;
+        color: rgb(255, 255, 255);
+    }
+    .subscribe-button:hover{
+
+        background: transparent;
+        color: black;
+    }
+    .subscrribe-title ,  .footer-top-title{
+        font-weight: bold;
+        color: white;
+    }
+
+</style>
+<div id="loading-spinner" style="display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 9999;">
+  <img src="https://i.gifer.com/ZZ5H.gif" alt="Loading..." width="80">
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const sortRadios = document.querySelectorAll('input[name="sort"]');
+    const loadingSpinner = document.getElementById("loading-spinner");
+    const form = document.getElementById("sortForm");
+
+    sortRadios.forEach(radio => {
+        radio.addEventListener("change", function (event) {
+            event.preventDefault();  // Prevent immediate form submission
+            
+            // Show the loading spinner immediately
+            loadingSpinner.style.display = "block";
+
+            // Wait for 15 seconds (15000ms) before submitting the form
+            setTimeout(() => {
+                form.submit();  // Submit the form after the delay
+            }, 15000);  // Set delay to 15 seconds
+        });
+    });
+
+    // Hide the spinner once the page is fully loaded
+    window.addEventListener("load", function () {
+        loadingSpinner.style.display = "none";
+    });
+});
+</script>
+
+{% endblock content %}

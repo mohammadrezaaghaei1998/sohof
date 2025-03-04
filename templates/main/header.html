@@ -1,0 +1,387 @@
+
+{% load static %}
+<!-- <span class="title">Dark mode OFF</span>
+<button class="botao">Dark mode</button> -->
+
+<!-- #dd3333!important -->
+<section class="ftco-section" >
+    <header class="header-container">
+        <div class="col-12 text-center mb-5 header-title-home-page">
+            
+            <img src="{% static 'assets/images/logo.png' %}" width="230" alt="">
+            <h1 class="animate__animated animate__fadeIn">Business Hub Magazine</h1>
+            <!-- <p class="animate__animated animate__fadeIn">Your Subtitle or Text</p> -->
+        </div>
+        <!-- <div class="container-cont" style="max-width: 1890px;"> -->
+            <div class="row align-items-center d-flex justify-content-between">
+            <!-- Left: Social Icons -->
+                <div class="col-6  d-flex justify-content-start">
+                    <div>
+                        {% for link in social_media_links %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2">
+                                <i class="fa fa-facebook fa-2x header-social-icons" style="color: red;"></i>
+                            </a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2">
+                                <i class="fa fa-linkedin fa-2x header-social-icons" style="color: red;"></i>
+                            </a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2">
+                                <i class="fa fa-instagram fa-2x header-social-icons" style="color: red;"></i>
+                            </a>
+                        {% elif 'youtube' in link.social_media_url %}
+                          
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2">
+                                <i class="fa fa-youtube fa-2x header-social-icons" style="color: red;"></i>
+                            </a>
+                        {% endif %}
+                    {% empty %}
+                        <li>No social media links available</li>
+                    {% endfor %}
+                    </div>
+                </div>
+            <!-- Right: Search Bar -->
+                <!-- <div class="col-6 d-flex justify-content-end">
+                    <form class="search-bar mr-4">
+                        <div class="input-group" style="border-bottom: 2px solid red; max-width: 180px;">
+                            <input type="text" 
+                                class="form-control" 
+                                placeholder="Search..." 
+                                style="border: none; outline: none; box-shadow: none;">
+                            <div class="input-group-append">
+                                <button type="submit" 
+                                        class="btn animate__animated animate__bounceIn animate__delay-.5s" 
+                                        style="outline: none; box-shadow: none;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div> -->
+                <div class="col-6 d-flex justify-content-end">
+                    <form class="search-bar mr-4" method="get" action="{% url 'search' %}">
+                        <div class="input-group" style="border-bottom: 2px solid red; max-width: 180px;">
+                            <input type="text" 
+                                class="form-control" 
+                                name="q" 
+                                placeholder="Search Products..." 
+                                style="border: none; outline: none; box-shadow: none;">
+                            <div class="input-group-append">
+                                <button type="submit" 
+                                        class="btn animate__animated animate__bounceIn animate__delay-.5s" 
+                                        style="outline: none; box-shadow: none;">
+                                    <i class="fa fa-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+            </div>
+        <!-- </div> -->
+        
+    </header>
+    
+  
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+        <div class="container-fluid">
+            <button class="navbar-toggler mb-3 mt-2" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="fa fa-bars"></span> Menu
+            </button>
+            <div class="collapse navbar-collapse" id="ftco-nav">
+                 <div class="full-page-menu-container">
+                <!-- Button that triggers the menu -->
+                <a class="menu-btn dropdown-toggle mb-2" style="color: white; display: flex; align-items: center;">All categories</a>
+                <!-- The full-page menu -->
+                <div class="menu">
+                    <div class="container-cont mt-4">
+                        <div class="row">
+                            <!-- Left Column: Categories -->
+                            <div class="col-md-2">
+                                <div class="list-group-header" style=" overflow-y: auto; max-height: 200px;">
+                                    {% for category in categories %}
+                                        <a href="javascript:void(0);" class="list-group-item list-group-item-action category-header"
+                                           data-target="category{{ category.id }}">
+                                            {{ category.name }}
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            
+                            <!-- Subcategories Column -->
+                            <div class="col-md-10">
+                                <div class="row">
+                                    {% for category in categories %}
+                                        <div id="category{{ category.id }}" class="content-column-header" style="display: none;">
+                                            <div class="subcategory-container">
+                                                {% for subcategory in category.subcategories.all %}
+                                                    <div class="col-3 col-md-2 mb-4">  <!-- 4 items on mobile (col-3), 8 items on PC (col-md-1) -->
+                                                        <div class="subcategory-item">
+                                                            <a href="{% url 'subcategory_products' subcategory.id %}" class="list-group-item list-group-item-action subcategory">
+                                                                <i class="fa {{ subcategory.icon }} fa-2x mb-2"></i> <!-- Icon -->
+                                                                <div>{{ subcategory.name }}</div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+
+                           
+
+
+                            
+                            
+                    
+                            <!-- Right Column: Items -->
+                            <!-- <div class="col-md-8">
+                                <div id="subcategory1-1" class="content-column-header">
+                                    <div class="row">
+                                        <div class="col-lg-2 mb-5 sub-item-header">
+                                            <img src="{% static 'assets/images/1.jpg' %}" alt="">
+                                            <a href="#" class="subitem">Item 1.1.1</a>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div id="subcategory1-2" class="content-column-header">
+                                    <div class="row">
+                                        <div class="col-lg-2 mb-5 sub-item-header">
+                                            <img src="{% static 'assets/images/1.jpg' %}" alt="">
+                                            <a href="#" class="subitem">Item 1.2.1</a>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div id="subcategory2-1" class="content-column-header">
+                                    <div class="row">
+                                        <div class="col-lg-2 mb-5 sub-item-header">
+                                            <img src="{% static 'assets/images/1.jpg' %}" alt="">
+                                            <a href="#" class="subitem">Item 2.1.1</a>
+                                        </div>
+                                    </div>
+                                </div>
+                    
+                                <div id="subcategory2-2" class="content-column-header">
+                                    <div class="row">
+                                        <div class="col-lg-2 mb-5 sub-item-header">
+                                            <img src="{% static 'assets/images/1.jpg' %}" alt="">
+                                            <a href="#" class="subitem">Item 2.2.1</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+            
+            <ul class="navbar-nav m-auto">         
+                <li class="nav-item active"><a href="{% url 'index' %}" class="nav-link">Home</a></li>
+                <li class="nav-item"><a href="{% url 'catalogues' %}" class="nav-link">Catalogues</a></li>
+                <li class="nav-item"><a href="{% url 'aboutus' %}" class="nav-link">About Us</a></li>
+                <li class="nav-item"><a href="{% url 'company_signup' %}" class="nav-link">Become a supplier</a></li>
+            </ul>
+            
+        </div>
+
+    
+        <div class="row align-items-center d-flex justify-content-between">
+            <!-- Left: User Sign-In Icon (Buyer) -->
+            <div class="col-6 d-flex justify-content-start">
+                <div class="sign-in-icons ml-3">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.user_type == "buyer" %}
+                            <a href="{% url 'user_dashboard' %}" class="fa fa-user" title="User Dashboard"></a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'log_reg' %}" class="fa fa-user" title="User Sign-In"></a>
+                    {% endif %}
+                </div>
+            </div>
+        
+            <!-- Right: Company Sign-In Icon (Seller) -->
+            <div class="col-6 d-flex justify-content-end">
+                <div class="sign-in-icons ml-3">
+                    {% if request.user.is_authenticated %}
+                        {% if request.user.user_type == "seller" %}
+                            <a href="{% url 'seller_dashboard' %}" class="fa fa-building" title="Company Dashboard"></a>
+                        {% endif %}
+                    {% else %}
+                        <a href="{% url 'company_login' %}" class="fa fa-building" title="Company Sign-In"></a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        
+        
+        
+            
+    </nav>
+</section>
+
+<style>
+    .sign-in-icons a {
+        font-size: 36px;  
+        color: white;     
+        transition: all 0.3s ease; 
+    }
+
+    .sign-in-icons a:hover {
+        color: #ff0000;  
+    }
+
+
+    .subcategory-container {
+        display: flex;
+        flex-wrap: wrap;
+        max-height: 300px;   
+        overflow-y: auto;    
+    }
+
+
+
+    .subcategory-item .fa {
+        margin-bottom: 10px;
+    }
+
+    .subcategory {
+        text-align: center;
+        text-decoration: none;
+        color: inherit;
+        padding: 10px;
+        height: 130px;
+    }
+
+    .subcategory:hover {
+        background-color: #343a40;
+        border-radius: 5px;
+        color: aliceblue;
+    }
+
+    .subcategory .fa {
+        display: block;
+        margin-bottom: 8px;
+    }
+
+    @media (min-width: 992px) { 
+    .list-group-header {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+}
+</style>
+
+
+
+
+
+<!-- <script>
+    const botao = document.getElementsByClassName("botao")[0];
+
+    botao.addEventListener("click", function() {
+        const title = document.getElementsByClassName("title")[0];
+        const allElements = document.body.querySelectorAll("*");
+
+        if (title.textContent === "Dark mode OFF") {
+            title.textContent = "Dark mode ON";
+            document.body.style.backgroundColor = '#313131'; 
+
+            allElements.forEach((element) => {
+                if (!element.classList.contains("botao")) {
+                    element.style.color = '#fff'; 
+                }
+                element.style.backgroundColor = 'transparent'; 
+            });
+
+            botao.style.backgroundColor = '#fff';
+            botao.style.color = '#000';
+        } else {
+            title.textContent = "Dark mode OFF";
+            document.body.style.backgroundColor = '#fff';
+            allElements.forEach((element) => {
+                if (!element.classList.contains("botao")) {
+                    element.style.color = '#000';
+                }
+                element.style.backgroundColor = 'transparent'; 
+            });
+
+            botao.style.backgroundColor = '#000';
+            botao.style.color = '#fff';
+        }
+    });
+
+    botao.addEventListener("mouseover", function() {
+        botao.style.backgroundColor = '#a9b9c1';
+        botao.style.color = '#000';
+    });
+
+    botao.addEventListener("mouseout", function() {
+        const title = document.getElementsByClassName("title")[0];
+        if (title.textContent === "Dark mode OFF") {
+            botao.style.backgroundColor = '#000';
+            botao.style.color = '#fff';
+        } else {
+            botao.style.backgroundColor = '#fff';
+            botao.style.color = '#000';
+        }
+    });
+</script>
+ -->
+
+
+
+ <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        let categoryLinks = document.querySelectorAll(".category-header");
+
+        categoryLinks.forEach(link => {
+            link.addEventListener("mouseenter", function () {
+                let targetId = this.getAttribute("data-target");
+
+                document.querySelectorAll(".content-column-header").forEach(el => {
+                    el.style.display = "none";
+                });
+
+                let targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.style.display = "block";
+                }
+            });
+        });
+
+        // Handle clicking on subcategory links
+        let subcategoryLinks = document.querySelectorAll(".subcategory");
+
+        subcategoryLinks.forEach(link => {
+            link.addEventListener("click", function (e) {
+                // Prevent the default link behavior
+                e.preventDefault();
+
+                // You can handle the click to load the content of the subcategory here
+                let url = this.getAttribute("href");
+                window.location.href = url;  // Navigate to the subcategory page
+            });
+        });
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

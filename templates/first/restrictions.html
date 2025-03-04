@@ -1,0 +1,105 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<section style="margin-bottom: 240px;">
+    <div class="container" style="margin-top: 150px;"> 
+        <div class="alert alert-warning text-center mt-5">
+            <h4>Oops! You are already signed in.</h4>
+            <p>You cannot access this page while logged in.</p>
+            <p>Click below to go back.</p>
+            <a href="{% url 'seller_dashboard' %}" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s m-2">Back to Dashboard</a>
+            <a href="{% url 'index' %}" class="btn btn-secondary m-2">Back to Home</a>
+        </div>
+    </div>
+</section>
+<footer class="bg-dark text-white pt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">About Us</h5>
+                <p>
+
+                    We promote businesses through our catalog and strategic advertising, connecting them with global markets to enhance visibility and growth.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'catalogues' %}" class="text-white text-decoration-none">Catalogues</a></li>
+                    <li><a href="{% url 'company_signup' %}" class="text-white text-decoration-none">Become a supplier</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">Smart and Targeted Advertising</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> Connection to Global Markets</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Specialized Commercial Support</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> International Transportation</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Secure International Financial Transactions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media and Subscribe -->
+            <div class="col-md-3 text-center">
+                <h5 class="mb-4 footer-top-title">Follow Us</h5>
+                <div class="mb-3">
+                    {% for link in socialmedia %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-facebook fa-2x"></i></a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-instagram fa-2x"></i></a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-linkedin fa-2x"></i></a>
+                        {% elif 'youtube' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-youtube fa-2x"></i></a>
+                        {% endif %}
+                    {% empty %}
+                        <p>No social media links available</p>
+                    {% endfor %}
+                </div>
+                <!-- <h5 class="mt-4 subscrribe-title">Subscribe to Our Newsletter</h5>
+                <form class="d-flex mt-2">
+                    <div class="input-group" style="border:none; border-bottom: 2px solid white;">
+                        <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="row text-center pb-4">
+            <div class="col">
+                <p class="mb-0">&copy; 2025 Sohof. All Rights Reserved.</p>
+                <!-- <p class="mb-0"><a href="#" class="text-white text-decoration-none">Privacy Policy</a> | <a href="#" class="text-white text-decoration-none">Terms of Service</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<style>
+    .subscribe-button{
+
+        background: transparent;
+        color: rgb(255, 255, 255);
+    }
+    .subscribe-button:hover{
+
+        background: transparent;
+        color: black;
+    }
+    .subscrribe-title ,  .footer-top-title{
+        font-weight: bold;
+        color: white;
+    }
+
+</style>
+{% endblock content %}

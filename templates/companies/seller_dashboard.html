@@ -1,0 +1,1816 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+
+    
+
+    <!-- Sidebar -->
+    <div class="sidebar company-dashboard-sidebar" id="sidebar-company-dashboard">
+        <div class="mt-5">
+        <a href="#add-info" title="Add Informations"> <i class="fa fa-info-circle"></i><span class="text">Add Informations</span></a>
+        <a href="#manage-videos" title="Manage Videos"><i class="fa fa-film"></i><span class="text">Manage Videos</span></a>
+        <a href="#manage-products" title="Manage Product"><i class="fa fa-plus"></i><span class="text">Manage Product</span></a>
+        <a href="#page-views" title="Page Views"><i class="fa fa-eye"></i><span class="text">Page Views</span></a>
+        <a href="#settings" title="Settings"><i class="fa fa-cog"></i><span class="text">Settings</span></a>
+        <a href="{% url 'logout' %}" title="Sign Out"><i class="fa fa-sign-out"></i> <span class="text">Sign Out</span></a>
+        
+        </div>
+    
+        <!-- Hamburger icon toggle -->
+        <a id="toggle-btn" class="btn">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    
+
+    <!-- Content -->
+    <div class="company-dashboard-sidebar-content" style=" text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.247);">
+        <h4 class="mb-5 p-2 animate__animated animate__fadeIn">Welcome to Your Dashboard <strong>{{ sellerprofile.company_name }}</strong></h4>
+
+
+
+        <section id="add-info">
+            <div id="step-form">
+                <!-- Step form content will be dynamically inserted here -->
+                <div class="container-count ">
+                    <div id="form-1" class="form-step business-information-form  ">
+                        
+                        <form action="{% url 'submit_business_info' %}" method="POST" enctype="multipart/form-data" id="company-info-form">
+                            {% csrf_token %}
+                            <div class="row p-2 mt-2 " style="  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+                               <div class="col-lg-12 d-flex justify-content-start animate__animated animate__fadeIn">
+                                    <h3 class="text-center mb-2 mt-5">Description And Overview</h3>
+                               </div>
+                                 <!-- Company Name -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="company-name"><span class="required-star"></span>Company Name:</label>
+                                    <input type="text" id="company-name" name="company_name" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.company_name }}" disabled>
+                                    {% if form.company_name.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.company_name.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                     {% endif %}
+                                </div>
+
+                                <!-- Fields of Work -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="fields-of-work"><span class="required-star"></span>Fields of Work:</label>
+                                    <select id="fields-of-work" name="fields_of_work" class="form-control border-bottom-style-business-info" disabled>
+                                        {% for value, label in fields_of_work_choices %}
+                                            <option value="{{ value }}" {% if sellerprofile.fields_of_work == value %} selected {% endif %}>{{ label }}</option>
+                                        {% endfor %}
+                                    </select>
+
+                                    {% if form.fields_of_work.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.fields_of_work.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                 <!-- Company Description -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="company-description"><span class="required-star"></span>Company Description:</label>
+                                    <textarea id="company-description" name="company_description" class="form-control border-bottom-style-business-info" rows="4" disabled>{{ sellerprofile.company_description }}</textarea>
+                                    {% if form.company_description.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.company_description.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+                                 <!-- Year Established -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="year-established"><span class="required-star"></span>Year Established:</label>
+                                    <input type="number" id="year-established" name="year_established" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.year_established }}" disabled>
+                                    {% if form.company_description.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.company_description.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Accepted Languages -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="accepted-languages">Accepted Languages:</label>
+                                    <input type="text" id="accepted-languages" name="accepted_languages" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.accepted_languages }}" disabled>
+                                    {% if form.company_accepted_languages %}
+                                        <div class="error-list">
+                                            {% for error in form.company_accepted_languages %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                        
+                                <!-- Floor Space -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="floor-space">Floor Space (sq. meters):</label>
+                                    <input type="number" id="floor-space" name="floor_space" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.floor_space }}" disabled>
+                                    {% if form.company_floor_space %}
+                                        <div class="error-list">
+                                            {% for error in form.company_floor_space %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                        
+                                <!-- Years Exporting -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="years-exporting">Years Exporting:</label>
+                                    <input type="number" id="years-exporting" name="years_exporting" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.years_exporting }}" disabled>
+                                    {% if form.company_years_exporting %}
+                                        <div class="error-list">
+                                            {% for error in form.company_years_exporting %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                        
+                                <!-- Annual Export Revenue -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="annual-export-revenue">Annual Export Revenue (USD):</label>
+                                    <input type="number" step="0.01" id="annual-export-revenue" name="annual_export_revenue" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.annual_export_revenue }}" disabled>
+                                    {% if form.company_annual_export_revenue %}
+                                        <div class="error-list">
+                                            {% for error in form.company_annual_export_revenue %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                        
+                                <!-- Years in Industry -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="years-in-industry">Years in Industry:</label>
+                                    <input type="number" id="years-in-industry" name="years_in_industry" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.years_in_industry }}" disabled>
+                                    {% if form.company_years_in_industry %}
+                                        <div class="error-list">
+                                            {% for error in form.company_years_in_industry %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <!-- Company Size -->
+                                 <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="company-size">Company Size (Employee):</label>
+                                    <input type="number" id="company-size" name="company_size" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.company_size }}" disabled>
+                                    {% if form.company_company_size %}
+                                        <div class="error-list">
+                                            {% for error in form.company_size %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+
+
+
+
+
+                                <div class="col-lg-12 d-flex justify-content-start animate__animated animate__fadeIn">
+                                    <h3 class="text-center mb-2 mt-5">Production Capabilities</h3>
+                               </div>
+
+                                <!-- Production Lines -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="production-lines">Production Lines:</label>
+                                    <input type="number" id="production-lines" name="production_lines" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.production_lines }}" disabled>
+                                    {% if form.company_production_lines %}
+                                        <div class="error-list">
+                                            {% for error in form.production_lines %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Production Machines -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="production-machines">Production Machines:</label>
+                                    <input type="number" id="production-machines" name="production_machines" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.production_machines }}" disabled>
+                                    {% if form.company_production_machines %}
+                                        <div class="error-list">
+                                            {% for error in form.production_machines %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+
+
+
+
+
+                                <div class="col-lg-12 d-flex justify-content-start animate__animated animate__fadeIn">
+                                    <h3 class="text-center mb-2 mt-5">Quality control</h3>
+                               </div>
+
+                               <!-- Product Support Traceability -->
+                               <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="product-support-traceability">Product Support Traceability:</label>
+                                    <select id="product-support-traceability" name="product_support_traceability" class="form-control" disabled>
+                                        <option value="" {% if sellerprofile.product_support_traceability is None %}selected{% endif %}>-</option>
+                                        <option value="True" {% if sellerprofile.product_support_traceability == True %}selected{% endif %}>Yes</option>
+                                        <option value="False" {% if sellerprofile.product_support_traceability == False %}selected{% endif %}>No</option>
+                                    </select>
+                                    {% if form.product_support_traceability.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.product_support_traceability.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Product Inspection Method -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="product-inspection-method">Product Inspection Method:</label>
+                                    <textarea id="product-inspection-method" name="product_inspection_method" class="form-control border-bottom-style-business-info" rows="4" disabled>{{ sellerprofile.product_inspection_method }}</textarea>
+                                    {% if form.product_inspection_method %}
+                                        <div class="error-list">
+                                            {% for error in form.product_inspection_method %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Quality Control on Lines -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="quality-control-on-lines">Quality Control on Lines:</label>
+                                    <select id="quality-control-on-lines" name="quality_control_on_lines" class="form-control" disabled>
+                                        <option value="" {% if sellerprofile.quality_control_on_lines is None %}selected{% endif %}>-</option>
+                                        <option value="True" {% if sellerprofile.quality_control_on_lines == True %}selected{% endif %}>Yes</option>
+                                        <option value="False" {% if sellerprofile.quality_control_on_lines == False %}selected{% endif %}>No</option>
+                                    </select>
+
+                                    {% if form.quality_control_on_lines.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.quality_control_on_lines.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+                                <!-- QA/QC Inspectors -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="qa-qc-inspectors">QA/QC Inspectors:</label>
+                                    <input type="number" id="qa-qc-inspectors" name="qa_qc_inspectors" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.qa_qc_inspectors }}" disabled>
+
+                                    {% if form.qa_qc_inspectors %}
+                                        <div class="error-list">
+                                            {% for error in form.qa_qc_inspectors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+
+
+
+
+
+
+                                <div class="col-lg-12 d-flex justify-content-start animate__animated animate__fadeIn">
+                                    <h3 class="text-center mb-2 mt-5">Trade background</h3>
+                                </div>
+
+                                 <!-- Main Markets -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="main-markets">Main Markets:</label>
+                                    <textarea id="main-markets" name="main_markets" class="form-control border-bottom-style-business-info" rows="4" disabled>{{ sellerprofile.main_markets }}</textarea>
+                                    {% if form.main_markets %}
+                                        <div class="error-list">
+                                            {% for error in form.main_markets %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Supply Chain Partners -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="supply-chain-partners">Supply Chain Partners:</label>
+                                    <textarea id="supply-chain-partners" name="supply_chain_partners" class="form-control border-bottom-style-business-info" rows="4" disabled>{{ sellerprofile.supply_chain_partners }}</textarea>
+                                    {% if form.supply_chain_partners %}
+                                        <div class="error-list">
+                                            {% for error in form.supply_chain_partners %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Main Client Types -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="main-client-types">Main Client Types:</label>
+                                    <textarea id="main-client-types" name="main_client_types" class="form-control border-bottom-style-business-info" rows="4" disabled>{{ sellerprofile.main_client_types }}</textarea>
+                                    {% if form.main_client_types %}
+                                        <div class="error-list">
+                                            {% for error in form.main_client_types %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+
+
+
+
+                                <div class="col-lg-12 d-flex justify-content-start animate__animated animate__fadeIn">
+                                    <h3 class="text-center mb-2 mt-5">R&D capabilities</h3>
+                                </div>
+                                 <!-- Customization Options -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="customization-options">Customization Options:</label>
+                                    <textarea id="customization-options" name="customization_options" class="form-control border-bottom-style-business-info" rows="4" disabled>{{ sellerprofile.customization_options }}</textarea>
+                                    {% if form.customization_options %}
+                                        <div class="error-list">
+                                            {% for error in form.customization_options %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- New Products Last Year -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="new-products-last-year">New Products Introduced Last Year:</label>
+                                    <input type="number" id="new-products-last-year" name="new_products_last_year" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.new_products_last_year }}" disabled>
+                                    {% if form.new_products_last_year %}
+                                        <div class="error-list">
+                                            {% for error in form.new_products_last_year %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                <!-- R&D engineer education levels -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="new-products-last-year">R&D engineer education levels:</label>
+                                    <input type="text" id="rd_engineer_education_levels" name="rd_engineer_education_levels" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.rd_engineer_education_levels }}" disabled>
+                                    {% if form.rd_engineer_education_levels %}
+                                        <div class="error-list">
+                                            {% for error in form.rd_engineer_education_levels %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                 <!-- R&D engineers -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="new-products-last-year">R&D engineers:</label>
+                                    <input type="number" id=" rd_engineers" name=" rd_engineers" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.rd_engineers }}" disabled>
+                                    {% if form.rd_engineers %}
+                                        <div class="error-list">
+                                            {% for error in form.rd_engineers %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                                <div class="col-lg-12 d-flex justify-content-start animate__animated animate__fadeIn">
+                                    <h3 class="text-center mb-2 mt-5">Contact Informations</h3>
+                                </div>
+
+
+                                <!-- Website URL -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="website-url"><span class="required-star"></span>Website URL:</label>
+                                    <input type="url" id="website-url" name="website_url" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.website_url }}" disabled>
+                                    {% if form.website_url %}
+                                        <div class="error-list">
+                                            {% for error in form.website_url %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                                
+                                <!-- Contact Email -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="contact-email"><span class="required-star"></span>Contact Email:</label>
+                                    <input type="email" id="contact-email" name="contact_email" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.contact_email }}" disabled>
+                                    {% if form.contact_email %}
+                                        <div class="error-list">
+                                            {% for error in form.contact_email %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                                
+                               <!-- Company Phone -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="company-phone">Company Phone:</label>
+                                    <input type="text" id="company-phone" name="company_phone" class="form-control" value="{{ sellerprofile.company_phone|default:'' }}" disabled>
+                                    
+                                    {% if form.company_phone.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.company_phone.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Company Fax -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="company-fax">Company Fax:</label>
+                                    <input type="text" id="company-fax" name="company_fax" class="form-control" value="{{ sellerprofile.company_fax|default:'' }}" disabled>
+                                    
+                                    {% if form.company_fax.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.company_fax.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Company Location -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="company-location"><span class="required-star"></span>Company Location:</label>
+                                    <input type="text" id="company-location" name="company_location" class="form-control border-bottom-style-business-info" value="{{ sellerprofile.company_location }}" disabled>
+
+                                    {% if form.company_location.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.company_location.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+                                
+
+                               
+                               
+
+
+                                <!-- Export Manager Name -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="export-manager-name">Export Manager Name:</label>
+                                    <input type="text" id="export-manager-name" name="export_manager_name" class="form-control" value="{{ sellerprofile.export_manager_name|default:'' }}" disabled>
+                                    
+                                    {% if form.export_manager_name.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.export_manager_name.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Responsible Person Name -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="responsible-person-name">Responsible Person Name:</label>
+                                    <input type="text" id="responsible-person-name" name="responsible_person_name" class="form-control" value="{{ sellerprofile.responsible_person_name|default:'' }}" disabled>
+
+                                    {% if form.responsible_person_name.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.responsible_person_name.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+                                 <!-- Instagram -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="instagram">Instagram:</label>
+                                    <input type="text" id="instagram" name="instagram" class="form-control" value="{{ sellerprofile.instagram|default:'' }}" disabled>
+
+                                    {% if form.instagram.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.instagram.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Facebook -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="facebook">Facebook:</label>
+                                    <input type="text" id="facebook" name="facebook" class="form-control" value="{{ sellerprofile.facebook|default:'' }}" disabled>
+
+                                    {% if form.facebook.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.facebook.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Twitter -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="twitter">Twitter:</label>
+                                    <input type="text" id="twitter" name="twitter" class="form-control" value="{{ sellerprofile.twitter|default:'' }}" disabled>
+
+                                    {% if form.twitter.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.twitter.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Linkedin -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="linkedin">Linkedin:</label>
+                                    <input type="text" id="linkedin" name="linkedin" class="form-control" value="{{ sellerprofile.linkedin|default:'' }}" disabled>
+
+                                    {% if form.linkedin.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.linkedin.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+                                <!-- Youtube -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="youtube">Youtube:</label>
+                                    <input type="text" id="youtube" name="youtube" class="form-control" value="{{ sellerprofile.youtube|default:'' }}" disabled>
+
+                                    {% if form.youtube.errors %}
+                                        <div class="error-list">
+                                            {% for error in form.youtube.errors %}
+                                                <p class="text-danger">{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+
+
+
+                               
+
+                               
+                                
+                            <!-- Edit and Submit Buttons -->
+                                <div class="col-lg-12 d-flex justify-content-end">
+                                    <button type="button" id="edit-btn" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mt-3 mb-5">Edit</button>
+                                    <button type="submit" id="submit-btn" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mt-3 mb-5 ml-2" style="display:none;">Save</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                            <br>
+                            <!-- {% if messages %}
+                                <div class="alert alert-info">
+                                    {% for message in messages %}
+                                        <p>{{ message }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %} -->
+                        <form method="post" action="{% url 'manage_documents' %}" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row p-2 mt-5 " style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+                                <div class="col-lg-12 d-flex justify-content-start animate__animated animate__fadeIn">
+                                    <h3 class="text-center mb-2 mt-5">Upload Documents</h3>
+                                </div>
+                            
+                                <!-- Company Logo -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="company-logo">Company Logo:</label>
+                                    <input type="file" id="company-logo" name="company_logo" class="form-control border-bottom-style-business-info">
+                                    {% if sellerprofile.company_logo %}
+                                        <div class="mt-3">
+                                            <img src="{{ sellerprofile.company_logo.url }}" alt="Company Logo" width="150">
+                                            <br>
+                                            <button type="submit" name="remove_company_logo" class="btn btn-danger mt-2">Remove</button>
+                                        </div>
+                                    {% endif %}
+                                    {% if document_form.company_logo.errors %}
+                                        <div class="text-danger">
+                                            {% for error in document_form.company_logo.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Company License -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="company-license"><span class="required-star"></span>Company License:</label>
+                                    <input type="file" id="company-license" name="company_license" class="form-control border-bottom-style-business-info">
+                                    {% if sellerprofile.company_license %}
+                                        <div class="mt-3">
+                                            <a href="{{ sellerprofile.company_license.url }}" target="_blank">View License</a>
+                                            <br>
+                                            <button type="submit" name="remove_company_license" class="btn btn-danger mt-2">Remove</button>
+                                        </div>
+                                    {% endif %}
+                                    {% if document_form.company_license.errors %}
+                                        <div class="text-danger">
+                                            {% for error in document_form.company_license.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Tax Registration -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="tax-registration">Tax Registration:</label>
+                                    <input type="file" id="tax-registration" name="tax_registration" class="form-control border-bottom-style-business-info">
+                                    {% if sellerprofile.tax_registration %}
+                                        <div class="mt-3">
+                                            <a href="{{ sellerprofile.tax_registration.url }}" target="_blank">View Tax Registration</a>
+                                            <br>
+                                            <button type="submit" name="remove_tax_registration" class="btn btn-danger mt-2">Remove</button>
+                                        </div>
+                                    {% endif %}
+                                    {% if document_form.tax_registration.errors %}
+                                        <div class="text-danger">
+                                            {% for error in document_form.tax_registration.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Utility Bill -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="utility-bill">Utility Bill:</label>
+                                    <input type="file" id="utility-bill" name="utility_bill" class="form-control border-bottom-style-business-info">
+                                    {% if sellerprofile.utility_bill %}
+                                        <div class="mt-3">
+                                            <a href="{{ sellerprofile.utility_bill.url }}" target="_blank">View Utility Bill</a>
+                                            <br>
+                                            <button type="submit" name="remove_utility_bill" class="btn btn-danger mt-2">Remove</button>
+                                        </div>
+                                    {% endif %}
+                                    {% if document_form.utility_bill.errors %}
+                                        <div class="text-danger">
+                                            {% for error in document_form.utility_bill.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Bank Statement -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="bank-statement">Bank Statement:</label>
+                                    <input type="file" id="bank-statement" name="bank_statement" class="form-control border-bottom-style-business-info">
+                                    {% if sellerprofile.bank_statement %}
+                                        <div class="mt-3">
+                                            <a href="{{ sellerprofile.bank_statement.url }}" target="_blank">View Bank Statement</a>
+                                            <br>
+                                            <button type="submit" name="remove_bank_statement" class="btn btn-danger mt-2">Remove</button>
+                                        </div>
+                                    {% endif %}
+                                    {% if document_form.bank_statement.errors %}
+                                        <div class="text-danger">
+                                            {% for error in document_form.bank_statement.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                        
+                                <!-- ID Card -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="id_card">ID Card:</label>
+                                    <input type="file" id="id_card" name="id_card" class="form-control border-bottom-style-business-info">
+                                    {% if sellerprofile.id_card %}
+                                        <div class="mt-3">
+                                            <img src="{{ sellerprofile.id_card.url }}" alt="ID Card" width="150">
+                                            <br>
+                                            <button type="submit" name="remove_id_card" class="btn btn-danger mt-2">Remove</button>
+                                        </div>
+                                    {% endif %}
+                                    {% if document_form.id_card.errors %}
+                                        <div class="text-danger">
+                                            {% for error in document_form.id_card.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                        
+                                <!-- Passport -->
+                                <div class="col-lg-6 form-group animate__animated animate__fadeIn">
+                                    <label for="passport">Passport:</label>
+                                    <input type="file" id="passport" name="passport" class="form-control border-bottom-style-business-info">
+                                    {% if sellerprofile.passport %}
+                                        <div class="mt-3">
+                                            <img src="{{ sellerprofile.passport.url }}" alt="Passport" width="150">
+                                            <br>
+                                            <button type="submit" name="remove_passport" class="btn btn-danger mt-2">Remove</button>
+                                        </div>
+                                    {% endif %}
+                                    {% if document_form.passport.errors %}
+                                        <div class="text-danger">
+                                            {% for error in document_form.passport.errors %}
+                                                <p>{{ error }}</p>
+                                            {% endfor %}
+                                        </div>
+                                    {% endif %}
+                                </div>
+                            
+                                <!-- Submit Button -->
+                                <div class="col-lg-12 text-right form-group">
+                                    <button type="submit" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mt-3 mb-5 ml-2">Update Documents</button>
+                                </div>
+                            </div>
+                        </form>
+                        
+                            
+                            
+                        <br>
+
+
+
+
+                        <div class="row p-5 mt-5" style="  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+                            <div class="col-lg-12 d-flex justify-content-start animate__animated animate__fadeIn">
+                                <h3 class="text-center mb-2 mt-5">Certificates</h3>
+                            </div>
+                                <div class="col-lg-12 mb-4 p-5 border rounded animate__animated animate__fadeIn"  id="certifications-container">
+                                <form method="POST" enctype="multipart/form-data" action="{% url 'manage_certifications' %}">
+                                    {% csrf_token %}
+                                    <div class="row certification-entry mb-4">
+                                        <div class="col-lg-4 form-group">
+                                            <label>Certificate Title:</label>
+                                            <input type="text" name="title" class="form-control" placeholder="ISO 9001">
+                                        </div>
+                                        <div class="col-lg-4 form-group">
+                                            <label>Certificate Description:</label>
+                                            <textarea name="description" class="form-control" rows="2" placeholder="Occupational Health and Safety Certification"></textarea>
+                                        </div>
+                                        <div class="col-lg-4 form-group">
+                                            <label>Upload Certificate Image:</label>
+                                            <input type="file" name="image" class="form-control">
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 d-flex justify-content-end" >
+                                        <button type="submit" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mt-3">Update</button>
+                                    </div>
+                                </form>
+                                <hr>
+                            
+                                
+                            </div>
+                                
+
+                            {% for cert in certificates %}
+                            <div class="col-lg-12 animate__animated animate__fadeIn">
+                                <div class="col-lg-6">
+                                    {% if cert.image %}
+                                    <img src="{{ cert.image.url }}" alt="{{ cert.title }}" style="width: 100px;">
+                                    {% else %}
+                                        <p>No image available</p>
+                                    {% endif %}
+                                </div>
+                                <div class="col-lg-6 mt-2 certificate-details">
+                                    <h5>{{ cert.title }}</h5>
+                                    <p>{{ cert.description }}</p>
+                                    <a href="{% url 'remove_certification' cert.id %}" class="btn btn-danger">Remove</a>
+                                </div>
+                            </div>
+                            {% empty %}
+                                <p class="animate__animated animate__fadeIn">No certificates available.</p>
+                            {% endfor %}
+                        
+                        </div>
+
+                           
+
+                        
+                      
+                        
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+
+
+
+        <!-- Manage Videos Section -->
+        <section id="manage-videos" class="mt-5" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+            <div class="container-count animate__animated animate__fadeIn p-5">
+                <div class="row p-2 mt-2"></div>
+                <h2>Manage Videos</h2>
+                
+                <div class="col-lg-3">
+                    <p>View and control your Videos</p>
+                </div>
+                <form method="POST" action="{% url 'add_video' %}" enctype="multipart/form-data" id="videoForm">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="mb-2">
+                            <label for="id_video_file"></label>
+                            <input type="file" name="video_file" id="id_video_file" accept="video/*" />
+                        </div>
+                        <button type="submit" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s">Add Video</button>
+                    </div>
+                </form>
+                <!-- Error message container -->
+                <div id="error-message" style="color: red; display: none;">Please choose a video file before submitting.</div>
+                <h3 class="mb-5 mt-5">Existing Videos</h3>
+                <div class="row">
+                    {% for video in videos %}
+                        <div class="col-12 col-md-4 mb-3">
+                            <div class="card">
+                                {% if video.video_file %}
+                                    <video width="100%" height="200" controls style="max-height: 200px;">
+                                        <source src="{{ video.video_file.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                {% endif %}
+                                <div class="card-body">
+                                    <a href="{% url 'remove_video' video.id %}" class="btn btn-danger">Remove</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% empty %}
+                        <p>No videos uploaded yet.</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+      
+        
+
+
+
+        <!-- add-productl -->
+        <section id="add-product " class="mt-5 p-5"  style="  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;" >
+            <div class="container-count animate__animated animate__fadeIn" id="manage-products">
+                <h2>Manage Products</h2>
+                
+                <div class="row ">
+                <div class="col-lg-3">
+                    <p>View and manage our products</p>
+                </div>
+                
+                <!-- Button to trigger the modal -->
+                <button type="button" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s" data-toggle="modal" data-target="#addProductModal">
+                    Add Product
+                </button>
+                </div>
+
+                <!-- Display current products -->
+                <div class="mt-3">
+                    <h3>Your Products</h3>
+                    <div class="row">
+                        {% for product in products %}
+                            <div class="col-md-3 mb-4"> <!-- Each product takes 1/3rd of the row -->
+                                <div class="col-lg-12 card p-3">
+                                    <!-- Bootstrap Carousel for Product Images (250px size) -->
+                                    <div id="carousel-{{ product.id }}" class="carousel slide mx-auto" data-ride="carousel" style="max-width: 250px;">
+                                        <div class="carousel-inner">
+                                            {% for image in product.images.all %}
+                                                {% if image.image %}
+                                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                                        <img src="{{ image.image.url }}" alt="{{ image.image_title }}" class="d-block w-100 img-thumbnail" 
+                                                            style="max-width: 250px; max-height: 250px; object-fit: contain; ">
+                                                    </div>
+                                                {% endif %}
+                                            {% empty %}
+                                                <div class="carousel-item active">
+                                                    <p class="text-center">No images available.</p>
+                                                </div>
+                                            {% endfor %}
+                                        </div>
+                
+                                        <!-- Carousel Controls (only if more than one image) -->
+                                        {% if product.images.all|length > 1 %}
+                                            <a class="carousel-control-prev" href="#carousel-{{ product.id }}" role="button" data-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Previous</span>
+                                            </a>
+                                            <a class="carousel-control-next" href="#carousel-{{ product.id }}" role="button" data-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="sr-only">Next</span>
+                                            </a>
+                                        {% endif %}
+                                    </div>
+                                    
+                                    <h5 class="card-title mt-3 text-dark">{{ product.name }}</h5>
+                                    <p class="card-text">Category: {{ product.category }}</p>
+                                    <p class="card-text">Sub Category: {{ product.subcategory }}</p>
+                                    <p class="card-text">Description: {{ product.description|truncatewords:10 }}</p>
+                                    <p class="card-text">Origin: {{ product.origin }}</p>
+                                    <p class="card-text">Availability: {{ product.get_availability_display }}</p>
+                                
+                
+                
+                                    <!-- Edit & Remove Buttons -->
+                                    <div class="mt-3">
+                                        <button class="btn btn-warning edit-product-btn" data-toggle="modal" data-target="#editProductModal"
+                                                data-id="{{ product.id }}" data-name="{{ product.name }}"
+                                                data-origin="{{ product.origin }}" data-availability="{{ product.availability }}">
+                                            Edit
+                                        </button>
+                                        <a href="{% url 'remove_product' product.id %}" class="btn btn-danger">Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% empty %}
+                            <p class="col-12 text-center">No products available.</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+
+          
+        
+            <!-- Modal for adding products -->
+            <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog" aria-labelledby="addProductModalLabel" aria-hidden="true">
+                <div class="modal-dialog d-flex justify-content-center" role="document">  <!-- Added modal-lg here -->
+                    <div class="modal-content " id="addproductmodalsecond">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addProductModalLabel">Add Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addProductForm" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="add_category">Category</label>
+                                        <select class="form-control" name="category" id="add_category" required>
+                                            <option value="">Select a Category</option>
+                                            {% for category in categories %}
+                                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+            
+                                    <div class="col-md-6 form-group">
+                                        <label for="add_subcategory">Subcategory</label>
+                                        <select class="form-control" name="subcategory" id="add_subcategory" required>
+                                            <option value="">Select a Subcategory</option>
+                                        </select>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="add_name">Product Name</label>
+                                        <input type="text" class="form-control" name="name" id="add_name" required>
+                                    </div>
+            
+                                    <div class="col-md-6 form-group">
+                                        <label for="add_origin">Product Origin</label>
+                                        <input type="text" class="form-control" name="origin" id="add_origin" required>
+                                    </div>
+                                </div>
+            
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="add_availability">Availability</label>
+                                        <select class="form-control" name="availability" id="add_availability" required>
+                                            <option value="in_stock">In Stock</option>
+                                            <option value="out_of_stock">Out of Stock</option>
+                                        </select>
+                                    </div>
+            
+                                    <div class="col-md-6 form-group">
+                                        <label for="add_description">Product Description</label>
+                                        <textarea class="form-control" name="description" id="add_description" rows="3"></textarea>
+                                    </div>
+                                </div>
+            
+                                <div class="form-group" id="image-container-add">
+                                    <label for="add_images">Add Images</label>
+                                    <input type="file" name="product_images" class="form-control mb-2" multiple>
+                                    <span class="error-message text-danger"></span> 
+                                </div>
+            
+                                <button type="button" id="addMoreImagesAdd" class="btn btn-secondary animate__animated animate__bounceIn animate__delay-.5s ml-2 ">Add More Images</button>
+            
+                                <button type="submit" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s ml-2">Add Product</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+
+        
+           
+            
+            
+
+           <!-- Edit Product Modal -->
+            <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog" aria-labelledby="editProductModalLabel" aria-hidden="true">
+                <div class="modal-dialog d-flex justify-content-center" role="document">
+                    <div class="modal-content"  id="addproductmodalthird">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="editProductModalLabel">Edit Product</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="editProductForm" method="POST" enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="product_id" id="edit_product_id">
+
+                                <div class="row">
+                                    <div class="col-md-6 form-group">
+                                        <label for="edit_category">Category</label>
+                                        <select class="form-control" name="category" id="edit_category" required>
+                                            <option value="">Select a Category</option>
+                                            {% for category in categories %}
+                                                <option value="{{ category.id }}">{{ category.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                
+                                    <div class="col-md-6 form-group">
+                                        <label for="edit_subcategory">Subcategory</label>
+                                        <select class="form-control" name="subcategory" id="edit_subcategory" required>
+                                            <option value="">Select a Subcategory</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+
+                               <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="edit_name">Product Name</label>
+                                            <input type="text" class="form-control" name="name" id="edit_name" required>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="edit_description">Product Description</label>
+                                            <textarea class="form-control" name="description" id="edit_description" rows="3" required></textarea>
+                                        </div>
+                                    </div>
+                               </div>
+                                
+
+                               <div class="row">
+                                   <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="edit_origin">Product Origin</label>
+                                            <input type="text" class="form-control" name="origin" id="edit_origin" required>
+                                        </div>
+                                   </div>
+
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label for="edit_availability">Availability</label>
+                                            <select class="form-control" name="availability" id="edit_availability" required>
+                                                <option value="in_stock">In Stock</option>
+                                                <option value="out_of_stock">Out of Stock</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                               </div>
+
+                                <!-- Image container for editing images -->
+                                <div class="form-group" id="image-container-edit">
+                                    <label for="edit_images">Update Images</label>
+                                    <input type="file" name="product_images" class="form-control mb-2" multiple>
+                                </div>
+
+                                <!-- Button to add more image inputs -->
+                                <button type="button" id="addMoreImagesEdit" class="btn btn-secondary animate__animated animate__bounceIn animate__delay-.5s">Add More Images</button>
+
+                                <button type="submit" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s ml-2">Update Product</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </section>
+        
+       
+        
+        
+
+
+ 
+         <!-- Page Views Section -->
+        <section id="page-views" class="mt-5" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+            <div class="page-views-container p-5 animate__animated animate__fadeIn" >
+                <h2>Profile Views</h2>
+                <p>See how many times your company profile has been visited:</p>
+                <div class="col-lg-12">
+                    <div class="row" style="display: flex; justify-content: space-between;">
+                        <div class="col-lg-2 m-2 text-center" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+                            <i class="fa fa-bar-chart pt-5" style="font-size: 50px; color: #ff0000;"></i>
+                            <div class="m-5">
+                                <strong>Total profile views: {{ profile_views }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 m-2 text-center" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+                            <i class="fa-solid fa-chart-line pt-5" style="font-size: 50px; color: #ff0000;"></i>
+                            <div class="m-5">
+                                <strong>Weekly profile views: {{ weekly_views }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 m-2 text-center" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+                            <i class="fa fa-chart-gantt pt-5" style="font-size: 50px; color: #ff0101;"></i>
+                            <div class="m-5">
+                                <strong>Daily profile views: {{ daily_views }}</strong>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 m-2 text-center" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+                            {% if percentage_change > 0 %}
+                                <i class="fa fa-arrow-up pt-5" style="font-size: 50px; color: #28a745;"></i>
+                                <div class="m-5">
+                                    <strong>Profile Views Change (30 days): +{{ percentage_change|floatformat:2 }}%</strong>
+                                </div>
+                            {% elif percentage_change < 0 %}
+                                <i class="fa fa-arrow-down pt-5" style="font-size: 50px; color: #dc3545;"></i>
+                                <div class="m-5">
+                                    <strong>Profile Views Change (30 days): {{ percentage_change|floatformat:2 }}%</strong>
+                                </div>
+                            {% else %}
+                                <i class="fa fa-arrow-right pt-5" style="font-size: 50px; color: #6c757d;"></i>
+                                <div class="m-5">
+                                    <strong>Profile Views Change (30 days): {{ percentage_change|floatformat:2 }}%</strong>
+                                </div>
+                            {% endif %}
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        
+        
+            
+                 
+        </section>
+ 
+   
+        <section id="settings" class="mt-5 p-5" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
+            <h2>Change Password</h2>
+        
+            {% if messages %}
+                <div class="alert alert-danger">
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        
+            <!-- Global Form Errors -->
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    {% for field, errors in form.errors.items %}
+                        <p><strong>{{ field }}:</strong> {% for error in errors %} {{ error }} {% endfor %}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        
+            
+            
+            <form method="post" action="{% url 'seller_change_password' %}">
+                {% csrf_token %}
+                
+                <div class="col-md-12 col-lg-12">
+                    {% if messages %}
+                        <div class="alert alert-danger mb-3">
+                            {% for message in messages %}
+                                <p>{{ message }}</p>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
+                    <div class="row">
+            
+                        <div class="col-lg-3 form-group">
+                            <label for="id_old_password" class="font-weight-bold text-muted">Old Password</label>
+                            <div class="input-group">
+                                <input type="password" name="old_password" id="id_old_password" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Enter your old password" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text toggle-password" onclick="togglePasswordVisibility('id_old_password', this)"><i class="fas fa-eye"></i></span>
+                                </div>
+                            </div>
+                            {% if form.old_password.errors %}
+                                <div class="text-danger mt-2">
+                                    {% for error in form.old_password.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+            
+                        <div class="col-lg-3 form-group">
+                            <label for="id_new_password1" class="font-weight-bold text-muted">New Password</label>
+                            <div class="input-group">
+                                <input type="password" name="new_password1" id="id_new_password1" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Create a new password" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text toggle-password" onclick="togglePasswordVisibility('id_new_password1', this)"><i class="fas fa-eye"></i></span>
+                                </div>
+                            </div>
+                            {% if form.new_password1.errors %}
+                                <div class="text-danger mt-2">
+                                    {% for error in form.new_password1.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+            
+                        <div class="col-lg-3 form-group">
+                            <label for="id_new_password2" class="font-weight-bold text-muted">Confirm New Password</label>
+                            <div class="input-group">
+                                <input type="password" name="new_password2" id="id_new_password2" class="form-control form-control-lg rounded-3 shadow-sm" placeholder="Re-enter new password" required>
+                                <div class="input-group-append">
+                                    <span class="input-group-text toggle-password" onclick="togglePasswordVisibility('id_new_password2', this)"><i class="fas fa-eye"></i></span>
+                                </div>
+                            </div>
+                            {% if form.new_password2.errors %}
+                                <div class="text-danger mt-2">
+                                    {% for error in form.new_password2.errors %}
+                                        <p>{{ error }}</p>
+                                    {% endfor %}
+                                </div>
+                            {% endif %}
+                        </div>
+            
+                        <div class="col-lg-3 d-flex justify-content-start align-items-center">
+                            <button type="submit" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s mt-3">Change Password</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            
+            
+
+            
+            <!-- Font Awesome Icons -->
+            
+        </section>
+        
+        
+
+
+    </div>
+    <script>
+        function togglePasswordVisibility(inputId, icon) {
+            var inputField = document.getElementById(inputId);
+            var iconElement = icon.querySelector("i");
+    
+            if (inputField.type === "password") {
+                inputField.type = "text"; 
+                iconElement.classList.remove("fa-eye");
+                iconElement.classList.add("fa-eye-slash"); 
+            } else {
+                inputField.type = "password"; 
+                iconElement.classList.remove("fa-eye-slash");
+                iconElement.classList.add("fa-eye"); 
+            }
+        }
+    </script>
+    <style>
+          @media screen and (min-width: 1200px) {
+                #addproductmodalsecond, #addproductmodalthird  {
+                    min-width: 1200px;
+                }
+            }
+           
+        
+            
+            .input-group-text {
+                    background-color: #f8f9fc;
+                    border: none;
+                    border-radius: 0 0.375rem 0.375rem 0;
+                }
+            
+                .form-control {
+                    border-radius: 0.375rem;
+                    font-size: 1.1rem;
+                }
+            
+                .alert {
+                    border-radius: 0.375rem;
+                }
+            
+                .input-group-append {
+                    border-radius: 0.375rem;
+                }
+            
+                .text-danger p {
+                    font-size: 0.9rem;
+                    margin: 0;
+                }
+    </style>
+
+    <script>
+        document.getElementById('edit-btn').addEventListener('click', function() {
+            let formElements = document.querySelectorAll('#company-info-form input, #company-info-form select, #company-info-form textarea');
+            let isDisabled = formElements[0].disabled;
+
+            formElements.forEach((el) => {
+                el.disabled = !isDisabled;
+            });
+
+            // Toggle button text
+            if (isDisabled) {
+                this.textContent = 'Cancel';
+                document.getElementById('submit-btn').style.display = 'inline-block';
+            } else {
+                this.textContent = 'Edit';
+                document.getElementById('submit-btn').style.display = 'none';
+            }
+        });
+    </script>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+    <script>
+    $(document).ready(function () {
+        $("#addProductForm").submit(function (e) {
+            e.preventDefault(); // Prevent form from reloading the page
+            
+            var formData = new FormData(this); // Get form data
+            $(".error-message").html(""); // Clear previous errors
+
+            // Check if at least one image is selected
+            var imageInputs = $("[name='product_images']");
+            var imageUploaded = false;
+            
+            for (var i = 0; i < imageInputs.length; i++) {
+                if (imageInputs[i].files.length > 0) {
+                    imageUploaded = true;
+                    break;
+                }
+            }
+
+            // If no image is uploaded, show error message under the image field
+            if (!imageUploaded) {
+                // Target the error-message below the product images section
+                $("div.form-group").has("input[name='product_images']").find(".error-message").html("Please upload at least one image.");
+                return; // Don't proceed with the form submission
+            }
+
+            $.ajax({
+                url: "{% url 'add_product' %}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response.success) {
+                        alert("Product added successfully!");
+                        window.location.reload(); // Reload the page to show new product
+                    } else {
+                        // Display error messages next to fields
+                        for (var field in response.errors) {
+                            $("[name=" + field + "]").next(".error-message").html(response.errors[field]);
+                        }
+                    }
+                },
+                error: function () {
+                    alert("Something went wrong. Please try again.");
+                }
+            });
+        });
+    });
+
+
+    </script>
+
+
+    <!-- 
+    <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById('addMoreImagesAdd').addEventListener('click', function () {
+            const container = document.getElementById('image-container-add');
+            const currentInputs = container.getElementsByTagName('input');
+
+            if (currentInputs.length < 6) {
+                const newInput = document.createElement('input');
+                newInput.setAttribute('type', 'file');
+                newInput.setAttribute('name', 'product_images');
+                newInput.classList.add('form-control', 'mb-2');
+                container.appendChild(newInput);
+            }
+
+            if (currentInputs.length + 1 >= 6) {
+                document.getElementById('addMoreImagesAdd').style.display = 'none';
+            }
+        });
+
+
+
+        document.getElementById('addMoreImagesEdit').addEventListener('click', function () {
+            const container = document.getElementById('image-container-edit');
+            const currentInputs = container.getElementsByTagName('input');
+
+            if (currentInputs.length < 5) {
+                const newInput = document.createElement('input');
+                newInput.setAttribute('type', 'file');
+                newInput.setAttribute('name', 'product_images');
+                newInput.classList.add('form-control', 'mb-2');
+                container.appendChild(newInput);
+            }
+
+            
+
+            if (currentInputs.length >= 5) {
+                document.getElementById('addMoreImagesAdd').style.display = 'none';
+            }
+        });
+
+
+
+        document.querySelectorAll(".edit-product-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                let productId = this.getAttribute("data-id");
+                let name = this.getAttribute("data-name");
+                let origin = this.getAttribute("data-origin");
+                let availability = this.getAttribute("data-availability");
+                let description = this.getAttribute("data-description");
+                
+                document.getElementById("edit_product_id").value = productId;
+                document.getElementById("edit_name").value = name;
+                document.getElementById("edit_origin").value = origin;
+                document.getElementById("edit_availability").value = availability;
+                document.getElementById("edit_description").value = description;
+
+
+                
+
+            });
+        });
+
+        document.getElementById("addProductForm").addEventListener("submit", function (event) {
+            event.preventDefault(); 
+
+            const submitButton = this.querySelector('button[type="submit"]');
+            submitButton.disabled = true;
+
+            console.log('Form submitted');
+
+            const imageInputs = document.querySelectorAll('#image-container-add input[type="file"]');
+            let imageSelected = false;
+            imageInputs.forEach(input => {
+                if (input.files.length > 0) {
+                    imageSelected = true;
+                }
+            });
+
+            if (!imageSelected) {
+                alert("Please add at least one image.");
+                submitButton.disabled = false;
+            } else {
+                let formData = new FormData(this);
+
+                fetch("{% url 'add_product' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Product added successfully');
+                        location.reload(); 
+                    } else {
+                        alert("Error adding product. Please check your inputs.");
+                    }
+                    submitButton.disabled = false;
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    submitButton.disabled = false;
+                });
+            }
+        });
+
+
+
+        document.getElementById("editProductForm").addEventListener("submit", function (event) {
+            event.preventDefault(); 
+
+            const imageInputs = document.querySelectorAll('#image-container-edit input[type="file"]');
+            let imageSelected = false;
+            imageInputs.forEach(input => {
+                if (input.files.length > 0) {
+                    imageSelected = true;
+                }
+            });
+
+            if (!imageSelected) {
+                alert("Please add at least one image.");
+            } else {
+                let formData = new FormData(this);
+
+                fetch("{% url 'edit_product' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload();
+                    } else {
+                        alert("Error updating product. Please check your inputs.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+            }
+        });
+    });
+
+    </script> -->
+
+
+    <script>
+        
+        document.addEventListener("DOMContentLoaded", function () {
+        function handleAddMoreImages(buttonId, containerId, maxInputs) {
+            document.getElementById(buttonId).addEventListener("click", function () {
+                const container = document.getElementById(containerId);
+                const currentInputs = container.getElementsByTagName("input");
+
+                if (currentInputs.length < maxInputs) {
+                    const newInput = document.createElement("input");
+                    newInput.setAttribute("type", "file");
+                    newInput.setAttribute("name", "product_images");
+                    newInput.classList.add("form-control", "mb-2");
+                    container.appendChild(newInput);
+                }
+
+                if (currentInputs.length + 1 >= maxInputs) {
+                    this.style.display = "none";
+                }
+            });
+        }
+
+        handleAddMoreImages("addMoreImagesAdd", "image-container-add", 6);
+        handleAddMoreImages("addMoreImagesEdit", "image-container-edit", 5);
+
+        document.querySelectorAll(".edit-product-btn").forEach(button => {
+            button.addEventListener("click", function () {
+                document.getElementById("edit_product_id").value = this.getAttribute("data-id");
+                document.getElementById("edit_name").value = this.getAttribute("data-name");
+                document.getElementById("edit_origin").value = this.getAttribute("data-origin");
+                document.getElementById("edit_availability").value = this.getAttribute("data-availability");
+                document.getElementById("edit_description").value = this.getAttribute("data-description");
+            });
+        });
+
+        
+
+        function handleFormSubmission(formId, urlName) {
+            document.getElementById(formId).addEventListener("submit", function (event) {
+                event.preventDefault();
+                const form = this;
+                const submitButton = form.querySelector('button[type="submit"]');
+                submitButton.disabled = true;
+
+                const imageInputs = form.querySelectorAll("input[type='file']");
+                let imageSelected = Array.from(imageInputs).some(input => input.files.length > 0);
+
+                if (!imageSelected) {
+                    alert("Please add at least one image.");
+                    submitButton.disabled = false;
+                    return;
+                }
+
+                let formData = new FormData(form);
+
+                fetch(form.getAttribute("action"), {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        console.log('Action successful');
+                        location.reload();
+                    } else {
+                        alert("Error. Please check your inputs.");
+                    }
+                })
+                .catch(error => console.error("Error:", error))
+                .finally(() => submitButton.disabled = false);
+            });
+        }
+
+        handleFormSubmission("addProductForm", "add_product");
+        handleFormSubmission("editProductForm", "edit_product");
+
+        document.getElementById("editProductForm").addEventListener("submit", function (event) {
+            event.preventDefault(); 
+
+            const imageInputs = document.querySelectorAll('#image-container-edit input[type="file"]');
+            let imageSelected = false;
+            imageInputs.forEach(input => {
+                if (input.files.length > 0) {
+                    imageSelected = true;
+                }
+            });
+
+            if (!imageSelected) {
+                alert("Please add at least one image.");
+            } else {
+                let formData = new FormData(this);
+
+                fetch("{% url 'edit_product' %}", {
+                    method: "POST",
+                    body: formData,
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}"
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        location.reload(); 
+                    } else {
+                        alert("Error updating product. Please check your inputs.");
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+            }
+        });
+    });
+
+
+
+    </script> 
+    
+
+
+    
+    <script>
+        document.getElementById('videoForm').addEventListener('submit', function(event) {
+            var fileInput = document.getElementById('id_video_file');
+            var errorMessage = document.getElementById('error-message');
+
+            if (!fileInput.files.length) {
+                event.preventDefault();  
+                errorMessage.style.display = 'block';  
+            } else {
+                errorMessage.style.display = 'none';  
+            }
+        });
+    </script>
+
+
+
+        <!-- //  dynamically update subcategories based on selected category -->
+        <!-- document.getElementById('add_category').addEventListener('change', function() {
+            const categoryId = this.value;
+
+            if (categoryId) {
+                fetch(`/get_subcategories/${categoryId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const subcategorySelect = document.getElementById('add_subcategory');
+                        subcategorySelect.innerHTML = '<option value="">Select a Subcategory</option>';
+
+                        data.subcategories.forEach(subcategory => {
+                            const option = document.createElement('option');
+                            option.value = subcategory.id;
+                            option.textContent = subcategory.name;
+                            subcategorySelect.appendChild(option);
+                        });
+                    });
+            } else {
+                document.getElementById('add_subcategory').innerHTML = '<option value="">Select a Subcategory</option>';
+            }
+        }); -->
+
+
+
+
+
+
+<script>
+    // Function to update subcategories dynamically
+    function updateSubcategories(categoryElementId, subcategoryElementId) {
+        document.getElementById(categoryElementId).addEventListener('change', function () {
+            const categoryId = this.value;
+
+            if (categoryId) {
+                fetch(`/get_subcategories/${categoryId}/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        const subcategorySelect = document.getElementById(subcategoryElementId);
+                        subcategorySelect.innerHTML = '<option value="">Select a Subcategory</option>';
+
+                        data.subcategories.forEach(subcategory => {
+                            const option = document.createElement('option');
+                            option.value = subcategory.id;
+                            option.textContent = subcategory.name;
+                            subcategorySelect.appendChild(option);
+                        });
+                    });
+            } else {
+                document.getElementById(subcategoryElementId).innerHTML = '<option value="">Select a Subcategory</option>';
+            }
+        });
+    }
+
+    // Call the function separately for each modal
+    updateSubcategories('add_category', 'add_subcategory');
+    updateSubcategories('edit_category', 'edit_subcategory');
+</script>
+
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const sidebarLinks = document.querySelectorAll(".sidebar a");
+        
+        // Smooth Scroll and Active Link Highlighting
+        sidebarLinks.forEach(link => {
+            link.addEventListener("click", function (event) {
+                const targetId = this.getAttribute("href").substring(1);
+                const targetSection = document.getElementById(targetId);
+
+                if (targetSection) {
+                    event.preventDefault();
+                    targetSection.scrollIntoView({ behavior: "smooth", block: "start" });
+
+                    // Remove active class from all links
+                    sidebarLinks.forEach(link => link.classList.remove("active"));
+
+                    // Add active class to clicked link
+                    this.classList.add("active");
+                }
+            });
+        });
+
+        // Toggle Sidebar (Combined approach)
+        const toggleBtn = document.getElementById("toggle-btn");
+        const sidebar = document.getElementById("sidebar-company-dashboard");
+
+        toggleBtn.addEventListener("click", function () {
+            sidebar.classList.toggle("collapsed");
+        });
+    });
+</script>
+
+
+{% endblock content %}
+
+
+

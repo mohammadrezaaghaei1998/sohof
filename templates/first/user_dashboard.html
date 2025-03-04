@@ -1,0 +1,863 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="w3-sidebar w3-bar-block w3-xxlarge" style="width:70px">
+    <a href="{% url 'index' %}" class="w3-bar-item w3-button" onclick="showContent('home')"><i class="fa fa-home"></i></a>
+    <a href="#" class="w3-bar-item w3-button" onclick="showContent('profile')"><i class="fa fa-user"></i></a>
+    <!-- <a href="#" class="w3-bar-item w3-button" onclick="showContent('mail')"><i class="fa fa-envelope" style="font-size: 30px;"></i></a> -->
+    <a href="#" class="w3-bar-item w3-button" onclick="showContent('password')"><i class="fa fa-lock" style="font-size: 40px;"></i></a>
+    <a href="#" class="w3-bar-item w3-button" onclick="showContent('favorite')"><i class="fa fa-heart"></i></a>
+    <!-- <a href="#" class="w3-bar-item w3-button" onclick="showContent('order-history')"><i class="fa fa-history"></i> </a>
+    <a href="#" class="w3-bar-item w3-button" onclick="logout()"><span class="material-icons" style="font-size: 40px; font-weight: bold;">exit_to_app</span></a> -->
+
+    <a href="{% url 'logout' %}" class="w3-bar-item w3-button">
+        <i class="fa fa-sign-out"></i> 
+    </a>
+    
+</div>
+
+<div style="margin-left:70px">
+  <div id="home" class="content-user-dashboard ">
+    <!-- <div class="w3-container">
+      <h2>Home</h2>
+      <p>Welcome to the home section!</p>
+    </div> -->
+</div>
+
+ <!-- Profile Content -->
+<!-- Profile Content -->
+<div id="profile" class="content-user-dashboard active" style="margin-bottom: 220px;">
+    <div class="w3-container mt-5">
+        <h2 class="center-text-user-dashboard-content">Hello {{ user.username }}, Welcome To Your Profile!</h2>
+        <div class="container">
+            <!-- User Info -->
+            <div id="user-profile-info" class="profile-info mt-5 mb-5">
+                <div class="row d-flex justify-content-center align-items-center">
+                    <!-- Profile Image Section -->
+                    <div class="profile-image-container mt-5 mr-5 mb-5 d-flex justify-content-center">
+                        <img id="profile-img" src="{% if user_profile and user_profile.image %}{{ user_profile.image.url }}{% else %}{% static 'assets/images/confident2.jpg' %}{% endif %}" alt="Profile Image" class="profile-img" />
+
+                    </div>
+            
+                    <!-- Profile Details Section -->
+                    <div class="profile-details col-lg-8 mt-5">
+                        <div class="row mb-3">
+                            <div class="col-lg-6 profile-details-user-info">
+                                <p><strong>Name:</strong> {{ user_profile.name }}</p>
+                            </div>
+                            <div class="col-lg-6 profile-details-user-info">
+                                <p><strong>Last Name:</strong> {{ user_profile.last_name }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6 profile-details-user-info">
+                                <p ><strong >Email Address:</strong > {{ user.email }}</p>
+                            </div>
+                            <div class="col-lg-6 profile-details-user-info">
+                                <p ><strong >Username:</strong > {{ user.username }}</p>
+                            </div>
+                            
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6 profile-details-user-info">
+                                <p><strong>Phone Number:</strong> {{ user_profile.phone }}</p>
+                            </div>
+                            <div class="col-lg-6 profile-details-user-info">
+                                <p><strong>Tax Number:</strong> {{ user_profile.tax_number }}</p>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-lg-6 profile-details-user-info">
+                                <p><strong>Postal Code:</strong> {{ user_profile.postal_code }}</p>
+                            </div>
+                            <div class="col-lg-6 profile-details-user-info">
+                                <p ><strong>Address:</strong> {{ user_profile.address }}</p>
+                            </div>
+                        </div>
+                        <!-- Edit Button -->    
+                    </div>
+                    <div class="col-lg-12 d-flex justify-content-end">
+                        <button onclick="editProfile()" class="btn btn-md btn-custom mr-2 animate__animated animate__bounceIn animate__delay-.5s">Edit Profile</button>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Editable Profile Form (hidden initially) -->
+            <div id="edit-profile-form" class="edit-form" style="display: none;">
+                <h3>Edit Profile</h3>
+                <form id="profileForm" class="w3-container" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    
+                    <div class="profile-image-container mt-5 mr-5 mb-5 d-flex justify-content-center">
+                        <img id="profile-img" src="{% if user_profile and user_profile.image %}{{ user_profile.image.url }}{% else %}{% static 'assets/images/confident2.jpg' %}{% endif %}" alt="Profile Image" class="profile-img" />
+            
+                        <div class="edit-image-text" onclick="toggleImageInput()">
+                            <i class="fa fa-camera pr-2"></i>Edit Profile Image
+                        </div>
+            
+                        <!-- Hidden file input field -->
+                        <input type="file" id="image-upload" name="image" style="display: none;" onchange="previewImage(event)">
+                    </div>
+            
+                    <div class="w3-row">
+                        <div class="w3-col s12 m6">
+                            <label for="name">Name:</label>
+                            <input type="text" id="name" name="name" value="{{ user_profile.name }}" class="w3-input w3-border" /><br>
+            
+                            <label for="email">Email:</label>
+                            <input type="email" id="email" name="email" value="{{ user.email }}" class="w3-input w3-border" /><br>
+            
+                            <label for="phone">Phone Number:</label>
+                            <input type="text" id="phone" name="phone" value="{{ user_profile.phone }}" class="w3-input w3-border" /><br>
+
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" value="{{ user.username }}" class="w3-input w3-border" /><br>
+            
+                        </div>
+            
+                        <div class="w3-col s12 m6">
+                            <label for="last-name">Last Name:</label>
+                            <input type="text" id="last-name" name="last_name" value="{{ user_profile.last_name }}" class="w3-input w3-border" /><br>
+            
+                            <label for="address">Address:</label>
+                            <input type="text" id="address" name="address" value="{{ user_profile.address }}" class="w3-input w3-border" /><br>
+            
+                            <label for="postal-code">Postal Code:</label>
+                            <input type="text" id="postal-code" name="postal_code" value="{{ user_profile.postal_code }}" class="w3-input w3-border" /><br>
+
+                            
+                            <label for="tax-number">Tax Number:</label>
+                            <input type="text" id="tax-number" name="tax_number" value="{{ user_profile.tax_number }}" class="w3-input w3-border" /><br>
+                        </div>
+                    </div>
+            
+                    <button type="submit" class="btn btn-md btn-custom mr-2 animate__animated animate__bounceIn animate__delay-.5s">Save Changes</button>
+                    <button type="button" onclick="closeEditForm()" class="btn btn-md btn-custom mr-2 animate__animated animate__bounceIn animate__delay-.5s">Cancel</button>
+                </form>
+            </div>
+  
+            <!-- Modal for confirmation message -->
+            <div id="confirmation-modal" class="modal" style="display: none;">
+                <div class="modal-content w3-card-4">
+                    <span class="close-btn mb-2" onclick="closeModal()">&times;</span>
+                    <h4>Your changes have been saved successfully!</h4>
+                    <button onclick="closeModal()" class="btn btn-md btn-custom mr-2 animate__animated animate__bounceIn animate__delay-.5s">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Other Content Sections -->
+    
+    <div id="mail" class="content-user-dashboard" style="margin-bottom: 340px;">
+        <div class="w3-container mt-5">
+            <h2 class="center-text-user-dashboard-content">Check your inbox here.</h2>
+        </div>
+    
+        <!-- Loader (Initially Hidden) -->
+        <div id="loader" class="loader" style="display: none;">
+            <div class="spinner"></div>
+            <p>Refreshing...</p>
+        </div>
+    
+        <!-- Mail Inbox -->
+        <div class="w3-row mt-5 mb-5" style="overflow-x: auto;">
+            
+    
+            <!-- Inbox -->
+            <div class="w3-col l9">
+                <div class="w3-card-4">
+                    <!-- Mailbox Actions (Mark All, Delete, etc.) -->
+                    <header class="w3-container mailbox-header">
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <ul class="w3-ul">
+                                  <div class="row">
+                                    <li style="border: none;"><a href="#" class="w3-button w3-block w3-padding-small" onclick="showFolder('inbox')"><i class="fa fa-inbox"></i> Inbox</a></li>
+                                    <li  style="border: none;"><a href="#" class="w3-button w3-block w3-padding-small" onclick="showFolder('sent')"><i class="fa fa-paper-plane"></i> Sent</a></li>
+                                  </div>
+                                </ul>
+                            </div>
+
+                            <div class="col-lg-4 actions">
+                                <button class="w3-button w3-blue" onclick="markAll()"><i class="fa fa-check-square"></i> Mark All</button>
+                                <button class="w3-button w3-red" onclick="deleteSelected()"><i class="fa fa-trash"></i> Delete</button>
+                                <button class="w3-button w3-teal" onclick="refreshInbox()"><i class="fa fa-refresh"></i> Refresh</button>
+                            </div>
+                        </div>
+                    </header>
+                    
+    
+                    <div class="w3-container" id="inbox-messages">
+                        <!-- Sample inbox email items will go here -->
+                        <div class="mail-item tex-shadow">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="email1">
+                            </div>
+                            <div class="col-lg-2">
+                                <span class="sender">John asdasdDoe</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject">New asdasdasdasdProject Updates</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject"><p class="w3-small">Just wanted to let you know about the latest updates on the project...</p></span>
+                            </div>
+                            <div class="col-lg-2 d-flex justify-content-end">
+                                <span class="date">Dec 30, 2024</span>
+                            </div>
+                        </div>
+                        <div class="mail-item tex-shadow">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="email1">
+                            </div>
+                            <div class="col-lg-2">
+                                <span class="sender">Elijah Mickelson</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject">New Project Updates Will be Here</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject"><p class="w3-small">Just wanted to let you know about the latest updates on the project...</p></span>
+                            </div>
+                            <div class="col-lg-2 d-flex justify-content-end">
+                                <span class="date">Dec 30, 2024</span>
+                            </div>
+                        </div>
+                        <div class="mail-item tex-shadow">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="email1">
+                            </div>
+                            <div class="col-lg-2">
+                                <span class="sender">Stephen Somerhalder</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject">New Project Updates</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject"><p class="w3-small">Just wanted to let you know about the latest updates on the project...</p></span>
+                            </div>
+                            <div class="col-lg-2 d-flex justify-content-end">
+                                <span class="date">Dec 30, 2024</span>
+                            </div>
+                        </div>
+                        <!-- Additional Inbox emails -->
+                    </div>
+    
+                    <div class="w3-container" id="sent-messages" style="display: none;">
+                        <!-- Sample sent email items will go here -->
+                        <div class="mail-item tex-shadow">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="sent-email1">
+                            </div>
+                            <div class="col-lg-2">
+                                <span class="sender">You</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject">Meeting Invitation</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <p class="w3-small">You're invited to the meeting at 3 PM tomorrow regarding the new project...</p>
+                            </div>
+                            <div class="col-lg-2 d-flex justify-content-end">
+                                <span class="date">Dec 29, 2024</span>
+                            </div>
+                        </div>
+                        <div class="mail-item tex-shadow">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="sent-email1">
+                            </div>
+                            <div class="col-lg-2">
+                                <span class="sender">You</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject">Meeting Invitation</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <p class="w3-small">You're invited to the meeting at 3 PM tomorrow regarding the new project...</p>
+                            </div>
+                            <div class="col-lg-2 d-flex justify-content-end">
+                                <span class="date">Dec 29, 2024</span>
+                            </div>
+                        </div>
+                        <div class="mail-item tex-shadow">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="sent-email1">
+                            </div>
+                            <div class="col-lg-2">
+                                <span class="sender">You</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <span class="subject">Meeting Invitation</span>
+                            </div>
+                            <div class="col-lg-4">
+                                <p class="w3-small">You're invited to the meeting at 3 PM tomorrow regarding the new project...</p>
+                            </div>
+                            <div class="col-lg-2 d-flex justify-content-end">
+                                <span class="date">Dec 29, 2024</span>
+                            </div>
+                        </div>
+                        <!-- Additional Sent emails -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    
+    <div id="password" class="content-user-dashboard" style="margin-bottom: 100px;">
+        <div class="w3-container">
+            <h2 class="center-text-user-dashboard-content mt-5">Change Password</h2>
+            <div class="d-flex justify-content-center mt-5 pt-2">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="col col-xl-12">
+                            <div class="card log-reg-card" style="border-radius: 1rem;">
+                                <div class="row g-0">
+                                    <div class="col-md-6 col-lg-5 d-none d-md-block">
+                                        <i class="material-icons" style="font-size:370px;color:red">fingerprint</i>
+                                        <h2 class="center-text-user-dashboard-content mt-3" style="font-size: 20px; font-weight: bold;">Secure Your Data With Strong Password</h2>
+                                    </div>
+                                    <div class="col-md-6 col-lg-7 d-flex align-items-center" style="font-size: 20px;">
+                                        <div class="card-body p-4 p-lg-5 text-black">
+                                            <!-- Change Password Form -->
+                                            <form method="POST" action="{% url 'change_password' %}">
+                                                {% csrf_token %}
+                                                
+                                                <h5 class="fw-normal mb-3 pb-3" style="letter-spacing: 1px; font-size: 20px;">Change Password</h5>
+    
+                                                <!-- Old Password -->
+                                                <div class="form-outline mb-4">
+                                                    <input type="password" name="old_password" class="form-control form-control-lg" placeholder="Old Password" required />
+                                                </div>
+    
+                                                <!-- New Password -->
+                                                <div class="form-outline mb-4">
+                                                    <input type="password" name="new_password1" class="form-control form-control-lg" placeholder="New Password" required />
+                                                </div>
+    
+                                                <!-- Confirm New Password -->
+                                                <div class="form-outline mb-4">
+                                                    <input type="password" name="new_password2" class="form-control form-control-lg" placeholder="Confirm New Password" required />
+                                                </div>
+    
+                                                <!-- Submit Button -->
+                                                <div class="pt-1 mb-4">
+                                                    <button type="submit" class="btn btn-lg btn-block" style="background-color: #ff1919; color: white;">Change Password</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>   
+        </div>
+    </div>
+    
+
+
+    <div id="favorite" class="content-user-dashboard" style="margin-bottom: 720px;">
+        <div class="w3-container p-5">
+            <h2 class="center-text-user-dashboard-content mt-5 mb-4">Your Favorite Products</h2>
+            <div class="d-flex justify-content-center mt-5">
+                <div class="container-cont-favorite h-100 " >
+                    {% if wishlist_items %}
+                        <div class="row favorite-item d-flex justify-content-center align-items-start h-100 p-5 mb-5" >
+                            <!-- Carousel and Product Info Section -->
+                            {% for item in wishlist_items %}
+                                <div class="col-lg-12 mb-5"style="border-radius: 20px;  box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.151), -8px -8px 15px rgba(0, 0, 0, 0.082);">
+                                    <div class="row  pt-5">
+
+                                        <div class="col-lg-3 mb-2">
+                                            <!-- Image Carousel -->
+                                            <div id="productCarousel{{ forloop.counter }}" class="carousel slide" data-ride="carousel" style="max-width: 350px; margin: auto;">
+                                                <div class="carousel-inner favorite-carousel">
+                                                    {% for product_image in item.product.images.all %}
+                                                        <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                                                            <img src="{{ product_image.image.url }}" class="d-block w-100 rounded-3 shadow-lg" alt="Product Image" style="object-fit: contain; height: 250px; max-width: 100%;">
+                                                        </div>
+                                                    {% endfor %}
+                                                </div>
+                                                <button class="carousel-control-prev" type="button" data-target="#productCarousel{{ forloop.counter }}" data-slide="prev" style="background-color: rgb(0, 0, 0); height: 30px; width: 30px; border-radius: 50%; top: 47%;">
+                                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Previous</span>
+                                                </button>
+                                                <button class="carousel-control-next" type="button" data-target="#productCarousel{{ forloop.counter }}" data-slide="next" style="background-color: rgb(0, 0, 0); height: 30px; width: 30px; border-radius: 50%; top: 47%;">
+                                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                    <span class="sr-only">Next</span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                        
+                                        
+                                        
+                                        <!-- Product Info Section -->
+                                        <div class="col-lg-9 mb-5">
+                                            <div class="product-info">
+                                                <h3 id="productName" class="product-name">{{ item.product.name }}</h3>
+                                                <p id="productCompany">
+                                                    <strong>Company Name:</strong> 
+                                                    {{ item.product.SellerProfile.company_name }}
+                                                </p>
+                                                
+                                                <p id="productActivityField">
+                                                    <strong>Activity Field:</strong> 
+                                                    {{ item.product.availability }}
+                                                </p>
+
+                                                <p id="productDescription" class="text-muted mb-4">{{ item.product.description }}</p>
+                                                <div class="product-meta mb-3">
+                                                    <p id="productOrigin"><strong>Origin:</strong> {{ item.product.origin }}</p>
+                                                    <p id="productCompany"><strong>Activity Field:</strong> {{ item.product.sellerProfile.fields_of_work }}</p>
+                                                    <p id="productAvailability"><strong>Availability:</strong> {{ item.product.availability }}</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="product-actions d-flex justify-content-end">
+                                                <div class="row">
+                                                    <button class="btn btn-danger mb-3 w-40 py-3 mr-1 remove-wishlist-btn" data-product-id="{{ item.product.id }}">
+                                                        <i class="fa fa-trash"></i> Remove
+                                                    </button>  
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                            {% endfor %}
+                            </div>
+                            {% else %}
+                                <p class="text-center">Your favorite list is empty!</p>
+                            {% endif %}
+
+                        
+
+                    
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="order-history" class="content-user-dashboard" style="margin-bottom: 430px;">
+        <div class="w3-container">
+            <h2 class="center-text-user-dashboard-content mt-5">Order History</h2>
+    
+            <div class="d-flex justify-content-center mt-5 pt-2">
+                <div class="container h-100">
+                    <div class="row d-flex justify-content-center align-items-center h-100">
+                        <div class="table-responsive"> 
+                            <table class="table table-striped table-hover shadow-lg">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Product</th>
+                                        <th>Quantity</th>
+                                        <th>Price</th>
+                                        <th>Total</th>
+                                        <th>Order Date</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>12345</td>
+                                        <td>Product Name 1</td>
+                                        <td>2</td>
+                                        <td>$20.00</td>
+                                        <td>$40.00</td>
+                                        <td>2025-01-02</td>
+                                        <td>Shipped</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#productDetailsModal1">View Details</button>
+                                            <button class="btn btn-warning btn-sm mb-2" data-toggle="modal" data-target="#productImagesModal1">View Images</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>67890</td>
+                                        <td>Product Name 2</td>
+                                        <td>1</td>
+                                        <td>$50.00</td>
+                                        <td>$50.00</td>
+                                        <td>2025-01-01</td>
+                                        <td>Delivered</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#productDetailsModal2">View Details</button>
+                                            <button class="btn btn-warning btn-sm mb-2" data-toggle="modal" data-target="#productImagesModal2">View Images</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>67890</td>
+                                        <td>Product Name 2</td>
+                                        <td>1</td>
+                                        <td>$50.00</td>
+                                        <td>$50.00</td>
+                                        <td>2025-01-01</td>
+                                        <td>Delivered</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#productDetailsModal2">View Details</button>
+                                            <button class="btn btn-warning btn-sm mb-2" data-toggle="modal" data-target="#productImagesModal2">View Images</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>67890</td>
+                                        <td>Product Name 2</td>
+                                        <td>1</td>
+                                        <td>$50.00</td>
+                                        <td>$50.00</td>
+                                        <td>2025-01-01</td>
+                                        <td>Delivered</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#productDetailsModal2">View Details</button>
+                                            <button class="btn btn-warning btn-sm mb-2" data-toggle="modal" data-target="#productImagesModal2">View Images</button>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>67890</td>
+                                        <td>Product Name 2</td>
+                                        <td>1</td>
+                                        <td>$50.00</td>
+                                        <td>$50.00</td>
+                                        <td>2025-01-01</td>
+                                        <td>Delivered</td>
+                                        <td>
+                                            <button class="btn btn-info btn-sm mb-2" data-toggle="modal" data-target="#productDetailsModal2">View Details</button>
+                                            <button class="btn btn-warning btn-sm mb-2" data-toggle="modal" data-target="#productImagesModal2">View Images</button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Product Details Modal 1 -->
+            <div class="modal fade" id="productDetailsModal1" tabindex="-1" role="dialog" aria-labelledby="productDetailsModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-lg" role="document"> <!-- Center modal and adjust size -->
+                    <div class="modal-content" id="view-detail-order-history-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productDetailsModalLabel">Product Name 1 - Details</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p><strong>Product Description:</strong> This is a detailed description of Product Name 1.</p>
+                            <p><strong>Size:</strong> Medium</p>
+                            <p><strong>Color:</strong> Red</p>
+                            <p><strong>Shipping Info:</strong> Shipped via DHL, expected delivery in 5-7 days.</p>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <!-- Product Images Modal 1 -->
+            <div class="modal fade" id="productImagesModal1" tabindex="-1" role="dialog" aria-labelledby="productImagesModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content" id="view-image-order-history-modal">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="productImagesModalLabel">Product Name 1 - Images</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <div id="carouselExample" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                        <img src="{% static 'assets/images/gcc.png' %}" class="d-block w-100" alt="Image 1">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="{% static 'assets/images/confident2.jpg' %}" class="d-block w-100" alt="Image 2">
+                                    </div>
+                                    <div class="carousel-item">
+                                        <img src="{% static 'assets/images/2.jpg' %}" class="d-block w-100" alt="Image 3">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExample" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExample" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s" data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+</div>
+<footer class="bg-dark text-white pt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">About Us</h5>
+                <p>
+
+                    We promote businesses through our catalog and strategic advertising, connecting them with global markets to enhance visibility and growth.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'catalogues' %}" class="text-white text-decoration-none">Catalogues</a></li>
+                    <li><a href="{% url 'company_signup' %}" class="text-white text-decoration-none">Become a supplier</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">Smart and Targeted Advertising</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> Connection to Global Markets</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Specialized Commercial Support</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> International Transportation</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Secure International Financial Transactions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media and Subscribe -->
+            <div class="col-md-3 text-center">
+                <h5 class="mb-4 footer-top-title">Follow Us</h5>
+                <div class="mb-3">
+                    {% for link in socialmedia %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-facebook fa-2x"></i></a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-instagram fa-2x"></i></a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-linkedin fa-2x"></i></a>
+                        {% elif 'youtube' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-youtube fa-2x"></i></a>
+                        {% endif %}
+                    {% empty %}
+                        <p>No social media links available</p>
+                    {% endfor %}
+                </div>
+                <!-- <h5 class="mt-4 subscrribe-title">Subscribe to Our Newsletter</h5>
+                <form class="d-flex mt-2">
+                    <div class="input-group" style="border:none; border-bottom: 2px solid white;">
+                        <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="row text-center pb-4">
+            <div class="col">
+                <p class="mb-0">&copy; 2025 Sohof. All Rights Reserved.</p>
+                <!-- <p class="mb-0"><a href="#" class="text-white text-decoration-none">Privacy Policy</a> | <a href="#" class="text-white text-decoration-none">Terms of Service</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<style>
+	.subscribe-button{
+
+		background: transparent;
+		color: rgb(255, 255, 255);
+	}
+	.subscribe-button:hover{
+
+		background: transparent;
+		color: black;
+	}
+	.subscrribe-title ,  .footer-top-title{
+		font-weight: bold;
+		color: white;
+	}
+
+    .profile-details-user-info p{
+        word-wrap: break-word;
+        white-space: normal;
+    }
+</style>
+
+    
+<!-- 
+<script>
+  function showContent(sectionId) {
+    const contents = document.querySelectorAll('.content-user-dashboard');
+    contents.forEach(content => content.classList.remove('active'));
+
+    const activeContent = document.getElementById(sectionId);
+    activeContent.classList.add('active');
+  }
+
+  function editProfile() {
+    document.querySelector('.profile-details').style.display = 'none';
+    document.getElementById('edit-profile-form').style.display = 'block';
+  }
+
+  function saveProfile() {
+    const name = document.getElementById('name').value;
+    const lastName = document.getElementById('last-name').value;
+    const email = document.getElementById('email').value;
+    const address = document.getElementById('address').value;
+    const phone = document.getElementById('phone').value;
+    const taxNumber = document.getElementById('tax-number').value;
+    const postalCode = document.getElementById('postal-code').value;
+
+    console.log("Updated Profile Information: ", { name, lastName, email, address, phone, taxNumber, postalCode });
+
+    document.querySelector('.profile-details').style.display = 'block';
+    document.getElementById('edit-profile-form').style.display = 'none';
+
+    document.querySelector('.profile-details').innerHTML = `
+      <p><strong>Name:</strong> ${name}</p>
+      <p><strong>Last Name:</strong> ${lastName}</p>
+      <p><strong>Email Address:</strong> ${email}</p>
+      <p><strong>Address:</strong> ${address}</p>
+      <p><strong>Phone Number:</strong> ${phone}</p>
+      <p><strong>Tax Number:</strong> ${taxNumber}</p>
+      <p><strong>Postal Code:</strong> ${postalCode}</p>
+      <button onclick="editProfile()" class="w3-button w3-blue">Edit Profile</button>
+    `;
+  }
+</script> -->
+
+
+
+
+
+<script>
+
+    function showContent(sectionId) {
+        const contents = document.querySelectorAll('.content-user-dashboard');
+        contents.forEach(content => content.classList.remove('active'));
+
+        const activeContent = document.getElementById(sectionId);
+        activeContent.classList.add('active');
+        }
+
+        function editProfile() {
+            document.querySelector('.profile-details').style.display = 'none';
+            document.getElementById('edit-profile-form').style.display = 'block';
+    }
+
+    // Toggle visibility of file input for profile image
+    function toggleImageInput() {
+        const fileInput = document.getElementById('image-upload');
+        fileInput.click(); // Trigger file input click
+    }
+
+    // Preview the selected image
+    function previewImage(event) {
+        const profileImage = document.getElementById('profile-img');
+        const reader = new FileReader();
+
+        reader.onload = function() {
+            profileImage.src = reader.result; // Update the profile image preview
+        };
+
+        if (event.target.files && event.target.files[0]) {
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    }
+
+    function closeEditForm() {
+        document.querySelector('.profile-details').style.display = 'block';
+        document.getElementById('edit-profile-form').style.display = 'none';
+    }
+</script>
+
+
+
+<!-- 
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.remove-wishlist-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                let productId = this.getAttribute('data-product-id');
+
+                fetch("{% url 'remove_from_wishlist' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: "product_id=" + productId
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);  
+                    if (data.success) {
+                        this.closest('.favorite-item').remove();  
+                    }
+                })
+                .catch(error => console.error("Error:", error));
+            });
+        });
+    });
+</script> -->
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll('.remove-wishlist-btn').forEach(button => {
+            button.addEventListener('click', function () {
+                let productId = this.getAttribute('data-product-id');
+                let wishlistItem = this.closest('.wishlist-item');  // Ensure this targets the right element
+
+                // Perform AJAX request to remove the item
+                fetch("{% url 'remove_from_wishlist' %}", {
+                    method: "POST",
+                    headers: {
+                        "X-CSRFToken": "{{ csrf_token }}",
+                        "Content-Type": "application/x-www-form-urlencoded"
+                    },
+                    body: "product_id=" + productId
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message);  // Show success message
+
+                    // Check if the item was successfully removed
+                    if (data.success) {
+                        // Reload the page to reflect changes
+                        location.reload();  // Reload the page after successful removal
+                    }
+                })
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("Something went wrong, please try again.");
+                });
+            });
+        });
+    });
+  
+</script>
+
+
+{% endblock content %}

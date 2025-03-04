@@ -1,0 +1,631 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+    <br /><br />
+    <ul class="list-unstyled multi-steps mb-5 border-bottom-style-business-info pb-5">
+        <li id="step-1" class="is-active">Business Information</li>
+        <li id="step-2" class="is-inactive">Personal Information</li>
+        <li id="step-3" class="is-inactive">Upload Documents</li>
+        <li id="step-4" class="is-inactive">Terms & Conditions Agreement</li>
+        <li id="step-5" class="is-inactive">Create your account</li>
+    </ul>
+    {% if messages %}
+    <ul>
+        {% for message in messages %}
+            <li class="alert alert-{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    <div id="step-form">
+        <form method="POST" action="{% url 'company_signup' %}" id="registration-form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <!-- Step form content will be dynamically inserted here -->
+            <div class="container  animate__animated animate__fadeInUp">
+                <div id="form-1" class="form-step business-information-form">
+                    <h3 class="text-center mb-5">Business Information</h3>
+                    <div class="row">
+                            <!-- Company Name -->
+                            <div class="col-lg-6 form-group mb-5">
+                                <label for="company-name"><span class="required-star">*</span>Company Name:</label>
+                                <input type="text" id="company-name" name="company_name"  class="form-control border-bottom-style-business-info"  placeholder="Enter your company name" required>
+                            </div>
+                            <!-- Website URL -->
+                            <div class="col-lg-6 form-group mb-5">
+                                <label  for="website-url"><span class="required-star">*</span>Company Website URL:</label>
+                                <input type="url" id="website-url" name="website_url"  class="form-control border-bottom-style-business-info" placeholder="Enter your company's website URL" required>
+                            </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Fields of Work -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="fields-of-work"><span class="required-star">*</span>Fields of Work:</label>
+                            <select  id="fields-of-work" name="fields_of_work" class="form-control border-bottom-style-business-info" required>
+                                <option value="">Select a category</option>
+                                <option value="technology">Technology</option>
+                                <option value="consulting">Consulting</option>
+                                <option value="manufacturing">Manufacturing</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="education">Education</option>
+                                <option value="finance">Finance</option>
+                                <option value="agriculture">Agriculture</option>
+                                <option value="automotive">Automotive</option>
+                                <option value="construction">Construction</option>
+                                <option value="real-estate">Real Estate</option>
+                                <option value="retail">Retail</option>
+                                <option value="hospitality">Hospitality</option>
+                                <option value="entertainment">Entertainment</option>
+                                <option value="logistics">Logistics</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="energy">Energy</option>
+                                <option value="environmental-services">Environmental Services</option>
+                                <option value="telecommunications">Telecommunications</option>
+                                <option value="food-and-beverage">Food and Beverage</option>
+                                <option value="pharmaceuticals">Pharmaceuticals</option>
+                                <option value="media">Media</option>
+                                <option value="arts-and-culture">Arts and Culture</option>
+                                <option value="sports">Sports</option>
+                                <option value="legal-services">Legal Services</option>
+                                <option value="nonprofit">Nonprofit</option>
+                                <option value="government">Government</option>
+                                <option value="mining">Mining</option>
+                                <option value="aerospace">Aerospace</option>
+                                <option value="defense">Defense</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="beauty-and-cosmetics">Beauty and Cosmetics</option>
+                                <option value="cleaning-services">Cleaning Services</option>
+                                <option value="technology-services">Technology Services</option>
+                                <option value="cybersecurity">Cybersecurity</option>
+                                <option value="blockchain-and-cryptocurrency">Blockchain and Cryptocurrency</option>
+                                <option value="e-commerce">E-Commerce</option>
+                                <option value="venture-capital">Venture Capital</option>
+                                <option value="insurance">Insurance</option>
+                                <option value="event-management">Event Management</option>
+                                <option value="travel-and-tourism">Travel and Tourism</option>
+                                <option value="petroleum">Petroleum</option>
+                                <option value="biotechnology">Biotechnology</option>
+                                <option value="research-and-development">Research and Development</option>
+                                <option value="engineering">Engineering</option>
+                                <option value="human-resources">Human Resources</option>
+                                <option value="business-services">Business Services</option>
+                                <option value="printing-and-publishing">Printing and Publishing</option>
+                                <option value="handicrafts">Handicrafts</option>
+                                <option value="marine-industry">Marine Industry</option>
+                                <option value="architecture">Architecture</option>
+                                <option value="interior-design">Interior Design</option>
+                                <option value="artificial-intelligence">Artificial Intelligence</option>
+                                <option value="robotics">Robotics</option>
+                                <option value="gaming">Gaming</option>
+                                <option value="fitness-and-wellness">Fitness and Wellness</option>
+                                <option value="personal-care">Personal Care</option>
+                                <option value="luxury-goods">Luxury Goods</option>
+                                <option value="forestry">Forestry</option>
+                                <option value="security-services">Security Services</option>
+                                <option value="aviation">Aviation</option>
+                                <option value="childcare">Childcare</option>
+                                <option value="translation-services">Translation Services</option>
+                                <option value="antiques-and-collectibles">Antiques and Collectibles</option>
+                                <option value="recycling">Recycling</option>
+                                <option value="marine-tourism">Marine Tourism</option>
+                            </select>
+                            
+                        </div>
+                        <!-- Company Description -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="company-description"><span class="required-star"></span>What does your company do?</label>
+                            <textarea id="company-description" name="company_description" class="form-control border-bottom-style-business-info" rows="4" placeholder="Provide a brief description of your company"></textarea>
+                        </div>
+                    </div>
+        
+                    <div class="row">
+                        <!-- Company Location -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="company-location"><span class="required-star">*</span>Company Location:</label>
+                            <input type="text" id="company-location" name="company_location" class="form-control border-bottom-style-business-info" placeholder="Enter company location" required>
+                        </div>
+                        <!-- Year Established -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="year-established"><span class="required-star">*</span>Year Established:</label>
+                            <input type="number" id="year-established" name="year_established" class="form-control border-bottom-style-business-info" placeholder="Enter the year your company was established" required>
+                        </div>
+                    </div>
+                
+                    <div class="row">
+                        <!-- Company Size -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="company-size"><span class="required-star"></span>Company Size (number of employees):</label>
+                            <input type="number" id="company-size" name="company_size" class="form-control border-bottom-style-business-info" placeholder="Enter the number of employees in your company">
+                        </div>
+                
+                        <!-- Contact Email -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="contact-email"><span class="required-star">*</span>Contact Email:</label>
+                            <input type="email" id="contact_email" name="contact_email" class="form-control border-bottom-style-business-info" placeholder="Enter your contact email" required>
+                        </div>
+                    </div>
+                
+                    <!-- Logo Upload -->
+                    <div class="col-lg-6 form-group">
+                        <div class="row">
+                            <label for="company-logo"><span class="required-star"></span>Upload Company Logo:</label>
+                            <input type="file" id="company-logo" name="company_logo" class="col-lg-6 form-control-file" accept="image/*">
+                        </div>
+                    </div>
+        
+                    
+                </div>
+            </div>
+
+
+
+            <div class="container">
+                <div id="form-2" class="business-information-form form-step">
+                    <h3 class="text-center mb-5">Personal Information</h3>
+                    <div class="row">
+                        <!-- Full Name -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="full-name"><span class="required-star">*</span>Your Full Name:</label>
+                            <input type="text" id="full-name" name="full_name" class="form-control border-bottom-style-business-info" placeholder="Enter your full name" required>
+                        </div>
+                
+                        <!-- Date of Birth -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="date-of-birth"><span class="required-star">*</span>Date of Birth:</label>
+                            <input type="date" id="date-of-birth" name="date_of_birth" class="form-control border-bottom-style-business-info" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Gender -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="gender"><span class="required-star">*</span>Gender:</label>
+                            <select id="gender" name="gender" class="form-control border-bottom-style-business-info" required>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                
+                        <!-- Phone Number -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="phone-number"><span class="required-star">*</span>Phone Number:</label>
+                            <input type="tel" id="phone-number" name="phone_number" class="form-control border-bottom-style-business-info" placeholder="Enter your phone number" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- Email Address -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for=" email_address"><span class="required-star">*</span>Email Address:</label>
+                            <input type="email" id="email_address" name="email_address" class="form-control border-bottom-style-business-info" placeholder="Enter your email address" required>
+                        </div>
+                
+                        <!-- Address -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="address"><span class="required-star">*</span>Address:</label>
+                            <input type="text" id="company_address" name="company_address" class="form-control border-bottom-style-business-info" placeholder="Enter your address" required>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                            <!-- Country -->
+                            <div class="col-lg-6 form-group mb-5">
+                                <label for="country"><span class="required-star">*</span>Country:</label>
+                                <input type="text" id="country" name="country" class="form-control border-bottom-style-business-info" placeholder="Enter your country" required>
+                            </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="container">
+                <div id="form-3" class="form-step business-information-form">
+                    <h3 class="text-center mb-5">Upload Documents</h3>
+                    <div class="row">
+                        <!-- Company License -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="company_license"><span class="required-star">*</span>Upload Company License:</label>
+                            <input type="file" id="company_license" name="company_license" class="form-control-file" accept=".pdf,.jpg,.png,.jpeg" required>
+                        </div>
+                    
+                        <!-- ID Card -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="id_card"><span class="required-star"></span>Upload ID Card:</label>
+                            <input type="file" id="id_card" name="id_card" class="form-control-file" accept=".pdf,.jpg,.png,.jpeg">
+                        </div>
+                    </div>
+                    <hr>
+                    
+                    <div class="row">
+                        <!-- Passport -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="passport"><span class="required-star"></span>Upload Passport:</label>
+                            <input type="file" id="passport" name="passport" class="form-control-file" accept=".pdf,.jpg,.png,.jpeg">
+                        </div>
+                    
+                        <!-- Certificates (Optional) -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="certificates">Upload Certificates (If Any):</label>
+                            <input type="file" id="certificates" name="certificates" class="form-control-file" accept=".pdf,.jpg,.png,.jpeg">
+                        </div>
+                    </div>
+                    <hr>
+                    
+                    <div class="row">
+                        <!-- Tax Registration Certificate (Optional) -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="tax_registration">Upload Tax Registration Certificate:</label>
+                            <input type="file" id="tax_registration" name="tax_registration" class="form-control-file" accept=".pdf,.jpg,.png,.jpeg">
+                        </div>
+                    
+                        <!-- Utility Bill (Optional) -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="utility_bill"><span class="required-star"></span>Upload Utility Bill (Proof of Address):</label>
+                            <input type="file" id="utility_bill" name="utility_bill" class="form-control-file" accept=".pdf,.jpg,.png,.jpeg">
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <!-- Bank Statement (Optional) -->
+                        <div class="col-lg-6 form-group mb-5">
+                            <label for="bank_statement">Upload Bank Statement:</label>
+                            <input type="file" id="bank_statement" name="bank_statement" class="form-control-file" accept=".pdf,.jpg,.png,.jpeg">
+                        </div>
+                    </div>
+                    
+
+                        
+                </div>
+            </div>
+
+        
+            <div  id="form-4" class="container form-step business-information-form">
+                <h3  class="text-center mb-5">Contract and Agreements</h3>
+                    <!-- Scrollable Terms -->
+                    <div class="terms">
+                        <div class="col-lg-12">
+                            <h5>1. Registration Requirements</h5>
+                            <p>Users must provide accurate and up-to-date personal information, including their name, email, and contact number.</p>
+                            <p>Only individuals over the legal age (e.g., 18 years old) are allowed to register.</p>
+                            <p>The use of offensive, illegal, or fake usernames is strictly prohibited.</p>
+                            <p>Each person or entity is allowed to create only one user account.</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <h5>2. Responsibility for Login Information</h5>
+                            <p>Users are responsible for keeping their login credentials (username and password) secure.</p>
+                            <p>The website is not liable for unauthorized account access due to user negligence.</p>
+                            <p>Any suspicious activity or unauthorized access must be reported immediately.</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <h5>3. Permissible Behavior and Activities</h5>
+                            <p>Users may not post illegal, offensive, or obscene content.</p>
+                            <p>Violating intellectual property rights or any applicable laws is strictly prohibited.</p>
+                            <p>Sending spam, malware, or unauthorized advertising content is not allowed.</p>
+                        </div>
+                        <div class="col-lg-12">
+                        <h5>4. Fair Use of Services</h5>
+                        <p>Users must use the website’s services legally and in compliance with its regulations.</p>
+                        <p>The website reserves the right to limit or block access to users who violate the rules.</p>
+                        <p>Any abuse of website resources, such as attempting to disrupt or infiltrate systems, may result in legal action.</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <h5>5. Content Rights and Ownership</h5>
+                            <p>Users must ensure that their content complies with all applicable laws and does not infringe on others' rights.</p>
+                            <p>The website reserves the right to remove inappropriate content.</p>
+                            <p>By submitting content, users grant the website permission to use it as needed.</p>
+                            <p>The website may suspend or delete user accounts at its discretion.</p>
+                        </div>
+                        <div class="col-lg-12">
+                            <h5>6. Privacy and Registration Verification</h5>
+                            <p>Users are required to read and accept the website’s updated privacy policy.</p>
+                            <p>The website is committed to protecting users' personal information and will not disclose it to third parties without legal authorization.</p>
+                            <p>To complete registration, users may need to verify their identity via email or SMS.</p>
+                            <p>Additional information may be requested for security purposes.</p>
+                        </div>
+                    </div>
+        
+                    <!-- Checkbox to Accept -->
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input" id="accepted_terms" name="accepted_terms" style="background-color: red;" required>
+                        <label class="form-check-label" for="accepted_terms">I have read and accept the terms and conditions.</label>
+                    </div>
+        
+                
+            </div>
+
+            <div  id="form-5" class="container form-step business-information-form">
+                <h3  class="text-center mb-5">Create your account</h3>
+                <div class="container text-center h-100" >
+                    <div class="card-body p-4 p-lg-5 text-black">
+                        <!-- Register Form (Initially hidden) -->
+                        <div class="form-outline mb-4">
+                            <input name="username" type="text" id="form2ExampleUsername" class="form-control form-control-lg" placeholder="Username" / required>
+                        </div>
+                    
+                        <div class="form-outline mb-4" style="position: relative;">
+                            <input name="password1" type="password" id="form2ExamplePassword" class="form-control form-control-lg" placeholder="Password" / required>
+                            <span class="input-group-text toggle-password" onclick="togglePasswordVisibility('form2ExamplePassword', this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;  background-color: transparent; border: none;">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    
+                        <div class="form-outline mb-4" style="position: relative;">
+                            <input name="password2" type="password" id="form2ExamplePasswordConfirm" class="form-control form-control-lg" placeholder="Confirm Password" / required>
+                            <span class="input-group-text toggle-password" onclick="togglePasswordVisibility('form2ExamplePasswordConfirm', this)" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer; background-color: transparent; border: none;">
+                                <i class="fa fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+                    
+                   
+                    
+                </div>
+            </div>
+            
+            <div class="col-lg-12 text-center mt-5 mb-5">
+                <button class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s" id="prev-btn-registration-form">Previous</button>
+                <button class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s" id="next-btn-registration-form">Next</button>
+            </div>
+        </form>
+        
+
+        
+    
+    </div>
+</div>
+
+<style>
+    
+    .multi-steps {
+        display: table;
+        table-layout: fixed;
+        width: 100%;
+        margin: 0 auto;
+    }
+    .multi-steps > li {
+        counter-increment: stepNum;
+        text-align: center;
+        display: table-cell;
+        position: relative;
+        font-weight: bold;
+        color: #808080; 
+        cursor: pointer;
+    }
+    .multi-steps > li:before {
+        content: counter(stepNum);
+        display: block;
+        margin: 0 auto 4px;
+        background-color: #fff;
+        width: 36px;
+        height: 36px;
+        line-height: 32px;
+        text-align: center;
+        font-weight: bold;
+        border-width: 2px;
+        border-style: solid;
+        border-color: #808080;
+        border-radius: 50%;
+    }
+    .multi-steps > li.is-active {
+        color: #ff0000; 
+    }
+    .multi-steps > li.is-active:before {
+        content: counter(stepNum);
+        background-color: #ff0000;  
+        border-color: #ff0000; 
+        color: #fff;  
+    }
+    .multi-steps > li.is-done:before {
+        content: "✔"; 
+        background-color: #ff0000;  
+        border-color: #ff0000;
+        color: #fff;  
+        font-size: 20px;
+        line-height: 32px; 
+    }
+    .multi-steps > li.is-inactive:before {
+        background-color: #fff;  
+        border-color: #808080;
+    }
+    .multi-steps > li:after {
+        content: "";
+        height: 2px;
+        width: 100%;
+        background-color: #808080; 
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        z-index: -1;
+    }
+    .multi-steps > li.is-active:after {
+        background-color: #ff0000; 
+    }
+    .multi-steps > li:last-child:after {
+        display: none;
+    }
+    .form-step {
+        display: none;
+    }
+    .form-step.active {
+        display: block;
+    }
+
+
+
+
+    .business-information-form{
+        border-radius: 30px;
+        padding: 20px;
+        box-shadow: 8px 8px 15px rgba(97, 97, 97, 0.151), -8px -8px 15px rgba(105, 105, 105, 0.082);
+    }
+
+    .border-bottom-style-business-info{
+        border: none;
+        background-color: transparent;
+        border-bottom: 2px solid black;
+    }
+
+    .border-bottom-style-business-info{
+        font-size: 12px;
+       
+    }
+    .terms{
+        overflow-y: scroll;
+        max-height: 300px;
+    }
+
+    .required-star{
+        margin-right: 3px;
+        font-size: 20px;
+        font-weight: bold;
+        color: red;
+    }
+    
+</style>
+
+<script>
+    let currentStep = 1;
+    const totalSteps = 5;
+
+    const nextBtn = document.getElementById('next-btn-registration-form');
+    const prevBtn = document.getElementById('prev-btn-registration-form');
+    const steps = document.querySelectorAll('.multi-steps > li');
+    const forms = document.querySelectorAll('.form-step');
+
+    nextBtn.addEventListener('click', function() {
+        event.preventDefault(); // Prevent form submission
+        if (validateForm(currentStep)) {
+            if (currentStep < totalSteps) {
+                
+                completeCurrentStep();
+                
+                currentStep++;
+                updateProgress();
+            } else {
+                
+                submitForm();
+            }
+        } else {
+            alert('Please fill out all required fields.');
+        }
+    });
+
+    prevBtn.addEventListener('click', function() {
+        event.preventDefault(); // Prevent form submission
+        if (currentStep > 1) {
+            
+            revertCurrentStep();
+            currentStep--;
+            updateProgress();
+        }  else {
+            submitForm();
+        } 
+    });
+
+
+    function validateForm(step) {
+        const form = forms[step - 1];
+        const inputs = form.querySelectorAll('input, textarea');
+        let isValid = true;
+
+        inputs.forEach(input => {
+            if (input.hasAttribute('required') && !input.value.trim()) {
+                isValid = false;
+                input.classList.add('error'); 
+            } else {
+                input.classList.remove('error');
+            }
+        });
+
+        return isValid;
+    }
+
+    function completeCurrentStep() {
+        const currentStepElement = document.getElementById(`step-${currentStep}`);
+        currentStepElement.classList.add('is-done');
+        currentStepElement.classList.remove('is-active');
+    }
+
+    function revertCurrentStep() {
+        const currentStepElement = document.getElementById(`step-${currentStep}`);
+        currentStepElement.classList.remove('is-done');
+        currentStepElement.classList.add('is-active');
+    }
+
+    function updateProgress() {
+        steps.forEach((step, index) => {
+            if (index < currentStep - 1) {
+                step.classList.add('is-done');
+                step.classList.remove('is-active');
+                step.classList.remove('is-inactive');
+            } else if (index === currentStep - 1) {
+                step.classList.add('is-active');
+                step.classList.remove('is-done');
+                step.classList.remove('is-inactive');
+            } else {
+                step.classList.add('is-inactive');
+                step.classList.remove('is-active');
+                step.classList.remove('is-done');
+            }
+        });
+
+        forms.forEach((form, index) => {
+            if (index + 1 === currentStep) {
+                form.classList.add('active');
+                form.style.display = "block";
+            } else {
+                form.classList.remove('active');
+                form.style.display = "none"; 
+            }
+        });
+
+        if (currentStep === totalSteps) {
+            nextBtn.textContent = "Register Your Account";
+        } else {
+            nextBtn.textContent = "Next";
+        }
+    }
+
+ 
+    function submitForm() {
+        const form = document.getElementById('registration-form'); 
+        form.submit(); 
+    }
+
+    updateProgress();
+
+</script>
+
+
+
+ <!-- JavaScript to handle password visibility toggle -->
+ <script>
+    function togglePasswordVisibility(inputId, icon) {
+        var inputField = document.getElementById(inputId);
+        var iconElement = icon.querySelector("i");
+
+        if (inputField.type === "password") {
+            inputField.type = "text"; 
+            iconElement.classList.remove("fa-eye");
+            iconElement.classList.add("fa-eye-slash"); 
+        } else {
+            inputField.type = "password";
+            iconElement.classList.remove("fa-eye-slash");
+            iconElement.classList.add("fa-eye"); 
+        }
+    }
+</script>
+
+{% endblock content %}
+
+
+
+
+
+
+
+
+

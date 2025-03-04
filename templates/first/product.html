@@ -1,0 +1,318 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+
+<section style="padding: 50px;">
+<!-- <div class="container"> -->
+	<div class="row">
+		<aside class="col-md-3">
+			
+			<div class="card" style="box-shadow: 8px 8px 15px rgba(0, 0, 0, 0.11), 
+              -8px -8px 15px rgba(0, 0, 0, 0.055); border-radius: 20px;">
+				<article class="filter-group">
+					<header class="card-header" style="border-top-left-radius: 20px; border-top-right-radius: 20px;">
+						<a href="#" data-toggle="collapse" data-target="#collapse_1" aria-expanded="true" class="">
+							<i class="icon-control fa fa-chevron-down"></i>
+							<h6 class="title"> Types Of Companies</h6>
+						</a>
+					</header>
+					<div class="filter-content collapse show" id="collapse_1">
+						<div class="card-body">
+							<label class="custom-control custom-checkbox">
+
+							<input type="checkbox"  checked=""  class="custom-control-input">
+							<div class="custom-control-label">Construction</div>
+							</label>
+							
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox"  class="custom-control-input">
+								<div class="custom-control-label">Texhnical and Engineering </div>
+							</label>
+
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+								<div class="custom-control-label">Consulting</div>
+							</label>
+
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+								<div class="custom-control-label">Food</div>
+							</label>
+
+							
+						</div> 
+					</div>
+				</article> <!-- filter-group  .// -->
+				<article class="filter-group">
+					<header class="card-header">
+						<a href="#" data-toggle="collapse" data-target="#collapse_2" aria-expanded="true" class="">
+							<i class="icon-control fa fa-chevron-down"></i>
+							<h6 class="title">Manufacturing Companies </h6>
+						</a>
+					</header>
+					<div class="filter-content collapse show" id="collapse_2">
+						<div class="card-body">
+							<label class="custom-control custom-checkbox">
+							<input type="checkbox" checked="" class="custom-control-input">
+							<div class="custom-control-label">Mercedes  
+								<b class="badge badge-pill badge-light float-right">120</b>  </div>
+							</label>
+							<label class="custom-control custom-checkbox">
+							<input type="checkbox" checked="" class="custom-control-input">
+							<div class="custom-control-label">Toyota 
+								<b class="badge badge-pill badge-light float-right">15</b>  </div>
+							</label>
+							<label class="custom-control custom-checkbox">
+							<input type="checkbox" checked="" class="custom-control-input">
+							<div class="custom-control-label">Mitsubishi 
+								<b class="badge badge-pill badge-light float-right">35</b> </div>
+							</label>
+							<label class="custom-control custom-checkbox">
+							<input type="checkbox" checked="" class="custom-control-input">
+							<div class="custom-control-label">Nissan 
+								<b class="badge badge-pill badge-light float-right">89</b> </div>
+							</label>
+							<label class="custom-control custom-checkbox">
+							<input type="checkbox" class="custom-control-input">
+							<div class="custom-control-label">Honda 
+								<b class="badge badge-pill badge-light float-right">30</b>  </div>
+							</label>
+						</div> <!-- card-body.// -->
+					</div>
+				</article> <!-- filter-group .// -->
+				<article class="filter-group">
+					<header class="card-header">
+						<a href="#" data-toggle="collapse" data-target="#collapse_3" aria-expanded="true" class="">
+							<i class="icon-control fa fa-chevron-down"></i>
+							<h6 class="title">Price range </h6>
+						</a>
+					</header>
+					<div class="filter-content collapse show" id="collapse_3">
+						<div class="card-body">
+							<input type="range" class="custom-range" min="0" max="100" name="">
+							<div class="form-row">
+							<div class="form-group col-md-6">
+							<label>Min</label>
+							<input class="form-control" placeholder="$0" type="number">
+							</div>
+							<div class="form-group text-right col-md-6">
+							<label>Max</label>
+							<input class="form-control" placeholder="$1,0000" type="number">
+							</div>
+							</div> <!-- form-row.// -->
+							<hr>
+							<div class="text-center">
+								<a href="#" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s">Apply</a>
+							</div>	
+						</div><!-- card-body.// -->
+					</div>
+				</article> <!-- filter-group .// -->
+				
+				<article class="filter-group">
+					<header class="card-header" style="border-bottom-right-radius: 20px; border-bottom-left-radius: 20px;">
+						<a href="#" data-toggle="collapse" data-target="#collapse_5" aria-expanded="false" class="">
+							<i class="icon-control fa fa-chevron-down"></i>
+							<h6 class="title">More filter </h6>
+						</a>
+					</header>
+					<div class="filter-content collapse in" id="collapse_5">
+						<div class="card-body">
+							<label class="custom-control custom-checkbox">
+
+							<input type="checkbox"  checked=""  class="custom-control-input">
+							<div class="custom-control-label">Any condition</div>
+							</label>
+							
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox"  class="custom-control-input">
+								<div class="custom-control-label">Brand new </div>
+							</label>
+
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+								<div class="custom-control-label">Used items</div>
+							</label>
+
+							<label class="custom-control custom-checkbox">
+								<input type="checkbox" class="custom-control-input">
+								<div class="custom-control-label">Very old</div>
+							</label>
+
+							
+						</div> <!-- card-body.// -->
+					</div>
+				</article> <!-- filter-group .// -->
+			</div> <!-- card.// --> 
+		</aside>
+		<main class="col-md-9">
+
+			<header class="border-bottom mb-4 pb-3">
+					<div class="form-inline">
+						<span class="mr-md-auto mt-2 ml-2">{{ total_products }} Items found</span>
+					</div>	
+			</header>
+			<!-- sect-heading -->
+			<div class="row product-row">
+				{% for product in products.object_list %}
+					<div class="column-product col-md-4">
+						<figure class="card card-product-grid">
+							<div class="img-wrap text-center">
+								{% if product.images.all %}
+									<img src="{{ product.images.first.image.url }}" width="250" class="img-fluid" alt="{{ product.name }}" style="object-fit: contain; height: 300px; width: 300px;">
+								{% else %}
+									Image is not available.
+								{% endif %}
+							</div>
+							<figcaption class="info-wrap">
+								<div class="fix-height">
+									<div class="product_name">
+										<strong>{{ product.name }}</strong>
+									</div>
+									<div class="company-wrap mt-2">
+										<div class="row">
+											<span class="price mr-2">Provided by: </span>
+											<p>{{ product.SellerProfile.company_name }}</p>
+										</div>
+									</div>
+									<div class="product_name">
+										<div class="row">
+											<strong class="price mr-2">Origin:</strong>
+											<p>{{ product.origin }}</p>
+										</div>
+									</div>
+								</div>
+								<hr>
+								<a href="{% url 'product_detail' product.id %}" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s">View Details</a>
+							</figcaption>
+						</figure>
+					</div>
+				{% endfor %}
+			</div>
+			
+
+			<hr>
+			<div class="container d-flex justify-content-end">
+				<nav class="mt-4" aria-label="Page navigation sample">
+					<ul class="pagination">
+						{% if products.has_previous %}
+							<li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+							<li class="page-item"><a class="page-link" href="?page={{ products.previous_page_number }}">Previous</a></li>
+						{% else %}
+							<li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+						{% endif %}
+			
+						{% for num in products.paginator.page_range %}
+							<li class="page-item {% if products.number == num %}active{% endif %}">
+								<a class="page-link" href="?page={{ num }}">{{ num }}</a>
+							</li>
+						{% endfor %}
+			
+						{% if products.has_next %}
+							<li class="page-item"><a class="page-link" href="?page={{ products.next_page_number }}">Next</a></li>
+							<li class="page-item"><a class="page-link" href="?page={{ products.paginator.num_pages }}">Last</a></li>
+						{% else %}
+							<li class="page-item disabled"><a class="page-link" href="#">Next</a></li>
+						{% endif %}
+					</ul>
+				</nav>
+			</div>
+			
+
+		</main>
+	</div>
+<!-- </div> -->
+</section>
+
+
+
+<footer class="bg-dark text-white pt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">About Us</h5>
+                <p>
+
+                    We promote businesses through our catalog and strategic advertising, connecting them with global markets to enhance visibility and growth.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'catalogues' %}" class="text-white text-decoration-none">Catalogues</a></li>
+                    <li><a href="{% url 'company_signup' %}" class="text-white text-decoration-none">Become a supplier</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">Smart and Targeted Advertising</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> Connection to Global Markets</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Specialized Commercial Support</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> International Transportation</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Secure International Financial Transactions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media and Subscribe -->
+            <div class="col-md-3 text-center">
+                <h5 class="mb-4 footer-top-title">Follow Us</h5>
+                <div class="mb-3">
+                    {% for link in socialmedia %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-facebook fa-2x"></i></a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-instagram fa-2x"></i></a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-linkedin fa-2x"></i></a>
+                        {% elif 'youtube' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-youtube fa-2x"></i></a>
+                        {% endif %}
+                    {% empty %}
+                        <p>No social media links available</p>
+                    {% endfor %}
+                </div>
+                <!-- <h5 class="mt-4 subscrribe-title">Subscribe to Our Newsletter</h5>
+                <form class="d-flex mt-2">
+                    <div class="input-group" style="border:none; border-bottom: 2px solid white;">
+                        <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="row text-center pb-4">
+            <div class="col">
+                <p class="mb-0">&copy; 2025 Sohof. All Rights Reserved.</p>
+                <!-- <p class="mb-0"><a href="#" class="text-white text-decoration-none">Privacy Policy</a> | <a href="#" class="text-white text-decoration-none">Terms of Service</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+	.subscribe-button{
+
+		background: transparent;
+		color: rgb(255, 255, 255);
+	}
+	.subscribe-button:hover{
+
+		background: transparent;
+		color: black;
+	}
+	.subscrribe-title ,  .footer-top-title{
+		font-weight: bold;
+		color: white;
+	}
+
+</style>
+
+{% endblock content %}

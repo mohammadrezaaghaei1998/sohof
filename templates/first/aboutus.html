@@ -1,0 +1,543 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<!-- #343a40 -->
+
+<section class="aboutus-videos">
+  <div class="container-count">
+    <div class="row align-items-center">
+      <div class="col-lg-4 text-center header-title-home-page ">
+        <img src="{% static 'assets/images/logo2.png' %}" width="600" alt="">
+        <h1 class="pl-2 ml-2">Business Hub Magazine</h1>
+      </div> 
+      <div class="col-lg-8">
+        <div class="box-area-aboutus">
+            {% for video in aboutusvideos %}
+            <div class="box-aboutus active aboutus-active">
+                <video width="100%" height="auto" id="video{{ forloop.counter }}">
+                    <source src="{{ video.about_us_video.url }}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            {% empty %}
+            <p>No videos available.</p>
+            {% endfor %}
+        </div>
+    </div>
+    
+    </div>
+  </div>
+</section>
+
+<div class="divider div-transparent"></div>
+
+<section class="about-section">
+    <div class="container">
+        <div class="row clearfix">
+            <!--Content Column-->
+            <div class="content-column col-md-6 col-sm-12 col-xs-12">
+                <div class="inner-column">
+                    <div class="sec-title">
+                        <div class="title">About Us</div>
+                        <h2>Objective of the Advertising and Commercial Magazine</h2>
+                        <p>The Advertising and Commercial Magazine aims to provide a professional platform for targeted advertising and effective communication between businesses at an international level. This magazine enables companies to showcase their services and products to global markets, strengthening their presence in the competitive field of international trade.</p>
+                    </div>
+                    <div class="sec-title">
+                      <h2>Our Vision</h2>
+                      <p>Through the Advertising and Commercial Magazine, businesses can establish a strong and effective presence in international trade. Our goal is to serve as a reliable bridge, connecting companies to global markets and elevating their business to new heights.</p>
+                  </div>
+                    <div class="email">Request Quote: <span class="theme_color">Info@innwin.com</span></div>
+                    <!-- <a href="about.html" class="theme-btn btn-style-three">Read More</a> -->
+                </div>
+            </div>
+            
+            <!--Image Column-->
+            <div class="image-column col-md-6 col-sm-12 col-xs-12">
+                <div class="inner-column " data-wow-delay="0ms" data-wow-duration="1500ms">
+                    <div class="image">
+                        <img src="https://i.ibb.co/vQbkKj7/about.jpg" alt="">
+                        <div class="overlay-box">
+                            <div class="year-box"><span class="number">9</span>Years <br> Experience <br> Working</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-12">
+              <div class="col-lg-8 ">
+                <h1><i class="fa fa-briefcase fa-x icon" style="color: red;"></i>
+                  Our Capabilities and Services</h1>
+              </div>
+              <div class="col-lg-12 p-5">
+                <h5>1. Smart and Targeted Advertising</h5>
+                <div class="col-lg-12 p-3">
+                    <li>Delivering precise advertising programs to showcase your products and services to targeted audiences in both domestic and international markets.</li>
+                    <li>Combining physical and digital advertising methods for maximum effectiveness.</li>
+                </div>
+
+                <h5>2. Connection to Global Markets</h5>
+                <div class="col-lg-12 p-3">
+                  <li>Over a decade of experience in international trade, particularly in GCC (Gulf Cooperation Council) countries.</li>
+                  <li>Access to extensive networks and valuable market information to establish strategic business connections.</li>
+                </div>
+
+                <h5>3. Specialized Commercial Support</h5>
+                <div class="col-lg-12 p-3">
+                  <li>A team of experienced professionals providing business consultancy and guidance for companies</li>
+                  <li>Assistance with negotiations and drafting international trade agreements to ensure smooth transactions.</li>
+                </div>
+
+                <h5>4. International Transportation</h5>
+                <div class="col-lg-12 p-3">
+                  <li>A dedicated transportation network for shipping goods to various countries with guaranteed speed and security.</li>
+                  <li>Comprehensive logistics services to optimize supply chain management.</li>
+                </div>
+
+                <h5>5. Secure International Financial Transactions</h5>
+                <div class="col-lg-12 p-3">
+                  <li>Enabling secure financial transactions to facilitate trade collaborations.</li>
+                  <li>Collaborations with reputable banks and financial institutions to ensure safe and seamless payments.</li>
+                </div>
+
+              </div>
+
+              
+            </div>
+            
+        </div>
+        <div class="divider div-transparent"></div>
+
+    </div>
+</section>
+
+
+<section class="adv_sec">
+   
+    <div class="container">
+        <div class="row d-flex align-items-center justify-content-start">
+            <div class="content col-md-8 d-flex align-items-center justify-content-start">
+                <h1 class="animate__animated animate__fadeInDown" style="font-size: 30px;"><strong>Sohof ;</strong> 
+                   a gateway to the world of global trade
+                </h1>
+            </div>
+        </div>
+      <div class="adv_in">
+        <div class="row">
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-handshake-o fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>Powerful Networking and Connections</h5>
+                  <p>Our platform connects you with potential customers, new partners, and global opportunities across industries.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-bullseye fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>Targeted and Intelligent Advertising</h5>
+                  <p>Modern methods and data analysis ensure your ads reach genuine audiences through targeted, creative delivery in magazines and websites.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-truck fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>Trading Unit</h5>
+                  <p>At BIZSIZ, our trading team is always by your side, from the factory door to delivering goods to customers at destinations in different countries.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-line-chart fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>Sales Team</h5>
+                  <p>The BIZSIZ international sales team, with expertise in global trade and local markets, uses advanced tools and analysis to drive your business growth.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-cogs fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>Consulting</h5>
+                  <p>Our team provides expert consulting to help you optimize marketing strategies and expand your business.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-laptop fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>Consulting</h5>
+                  <p>We specialize in online marketing, including SEO, social media campaigns, and email marketing.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-bar-chart fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>Market Analysis</h5>
+                  <p>Gain valuable insights into market trends, competitor behavior, and customer preferences to make data-driven decisions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-headphones fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>24/7 Customer Support</h5>
+                  <p>Our dedicated customer support team is available round-the-clock to address your concerns and provide solutions for a seamless experience.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-6 col-12">
+            <div class="adv_box">
+              <div class="media">
+                <i class="fa fa-rocket fa-3x icon"></i>
+                <div class="media-body">
+                  <h5>Digital Transformation</h5>
+                  <p>Empowering your business with tech solutions like e-commerce, digital marketing, and automation.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+      </div>
+
+      <div class="divider div-transparent"></div>
+
+      
+
+    </div>
+    <div class="container mt-5 mb-5">
+      <div class="row d-flex align-items-center justify-content-center">
+        <div class="content col-md-6 d-flex align-items-start justify-content-start">
+            <h1 class="animate__animated animate__fadeInDown" style="font-size: 30px;">Subscribe to Our Newsletter </h1>
+        </div>
+        <div class="col-lg-5">
+          <form class="d-flex mt-2">
+              <div class="input-group" style="border:none; border-bottom: 2px solid rgb(0, 0, 0);">
+                  <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                  <button type="submit" class="btn btn-custom  subscribe-button">Subscribe</button>
+              </div>
+          </form>
+        </div>
+    </div>
+     
+
+    <div class="divider div-transparent"></div>
+ 
+
+   
+    <div class="container my-5">
+      <div class="row justify-content-center">
+          <div class="col-lg-6 d-flex justify-content-center mt-5">
+            <div class="map-container">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d58482.08157349544!2d58.02235007286069!3d23.635511461251514!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e8de52b4372dbed%3A0xec3599e501c57db1!2sInnwin!5e0!3m2!1sen!2som!4v1737428002559!5m2!1sen!2som" width="350" height="430" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+          </div>
+          <div class="col-lg-6">
+              <div class="contact-us">
+                  <div class="card-body p-4">
+                    <div class="content col-md-12 d-flex align-items-start justify-content-start mb-5">
+                      <h1 class="animate__animated animate__fadeInDown" style="font-size: 30px;">Get In Touch</h1>
+                  </div>
+                  <form id="contact-form" action="{% url 'contact_us' %}" method="POST">
+                    {% csrf_token %}
+                    <div class="form-row">
+                        <!-- Full Name -->
+                        <div class="form-group col-md-6 contact-us-input">
+                            <label for="name">Full Name</label>
+                            <input type="text" class="form-control" id="name" name="name" required placeholder="Enter your full name">
+                        </div>
+                        
+                        <!-- Email -->
+                        <div class="form-group col-md-6 contact-us-input">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                    </div>
+                    
+                    <!-- Subject -->
+                    <div class="form-group contact-us-input">
+                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control" id="subject" name="subject" required placeholder="Enter the subject">
+                    </div>
+                    
+                    <!-- Message -->
+                    <div class="form-group contact-us-input">
+                        <label for="message">Message</label>
+                        <textarea class="form-control" id="message" name="message" rows="5" required placeholder="Write your message"></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <!-- Send Message Button -->
+                        <button type="submit" class="btn btn-custom btn-block" id="submit-btn">
+                            <span id="button-text">Send Message</span>
+                        </button>
+                    </div>
+                </form>
+                
+                <!-- Loading Spinner (Hidden by Default) -->
+                <!-- This spinner will be inside the button -->
+                <div id="loader" style="display: none; text-align: center; padding: 20px;">
+                    <div class="spinner"></div>
+                </div>
+                
+                <div id="form-messages"></div>
+                
+              
+                  </div>
+              </div>
+
+
+          </div>
+      </div>
+  </div>
+    
+  </section>
+
+
+
+  <footer class="bg-dark text-white pt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">About Us</h5>
+                <p>
+
+                    We promote businesses through our catalog and strategic advertising, connecting them with global markets to enhance visibility and growth.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'catalogues' %}" class="text-white text-decoration-none">Catalogues</a></li>
+                    <li><a href="{% url 'company_signup' %}" class="text-white text-decoration-none">Become a supplier</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">Smart and Targeted Advertising</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> Connection to Global Markets</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Specialized Commercial Support</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> International Transportation</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Secure International Financial Transactions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media and Subscribe -->
+            <div class="col-md-3 text-center">
+                <h5 class="mb-4 footer-top-title">Follow Us</h5>
+                <div class="mb-3">
+                    {% for link in socialmedia %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-facebook fa-2x"></i></a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-instagram fa-2x"></i></a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-linkedin fa-2x"></i></a>
+                        {% elif 'youtube' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-youtube fa-2x"></i></a>
+                        {% endif %}
+                    {% empty %}
+                        <p>No social media links available</p>
+                    {% endfor %}
+                </div>
+                <!-- <h5 class="mt-4 subscrribe-title">Subscribe to Our Newsletter</h5>
+                <form class="d-flex mt-2">
+                    <div class="input-group" style="border:none; border-bottom: 2px solid white;">
+                        <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="row text-center pb-4">
+            <div class="col">
+                <p class="mb-0">&copy; 2025 Sohof. All Rights Reserved.</p>
+                <!-- <p class="mb-0"><a href="#" class="text-white text-decoration-none">Privacy Policy</a> | <a href="#" class="text-white text-decoration-none">Terms of Service</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<style>
+    .subscribe-button{
+
+        background: transparent;
+        color: rgb(255, 255, 255);
+    }
+    .subscribe-button:hover{
+
+        background: transparent;
+        color: black;
+    }
+    .subscrribe-title ,  .footer-top-title{
+        font-weight: bold;
+        color: white;
+    }
+
+      #submit-btn {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 12px 20px;
+        text-align: center;
+   }
+
+    .spinner {
+        border: 4px solid rgba(255, 255, 255, 0.3); /* Light border */
+        border-top: 4px solid #000;  /* Dark top for the spinning effect */
+        border-radius: 50%;
+        width: 20px;  /* Size of the spinner */
+        height: 20px;  /* Size of the spinner */
+        animation: spin 1s linear infinite;  /* Spin animation */
+    }
+
+    /* Spin animation */
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+   
+
+    @media screen and (min-width: 1200px) {
+                .map-container iframe  {
+                   width: 530px;
+                }
+            }
+           
+
+
+
+</style>
+
+
+ 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function(){
+      $("#contact-form").on("submit", function(e){
+          e.preventDefault();  // Prevent the default form submission
+
+          var form = $(this);
+          var formData = form.serialize();  // Serialize the form data
+          
+          // Change button text to loader inside the button
+          var button = $("#submit-btn");
+          var buttonText = $("#button-text");
+
+          buttonText.html('');  // Remove existing text
+          button.prop("disabled", true);  // Disable the button during submission
+          
+          // Append spinner inside the button
+          button.append('<div class="spinner"></div>');
+          
+          // Start the AJAX request
+          $.ajax({
+              url: form.attr("action"),  // The URL to send the request to
+              type: "POST",  // HTTP method
+              data: formData,  // The serialized form data
+              success: function(response) {
+                  // Remove spinner after a delay of 2 seconds
+                  setTimeout(function() {
+                      button.find(".spinner").remove();  // Remove spinner
+                      buttonText.html("Send Message");  // Restore the original button text
+                      button.prop("disabled", false);  // Enable the button again
+                      
+                      // Now display the success message
+                      if(response.status === "success") {
+                          $("#form-messages").html("<div class='alert alert-success'>" + response.message + "</div>");
+                          form[0].reset();  // Reset the form fields
+                          
+                          // Clear the message after 3 seconds
+                          setTimeout(function() {
+                              $("#form-messages").html('');
+                          }, 3000);  // Clear after 3 seconds
+                      } else {
+                          // If the response contains errors, display the error messages
+                          var errorHtml = "<div class='alert alert-danger'>";
+                          $.each(response.errors, function(key, value) {
+                              errorHtml += "<p>" + value + "</p>";
+                          });
+                          errorHtml += "</div>";
+                          $("#form-messages").html(errorHtml);
+                          
+                          // Clear the error message after 3 seconds
+                          setTimeout(function() {
+                              $("#form-messages").html('');
+                          }, 3000);  // Clear after 3 seconds
+                      }
+                  }, 2000);  // Delay for 2 seconds to keep the spinner visible
+              },
+              error: function() {
+                  // Delay before removing the spinner and restoring the button text
+                  setTimeout(function() {
+                      button.find(".spinner").remove();  // Remove spinner
+                      buttonText.html("Send Message");  // Restore the original button text
+                      button.prop("disabled", false);  // Enable the button again
+                      
+                      // Display a generic error message
+                      $("#form-messages").html("<div class='alert alert-danger'>There was an error processing your request. Please try again later.</div>");
+                      
+                      // Clear the error message after 3 seconds
+                      setTimeout(function() {
+                          $("#form-messages").html('');
+                      }, 3000);  // Clear after 3 seconds
+                  }, 2000);  // Delay for 2 seconds
+              }
+          });
+      });
+  });
+</script>
+
+
+
+
+{% endblock content %}

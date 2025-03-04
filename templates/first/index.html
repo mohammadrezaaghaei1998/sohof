@@ -1,0 +1,812 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- <div class="parallax">
+  <div class="col-lg-12 content">
+     <div class="row">
+        <div class="col-lg-12">
+            <h1 class="header-title animate__animated animate__fadeInDown mt-5">Welcome to Sohof</h1>
+            <p class="animate__animated animate__fadeInUp animate__delay-1s">International Magazine</p>
+        </div>
+        
+        <div class="col-lg-12 mt-5 mb-5 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
+            <a href="#" class="play-btn mb-5" data-toggle="modal" data-target="#videoModal" style="margin-bottom: 50px;">
+                
+            </a>
+        </div>
+     </div>
+  </div>
+  
+</div> -->
+
+
+<div class="parallax">
+    <div class="parallax-bg"></div>
+    <div class="col-lg-12 content">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="header-title animate__animated animate__fadeInDown mt-5">Welcome to Sohof</h1>
+          <p class="animate__animated animate__fadeInUp animate__delay-1s">International Magazine</p>
+        </div>
+        <div class="col-lg-12 mt-5 mb-5 d-flex align-items-center justify-content-center position-relative" data-aos="zoom-in" data-aos-delay="200">
+          <a href="#" class="play-btn mb-5" data-toggle="modal" data-target="#videoModal" style="margin-bottom: 50px;"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true" style="overflow: hidden;">
+    <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-content" style="background-color: transparent; border-radius: 15px; max-width: 100%; margin: 0 15px;">
+            <div class="modal-body p-0">
+                <div class="embed-responsive embed-responsive-16by9" style="border-radius: 15px; overflow: hidden;">
+                    {% for video in homepagevideos %}
+                    <video id="videoPlayer" class="embed-responsive-item" controls autoplay>
+                        <source src="{{ video.home_page_video.url }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<section>
+    
+    <div class="container-count mt-5  d-flex justify-content-center" >
+        <div class="col-md-8">
+            <div class="row   cards justify-content-center">
+                <div class="col-lg-4 mb-5 d-flex justify-content-center">
+                    <div class="card-top animate__animated animate__fadeInLeft">
+                        <div class="card-body">
+                            <div class="col-lg-4 text-center icon-top-card">
+                                <i class="fa fa-briefcase"></i>
+                            </div>
+                            <div class="card-title p-2 mt-2">
+                                <p class="card-title-p">Find Top Suppliers and Business Offerings</p> 
+                                <p class="p-2">Find top suppliers and high-quality products from around the world to expand your business.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-5 d-flex justify-content-center">
+                    <div class="card-top animate__animated animate__fadeInLeft">
+                        <div class="card-body">
+                            <div class="col-lg-4 text-center icon-top-card">
+                                <i class="fa fa fa-book"></i>
+                            </div>
+                            <div class="card-title p-2 mt-2">
+                                <p class="card-title-p">Showcase Your Business in Our Catalogues</p> 
+                                <p class="p-2">Promote your company and attract buyers with our catalogues</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 mb-5 d-flex justify-content-center">
+                    <div class="card-top animate__animated animate__fadeInLeft">
+                        <div class="card-body">
+                            <div class="col-lg-4 text-center icon-top-card">
+                                <i class="fa fa-bullhorn"></i>
+                            </div>
+                            <div class="card-title p-2 mt-2">
+                                <p class="card-title-p">Expand Your Reach with Strategic Promotions</p> 
+                                <p class="p-2">Promote your business globally and connect with trusted partners.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  
+</section>
+
+
+<div class="container col-md-8 cat-header justify-content-center">
+    <div class="row d-flex align-items-center justify-content-center">
+        <div class="content col-md-8 ">
+            <h1 class="animate__animated animate__fadeInDown">Explore millions of offerings tailored to your business needs</h1>
+        </div>
+        <div class="col-md-4 cat-boxes animate__animated animate__fadeInUp" style="margin-top: 100px;">
+            <div class="row  d-flex align-items-end justify-content-center">
+                <!-- Box 1 -->
+                <div class="col-6 mb-4 d-flex align-items-start justify-content-center flex-column-reverse">
+                    <div class="box-cat">
+                        <h1>200M+</h1>
+                        <h4>products</h4>
+                    </div>
+                </div>
+                <!-- Box 2 -->
+                <div class="col-6 mb-4 d-flex align-items-start justify-content-center flex-column-reverse">
+                    <div class="box-cat">
+                        <h1>200K+</h1>
+                        <h4>suppliers</h4>
+                    </div>
+                </div>
+                <!-- Box 3 -->
+                <div class="col-6 mb-4 d-flex align-items-start justify-content-center flex-column-reverse">
+                    <div class="box-cat">
+                        <h1>5,900</h1>
+                        <h4>product categories</h4>
+                    </div>
+                </div>
+                <!-- Box 4 -->
+                <div class="col-6 mb-4 d-flex align-items-start justify-content-center flex-column-reverse">
+                    <div class="box-cat">
+                        <h1>200+</h1>
+                        <h4>countries and regions</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<main class="carousel-container-category-index mt-5 mb-5">
+    <div class="container mt-5 mb-5">
+        <button class="controls-category-index prev-category-index" id="prevBtn-category-index">&#10094;</button>
+        <div class="carousel-category-index" id="carousel-category-index">
+            {% for category in categories %}
+                {% for subcategory in category.subcategories.all %}
+                    <a href="{% url 'subcategory_products' subcategory_id=subcategory.id %}">
+                        <div class="category-item-category-index">
+                            <div class="row d-flex flex-column align-items-center text-center">
+                                <div class="p-3 pr-4 pl-4 category-index-icon">
+                                    <i class="fa {{ subcategory.icon }} "></i>
+                                </div>
+                                <div>
+                                    <p class="category-name-index">{{ subcategory.name }}</p>
+                                </div>
+                            </div>
+                        </div> 
+                    </a>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <button class="controls-category-index next-category-index" id="nextBtn-category-index">&#10095;</button>
+    </div>
+</main>
+
+
+
+
+
+  <section class="d-flex justify-content-center mb-5">
+      <div class="col-lg-8">
+          <h1 class="headline">Catalogues</h1>
+          <div class="article-meta mt-4">
+              <p class="byline">Explore More Catalogues <a href="{% url 'catalogues' %}">Here</a></p>
+          </div>
+          <h2 class="subhead">Catalogues display a variety of products for easy browsing.</h2>
+  
+          <div class="container">
+              <div class="slider" data-slider>
+                  <ul class="slider__track" data-slider-track>
+                      {% for catalogue in catalogues %}
+                      <li>
+                          <div class="slide">
+                              {% if catalogue.cover_image %}
+                                  <img src="{{ catalogue.cover_image.url }}" alt="Catalogue Cover" style="max-height: 693px;">
+                              {% else %}
+                                  <p>No Catalogue to display</p>
+                              {% endif %}
+                          </div>
+                      </li>
+                      {% endfor %}
+                  </ul>
+                  <div class="slider__buttons">
+                      <button class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s slider__button" data-slider-prev disabled>
+                          Previous
+                      </button>
+                      <button class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s slider__button" data-slider-next>
+                          Next
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section>
+  
+
+
+
+
+  
+  <!-- <section class="our-catalogues">
+    <div class="container col-md-12 mt-5 justify-content-center">
+        <div class="row d-flex align-items-center justify-content-center">
+            <div class="content col-md-8 ">
+                <h1 class="animate__animated animate__fadeInDown">Explore Our Catalogues</h1>
+            </div>
+        </div>
+    </div>
+    <div class="cover-image"></div>
+    <div class="container py-5">
+        <div id="style-1" class="catalogue-carousel-wrapper">
+            <div id="catalogueCarousel" class="catalogue-carousel d-flex">
+                <div class="catalogue-card">
+                    <img src="{% static 'assets/images/1.jpg' %}" alt="Catalogue 1">
+                    <h5>Catalogue 1</h5>
+                    <p>Description of Catalogue 1</p>
+                </div>
+                <div class="catalogue-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Catalogue 2">
+                    <h5>Catalogue 2</h5>
+                    <p>Description of Catalogue 2</p>
+                </div>
+                <div class="catalogue-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Catalogue 3">
+                    <h5>Catalogue 3</h5>
+                    <p>Description of Catalogue 3</p>
+                </div>
+                <div class="catalogue-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Catalogue 1">
+                    <h5>Catalogue 1</h5>
+                    <p>Description of Catalogue 1</p>
+                </div>
+                <div class="catalogue-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Catalogue 2">
+                    <h5>Catalogue 2</h5>
+                    <p>Description of Catalogue 2</p>
+                </div>
+                <div class="catalogue-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Catalogue 3">
+                    <h5>Catalogue 3</h5>
+                    <p>Description of Catalogue 3</p>
+                </div>
+                <div class="catalogue-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Catalogue 1">
+                    <h5>Catalogue 1</h5>
+                    <p>Description of Catalogue 1</p>
+                </div>
+                <div class="catalogue-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Catalogue 2">
+                    <h5>Catalogue 2</h5>
+                    <p>Description of Catalogue 2</p>
+                </div>
+                <div class="catalogue-card">
+                    <img src="https://via.placeholder.com/300x200" alt="Catalogue 3">
+                    <h5>Catalogue 3</h5>
+                    <p>Description of Catalogue 3</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+
+<section class="image-section d-flex justify-content-center align-items-center">
+    
+    <div class="col-lg-10 mt-5 justify-content-center align-items-center">
+        <div class="container col-md-10  justify-content-start">
+            <div class="row d-flex align-items-center justify-content-start">
+                <div class="content col-md-8 ">
+                    <h1 class="animate__animated animate__fadeInDown" id='section-3'>Trade with confidence from production quality to purchase protection</h1>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-12" >
+            <div class="row justify-content-center">
+               
+
+                <div class="col-lg-5">
+                    <div class="custom-card col-sm-12 left-card">
+                        <div class="custom-card-body">
+                            
+                            <div class="col-lg-12">
+                                <div class="row align-items-center justify-content-start">
+                                    <!-- Image section: Image will be on the left on small screens -->
+                                    <div class="col-4 col-lg-2 d-flex justify-content-start order-0 order-lg-0">
+                                        <img src="{% static 'assets/images/top-catalogues.png' %}" style="max-width: 80px;" alt="">
+                                    </div>
+                                    <!-- Text section: Text will be on the right on small screens -->
+                                    <div class="col-8 col-lg-9  order-1 order-lg-1 ">
+                                        <h1 class="custom-card-title">Showcase Your Business with</h1>
+                                        <p class="custom-card-text">Our Catalogues</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Discover a curated selection of registered companies, verified for quality and reliability. Each month, we showcase top businesses in our catalog, providing a trusted platform for sourcing and collaboration. Join our network and get featured in our latest editions.</p>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Right Card -->
+                <div class="col-lg-5">
+                    <div class="custom-card col-sm-12 right-card">
+                        <div class="custom-card-body">
+                            
+                            <div class="col-lg-12">
+                                <div class="row align-items-center justify-content-start">
+                                    <!-- Image section: Image will be on the left on small screens -->
+                                    <div class="col-4 col-lg-2 d-flex justify-content-start order-0 order-lg-0">
+                                        <img src="{% static 'assets/images/verified.png' %}" style="max-width: 100px;" alt="">
+                                    </div>
+                                    <!-- Text section: Text will be on the right on small screens -->
+                                    <div class="col-8 col-lg-9  order-1 order-lg-1">
+                                        <h1 class="custom-card-title">Protect your purchase with</h1>
+                                        <p class="custom-card-text ">Our Verified Companies</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Partner with industry-leading companies that provide secure transactions, reliable shipping, and exceptional service. Our trusted partners ensure quality assurance, timely deliveries, and seamless shopping experiences for all your needs.</p>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section >
+    <div class="container mt-5 col-md-8 justify-content-start">
+        <div class="row d-flex align-items-center justify-content-start">
+            <div class="content col-md-8">
+                <h1 class="animate__animated animate__fadeInDown">Streamline ordering from search to fulfillment, all in one place</h1>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12 mt-5">
+        <div class="row justify-content-end ">
+            <div class="col-lg-4 p-5" >
+
+                <div class="col-md-12 custom-title" data-target="content1">
+                    <div class="row">
+                        <h4><i class="fa fa-search" aria-hidden="true"></i> Find the Perfect Match</h4>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-md-10 custom-content" id="content1">
+                            <h5>Search and filter from a vast network of registered companies and product offerings to find the perfect match for your business needs.</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 custom-title" data-target="content2">
+                    <div class="row">
+                        <h4><i class="fa fa-filter" aria-hidden="true"></i> Search with Precision</h4>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-md-10 custom-content" id="content2">
+                            <h5>Refine your search and evaluate suppliers effortlessly with verified credentials, quality inspections, and smart filtering options.</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 custom-title" data-target="content3">
+                    <div class="row">
+                        <h4><i class="fa fa-bullhorn" aria-hidden="true"></i> Advertise with Impact</h4>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-md-10 custom-content" id="content3">
+                            <h5>Promote your business effectively by showcasing your products and services to a global audience through our platform.</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 custom-title" data-target="content4">
+                    <div class="row">
+                        <h4><i class="fa fa-globe" aria-hidden="true"></i> Expand to Global Markets</h4>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-md-10 custom-content" id="content4">
+                            <h5>Increase your reach and grow internationally by connecting with businesses across various industries in global markets.</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12 custom-title" data-target="content5">
+                    <div class="row" id="custom-title-last">
+                        <h4><i class="fa fa-shield" aria-hidden="true"></i> Conduct Secure Transactions</h4>
+                    </div>
+                    <div class="row justify-content-end">
+                        <div class="col-md-10 custom-content" id="content5">
+                            <h5>Manage orders, track payments, and ensure secure financial transactions with multiple payment options and buyer protection.</h5>
+                        </div>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="col-lg-6 d-flex justify-content-center">
+                <div class="col-md-8 mt-5 custom-content" id="content1">
+                    <img  src="{% static 'assets/images/best_match2.png' %}" alt="">
+                </div>
+                <div class="col-md-8 mt-5 custom-content" id="content2">
+                    <img  src="{% static 'assets/images/precision.png' %}" alt="">
+                </div>
+                <div class="col-md-8 mt-5 custom-content" id="content3">
+                    <img  src="{% static 'assets/images/advertise.png' %}" alt="">
+                </div>
+                <div class="col-md-8 mt-5 custom-content" id="content4">
+                    <img  src="{% static 'assets/images/global.png' %}" alt="">
+                </div>
+                <div class="col-md-8 mt-5 custom-content" id="content5">
+                    <img  src="{% static 'assets/images/secure.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- 
+<section> 
+    <div class="container mt-5 mb-5 col-md-8 d-flex justify-content-center">
+        <div class="row d-flex justify-content-center">
+            <div class="content-content-what-people-say-slider col-md-12 ">
+                <h1 class="animate__animated animate__fadeInDown text-center">Get tailored discounts, services, and tools for your business stage.</h1>
+            </div>
+            <div class="content-content-what-people-say-slider col-md-10 mt-2">
+                <h4 class="animate__animated animate__fadeInDown  text-center"> Grow with curated benefits offered by the free Alibaba.com Membership, whether you are a small business needing the essentials to start sourcing or a well-established enterprise looking for tools and solutions for more complex orders.
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="container testimonials-home-page">
+        <div class="what-people-say">
+            <div class="slider">
+                <div class="slide-row-what-people-say-slider" id="slide-row">
+                    <div class="slide-col-what-people-say-slider">
+                        <div class="content-what-people-say-slider">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat explicabo animi odit maxime, veritatis quod.</p>
+                            <h2>INNWIN</h2>
+                            <p>Company</p>
+                        </div>
+                        <div class="hero-what-people-say-slider">
+                            <img src="{% static 'assets/images/1.jpg' %}" alt="avatar">
+                        </div>
+                    </div>
+    
+                    <div class="slide-col-what-people-say-slider">
+                        <div class="content-what-people-say-slider">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat explicabo animi odit maxime, veritatis quod.</p>
+                            <h2>INNWIN</h2>
+                            <p>Company</p>
+                        </div>
+                        <div class="hero-what-people-say-slider">
+                            <img src="{% static 'assets/images/2.jpg' %}" alt="avatar">
+                        </div>
+                    </div>
+    
+                    <div class="slide-col-what-people-say-slider">
+                        <div class="content-what-people-say-slider">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat explicabo animi odit maxime, veritatis quod.</p>
+                            <h2>INNWIN</h2>
+                            <p>Company</p>
+                        </div>
+                        <div class="hero-what-people-say-slider">
+                            <img src="{% static 'assets/images/match.jpeg' %}" alt="avatar">
+                        </div>
+                    </div>
+    
+                    <div class="slide-col-what-people-say-slider">
+                        <div class="content-what-people-say-slider">
+                            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat explicabo animi odit maxime, veritatis quod.</p>
+                            <h2>INNWIN</h2>
+                            <p>Company</p>
+                        </div>
+                        <div class="hero-what-people-say-slider">
+                            <img src="{% static 'assets/images/3.jpg' %}" alt="avatar">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="indicator-what-people-say-slider">
+                <span class="btn btn-what-people-say-slider active"></span>
+                <span class="btn btn-what-people-say-slider"></span>
+                <span class="btn btn-what-people-say-slider"></span>
+                <span class="btn btn-what-people-say-slider"></span>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+
+<section class="get-started-home-page" style="background-image: url('/static/assets/images/getready.jpg');">
+    <div class="container  mt-5 mb-5 col-md-10  justify-content-center get-started-home-page-container">
+        <div class="row d-flex justify-content-center">
+            <div class="content-content-what-people-say-slider col-md-12 ">
+                <h1 class="animate__animated animate__fadeInDown text-center">Ready to get started?</h1>
+            </div>
+            <div class="content-content-what-people-say-slider col-md-10 mt-2">
+                <h4 class="animate__animated animate__fadeInDown  text-center">Join Us As We Take A Step Into The World Of Global Trade</h4>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-5">
+            <a href="{% url 'company_signup' %}" class="btn btn-md  animate__animated animate__fadeInLeft" id="btn-get-started">Sign Up</a>
+        </div>
+    </div>
+</section>
+
+
+
+ <section class="global-trade-home-page">
+    <div class="container mt-5 mb-5 col-md-8 d-flex justify-content-center">
+        <div class="row d-flex justify-content-center">
+            <div class="content-content-what-people-say-slider col-md-12 ">
+                <h1 class="animate__animated animate__fadeInDown text-center">Empowering businesses through global trade</h1>
+            </div>
+            <div class="content-content-what-people-say-slider col-md-8 mt-2">
+                <h4 class="animate__animated animate__fadeInDown  text-center">Sohof.com offers one-stop B2B trading solutions for global small and medium-sized businesses, empowering them to transform through digital trade, grasp opportunities, and accelerate growth internationally.
+
+                </h4>
+            </div>
+        </div>
+    </div>
+    <div class="container col-lg-10" style="padding: 20px;">
+        <div class="row">
+            <div class="col-md-6 p-2">
+                <div class="box left-box d-flex align-items-end">
+                   <div class="row p-5">
+                    <div class="col-md-8 d-flex justify-content-start  global-trade-title">
+                        <h5>OUR MISSION</h5>
+                    </div>
+                    <div class="col-md-12 d-flex justify-content-start  global-trade-dec">
+                        <h1>Make it easy to do business anywhere</h1>
+                    </div>
+                   </div>
+                </div>
+            </div>
+            <div class="col-md-6 p-2">
+                <div class="box right-box-small mb-3 d-flex align-items-end">
+                    <div class="row p-5">
+                        <div class="col-md-8 d-flex justify-content-start global-trade-title">
+                            <h5>OUR LOCATIONS</h5>
+                        </div>
+                        <div class="col-md-8 d-flex justify-content-start  global-trade-dec">
+                            <h1>We have teams around GCC</h1>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="box right-box-large d-flex align-items-end">
+                    <div class="row p-5">
+                        <div class="col-md-8 d-flex justify-content-start  global-trade-title">
+                            <h5>OUR COMMITMENT</h5>
+                        </div>
+                        <div class="col-md-12 d-flex justify-content-start  global-trade-dec">
+                            <h1>Entrust your cargo transportation to us with confidence</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section> 
+   
+
+
+<footer class="bg-dark text-white pt-5">
+    <div class="container">
+        <div class="row">
+            <!-- About Section -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">About Us</h5>
+                <p>
+
+                    We promote businesses through our catalog and strategic advertising, connecting them with global markets to enhance visibility and growth.</p>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Quick Links</h5>
+                <ul class="list-unstyled">
+                    <li><a href="{% url 'index' %}" class="text-white text-decoration-none">Home</a></li>
+                    <li><a href="{% url 'aboutus' %}" class="text-white text-decoration-none">About Us</a></li>
+                    <li><a href="{% url 'catalogues' %}" class="text-white text-decoration-none">Catalogues</a></li>
+                    <li><a href="{% url 'company_signup' %}" class="text-white text-decoration-none">Become a supplier</a></li>
+                </ul>
+            </div>
+
+            <!-- Services -->
+            <div class="col-md-3">
+                <h5 class="mb-4 footer-top-title">Our Services</h5>
+                <ul class="list-unstyled">
+                    <li><a href="#" class="text-white text-decoration-none">Smart and Targeted Advertising</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> Connection to Global Markets</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Specialized Commercial Support</a></li>
+                    <li><a href="#" class="text-white text-decoration-none"> International Transportation</a></li>
+                    <li><a href="#" class="text-white text-decoration-none">Secure International Financial Transactions</a></li>
+                </ul>
+            </div>
+
+            <!-- Social Media and Subscribe -->
+            <div class="col-md-3 text-center">
+                <h5 class="mb-4 footer-top-title">Follow Us</h5>
+                <div class="mb-3">
+                    {% for link in socialmedia %}
+                        {% if 'facebook' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-facebook fa-2x"></i></a>
+                        {% elif 'instagram' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-instagram fa-2x"></i></a>
+                        {% elif 'linkedin' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-linkedin fa-2x"></i></a>
+                        {% elif 'youtube' in link.social_media_url %}
+                            <a href="{{ link.social_media_url }}" class="text-white mx-2"><i class="fa fa-youtube fa-2x"></i></a>
+                        {% endif %}
+                    {% empty %}
+                        <p>No social media links available</p>
+                    {% endfor %}
+                </div>
+                <!-- <h5 class="mt-4 subscrribe-title">Subscribe to Our Newsletter</h5>
+                <form class="d-flex mt-2">
+                    <div class="input-group" style="border:none; border-bottom: 2px solid white;">
+                        <input type="email" class="form-control" placeholder="Enter your email" style="background: transparent; border: none;">
+                        <button type="submit" class="btn subscribe-button">Subscribe</button>
+                    </div>
+                </form> -->
+            </div>
+        </div>
+        <hr class="bg-white">
+        <div class="row text-center pb-4">
+            <div class="col">
+                <p class="mb-0">&copy; 2025 Sohof. All Rights Reserved.</p>
+                <!-- <p class="mb-0"><a href="#" class="text-white text-decoration-none">Privacy Policy</a> | <a href="#" class="text-white text-decoration-none">Terms of Service</a></p> -->
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+
+
+
+
+
+<div id="adModal" class="modalad hiddenad">
+    <div class="col-lg-12">
+        <div class="row justify-content-between p-4">
+            <div class="col-lg-12">
+                <h4>Advertising</h4>
+                <button id="closeModalad" class="close-btnad">&times;</button>
+            </div>
+        </div>
+    </div>
+    <div class="modalad-content">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                {% for ad in advertisement %}
+                <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="row ad-desc-box-row">
+                        <div class="col-12">
+                            <img class="d-block w-100 ad-image" src="{{ ad.image.url }}" alt="{{ ad.company_name }}">
+                        </div>
+                        <div class="col-12 ad-desc-box">
+                            <h4 class="ad-description"><strong>Company Name:</strong> {{ad.company_name }}</h4>
+                            <p><i class="fa fa-industry"></i> <strong>Industry:</strong> {{ ad.industry }}</p>
+                            <p><i class="fa fa-globe"></i> <strong>Website:</strong> 
+                                <a href="{{ ad.website }}" target="_blank">{{ ad.website }}</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev" 
+               style="background-color: red; height: 40px; width: 40px; position: absolute; top: 50%; left: 0; 
+                      margin: 2px; transform: translateY(-50%); border-radius: 50%;">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next" 
+               style="background-color: red; height: 40px; width: 40px; position: absolute; top: 50%; right: 0; 
+                      margin: 2px; transform: translateY(-50%); border-radius: 50%;">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+<style>
+    .subscribe-button{
+
+        background: transparent;
+        color: rgb(255, 255, 255);
+    }
+    .subscribe-button:hover{
+
+        background: transparent;
+        color: black;
+    }
+    .subscrribe-title ,  .footer-top-title{
+        font-weight: bold;
+        color: white;
+    }
+
+    .category-name-index{
+        font-size: 12px;
+    }
+
+</style>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+         const modal = document.getElementById("adModal");
+         const closeModal = document.getElementById("closeModalad");
+
+         setTimeout(() => {
+             modal.classList.remove("hiddenad");
+             modal.style.bottom = "0"; 
+         }, 500);
+
+         closeModal.addEventListener("click", () => {
+             modal.style.bottom = "-0%"; 
+             setTimeout(() => {
+                 modal.classList.add("hiddenad");
+             }, 100); 
+         });
+      });
+
+ </script>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const carousel = document.getElementById("carousel-category-index");
+        const prevBtn = document.getElementById("prevBtn-category-index");
+        const nextBtn = document.getElementById("nextBtn-category-index");
+        
+        let isDragging = false;
+        let startX, scrollLeft;
+    
+        carousel.addEventListener("mousedown", (e) => {
+            isDragging = true;
+            carousel.classList.add("grabbing-category-index");
+            startX = e.pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+    
+        document.addEventListener("mouseup", () => {
+            isDragging = false;
+            carousel.classList.remove("grabbing-category-index");
+        });
+    
+        document.addEventListener("mousemove", (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2;
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+    
+        carousel.addEventListener("touchstart", (e) => {
+            isDragging = true;
+            startX = e.touches[0].pageX - carousel.offsetLeft;
+            scrollLeft = carousel.scrollLeft;
+        });
+    
+        document.addEventListener("touchend", () => {
+            isDragging = false;
+        });
+    
+        carousel.addEventListener("touchmove", (e) => {
+            if (!isDragging) return;
+            const x = e.touches[0].pageX - carousel.offsetLeft;
+            const walk = (x - startX) * 2;
+            carousel.scrollLeft = scrollLeft - walk;
+        });
+    
+        prevBtn.addEventListener("click", () => {
+            carousel.scrollBy({ left: -200, behavior: "smooth" });
+        });
+    
+        nextBtn.addEventListener("click", () => {
+            carousel.scrollBy({ left: 200, behavior: "smooth" });
+        });
+    });
+    </script>
+{% endblock content %}

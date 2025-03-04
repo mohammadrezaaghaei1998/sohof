@@ -1,0 +1,171 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+<!-- Search Results Header -->
+
+<div class="container">
+    <div class="search-result-header mt-5 p-4">
+        
+       <div class="col-lg-12">
+            {% if products %}
+                <p class="text-muted"><strong>{{ products|length }} product(s) found</strong></p>
+            {% else %}
+                <p class="text-muted">No products found</p>
+            {% endif %}
+       </div>
+    
+        {% if categories or subcategories %}
+            <div class="col-lg-12">
+                <div class="row">
+                    {% if categories %}
+                        {% for category in categories %} 
+                            <strong class="text-muted">{{ category.name }}</strong>
+                            {% if not forloop.last %} <i class="fa-solid fa-angle-right mt-2 mr-2 ml-2 text-muted"></i> {% endif %}
+                        {% endfor %}
+                    {% endif %} 
+                    
+                    {% if subcategories %}
+                        <i class="fa-solid fa-angle-right mt-2 mr-2 ml-2 text-muted"></i> 
+                        {% for subcategory in subcategories %} 
+                            <strong class="text-muted">{{ subcategory.name }}</strong>
+                            {% if not forloop.last %} <i class="fa-solid fa-angle-right text-muted"></i> {% endif %}
+                        {% endfor %}
+                    {% endif %} 
+    
+                    {% for product in products %}
+                        <i class="fa-solid fa-angle-right mt-2 mr-2 ml-2 text-muted"></i>
+                        <a href="{% url 'product_detail' product.id %}"><strong class="text-muted"> {{ query }}</strong></a>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+    
+    
+{% if products %}
+<div class="row">
+    {% for product in products %}
+        <div class="col-md-4 mb-4">
+           
+                <div class="product-card shadow-lg">
+                    <!-- Product Image Carousel -->
+                    {% if product.images.all %}
+                        <div id="carousel{{ product.id }}" class="carousel slide" data-ride="carousel">
+                            <div class="carousel-inner">
+                                {% for image in product.images.all %}
+                                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                                        <img src="{{ image.image.url }}" class="d-block w-100" alt="{{ image.image_title }}" />
+                                    </div>
+                                {% endfor %}
+                            </div>
+
+                            <a class="carousel-control-prev" href="#carousel{{ product.id }}" role="button" data-slide="prev" 
+                            style="background-color: red; height: 40px; width: 40px; position: absolute; top: 50%; left: 0; 
+                                margin: 2px; transform: translateY(-50%); border-radius: 50%;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#carousel{{ product.id }}" role="button" data-slide="next" 
+                            style="background-color: red; height: 40px; width: 40px; position: absolute; top: 50%; right: 0; 
+                                margin: 2px; transform: translateY(-50%); border-radius: 50%;">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                        </div>
+                    {% else %}
+                        <div class="no-image">
+                            <p>No images available for this product.</p>
+                        </div>
+                    {% endif %}
+                    <div class="product-info p-4">
+                        <h5 class="product-name">{{ product.name }}</h5>
+                        <p class="product-description">{{ product.description|truncatewords:20 }}</p>
+                        <p><strong>Origin:</strong> {{ product.origin }}</p>
+                        <p><strong>Availability:</strong> {{ product.availability|capfirst }}</p>
+                    </div>
+                        <a href="{% url 'product_detail' product.id %}" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s w-100">
+                            Visit Details
+                        </a>
+                </div>
+               
+        </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="no-results">
+    <p>No products found for "{{ query }}".</p>
+</div>
+{% endif %}
+</div>
+
+<style>
+    .display-4{
+        font-size: 25px;
+    }
+    .product-card {
+        border-radius: 15px;
+        background-color: #f9f9f9;
+        overflow: hidden;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    }
+
+
+    .product-info {
+        background-color: #fff;
+        border-top: 1px solid #eaeaea;
+        padding: 25px;
+    }
+
+    .product-name {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 12px;
+        color: #333;
+    }
+
+    .product-description {
+        color: #757575;
+        font-size: 1rem;
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+
+    .search-result-header {
+        margin-bottom: 50px;
+        text-align: start;
+        font-family: 'Roboto', sans-serif;
+        color: #343a40;
+    }
+
+    .carousel-inner img {
+        border-radius: 10px;
+        transition: transform 0.3s ease-in-out;
+        max-height: 300px;
+        object-fit: cover;
+    }
+
+    .carousel-inner img:hover {
+        transform: scale(1.05);
+    }
+
+
+    .carousel-control-prev, .carousel-control-next {
+        width: 5%;
+    }
+
+    .no-results {
+        text-align: center;
+        margin-top: 50px;
+        font-size: 1.2rem;
+        color: #888;
+    }
+
+    .no-image {
+        text-align: center;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        color: #757575;
+    }
+</style>
+{% endblock content %}

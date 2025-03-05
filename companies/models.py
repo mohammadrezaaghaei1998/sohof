@@ -168,9 +168,9 @@ class SellerProfile(models.Model):
 
 
     # Track profile views
-    profile_views = models.PositiveIntegerField(default=0)  
-    daily_views = models.PositiveIntegerField(default=0)  
-    weekly_views = models.PositiveIntegerField(default=0)
+    profile_views = models.PositiveIntegerField(default=0, blank=True, null=True)  
+    daily_views = models.PositiveIntegerField(default=0, blank=True, null=True)  
+    weekly_views = models.PositiveIntegerField(default=0, blank=True, null=True)
 
     is_verified = models.BooleanField(default=False)
     is_gold = models.BooleanField(default=False)

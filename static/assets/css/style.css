@@ -563,8 +563,8 @@ h1.custom-card-title, p.custom-card-text {
 }
 
  p.custom-card-text {
-  color: #fff;
-  font-size: 35px;
+  color: #df2424;
+  font-size: 30px;
   font-weight: bold;
 }
 
@@ -1257,7 +1257,7 @@ img {
 .card-product-detail, .second-card {
   margin-top: 50px;
   background: #ffffff;
-  padding: 3em;
+  /* padding: 3em; */
   line-height: 1.5em;
   border-radius: 25px; 
   box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.2), -10px -10px 20px rgba(255, 255, 255, 0.5); 
@@ -2283,8 +2283,8 @@ video {
 	font-size: 2rem;
 	column-span: all;
 	padding: 1rem;
-	width: fit-content;
-	max-width: 75%;
+	/* width: fit-content; */
+	/* max-width: 75%; */
 }
 
 

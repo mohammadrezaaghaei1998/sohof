@@ -9,33 +9,38 @@
             <img src="{{ page.page_image.url }}" alt="Page Image" class="img-fluid rounded shadow-lg">
         </div>
         <div class="col-lg-8">
-            <h2 class="mb-4">Page Details</h2>
-            <p class="h5 text-muted">Page Number: <span class="text-danger">{{ page.page_number }}</span></p>
-            <!-- <p>Catalogue: {{ page.catalogue }}</p> -->
 
-            <h3 class="mb-4">Companies in this page</h3>
+            <div class="col-lg-12 mb-5">
+                <div class="row">
+                    <strong class="text-muted">Page No:{{ page.page_number }}</strong>
+                    <i class="fa-solid fa-angle-right mt-2 mr-2 ml-2 text-muted"></i>   
+                    <strong class="text-muted">Page Details</strong>
+                    <i class="fa-solid fa-angle-right mt-2 mr-2 ml-2 text-muted"></i>
+                    <strong class="text-muted">Companies in this page</strong>
+                </div>
+            </div>
+
             <ul class="list-unstyled">
                 {% for seller in sellers %}
                 <li class="mb-4">
-                    <div class="d-flex align-items-center">
-                    
+                    <div class=" p-3 rounded bg-light shadow-sm text-decoration-none text-dark hover-shadow transition-all">
                         <div>
-                            <a href="{% url 'seller_detail' seller.id %}" class="d-block p-3 rounded bg-light shadow-sm text-decoration-none text-dark hover-shadow transition-all">
-                                <div class="row align-items-center">
-                                    <div class="col-lg-4">
-                                        {% if seller.company_logo %}
-                                        <img src="{{ seller.company_logo.url }}" alt="{{ seller.company_name }} Logo" class="img-fluid" style="width: 150px; height:150px; object-fit: contain;"> 
-                                        {% endif %} 
-                                    </div>
-                                    <div class="col-lg-8">
-                                        <h5 class="mb-0">{{ seller.company_name }}</h5>
-                                        <p class="text-muted mb-1"><strong>Location:</strong> {{ seller.company_location|default:"Not Provided" }}</p>
-                                        <p class="text-muted mb-1"><strong>Fields of Work:</strong> {{ seller.fields_of_work|default:"Not Provided" }}</p>
-                                    </div>
+                            <div class="row align-items-center">
+                                <div class="col-lg-4">
+                                    {% if seller.company_logo %}
+                                    <img src="{{ seller.company_logo.url }}" alt="{{ seller.company_name }} Logo" class="img-fluid" style="width: 150px; height:150px; object-fit: contain;"> 
+                                    {% endif %} 
                                 </div>
-                                <p class="text-muted mb-0"><strong>Description:</strong> {{ seller.company_description|default:"No description available." }}</p>
-                            </a>
-                            
+                                <div class="col-lg-8">
+                                    <h5 class="mb-0">{{ seller.company_name }}</h5>
+                                    <p class="text-muted mb-1"><strong>Location:</strong> {{ seller.company_location|default:"Not Provided" }}</p>
+                                    <p class="text-muted mb-1"><strong>Fields of Work:</strong> {{ seller.fields_of_work|default:"Not Provided" }}</p>
+                                </div>
+                            </div>
+                            <p class="text-muted mb-0 mt-5"><strong>Description:</strong> {{ seller.company_description|default:"No description available." }}</p>
+                            <div class="col-lg-12 d-flex justify-content-end">
+                                <a href="{% url 'seller_detail' seller.id %}" class=" btn btn-md btn-custom btn-primary mt-4"> Company Profile </a>
+                            </div>
                         </div>
                     </div>
                 </li>

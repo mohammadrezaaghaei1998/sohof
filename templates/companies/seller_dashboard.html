@@ -22,14 +22,20 @@
             <i class="fa fa-bars"></i>
         </a>
     </div>
-    
-
+   
     <!-- Content -->
     <div class="company-dashboard-sidebar-content" style=" text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.247);">
         <h4 class="mb-5 p-2 animate__animated animate__fadeIn">Welcome to Your Dashboard <strong>{{ sellerprofile.company_name }}</strong></h4>
 
-
-
+         
+  <!-- Global Form Errors -->
+    {% if form.errors %}
+        <div class="alert alert-danger">
+            {% for field, errors in form.errors.items %}
+                <p><strong>{{ field }}:</strong> {% for error in errors %} {{ error }} {% endfor %}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
         <section id="add-info">
             <div id="step-form">
                 <!-- Step form content will be dynamically inserted here -->
@@ -1198,36 +1204,13 @@
         <section id="settings" class="mt-5 p-5" style="box-shadow: 0 4px 8px rgba(0, 0, 0, 0.507); border-radius: 20px;">
             <h2>Change Password</h2>
         
-            {% if messages %}
-                <div class="alert alert-danger">
-                    {% for message in messages %}
-                        <p>{{ message }}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        
-            <!-- Global Form Errors -->
-            {% if form.errors %}
-                <div class="alert alert-danger">
-                    {% for field, errors in form.errors.items %}
-                        <p><strong>{{ field }}:</strong> {% for error in errors %} {{ error }} {% endfor %}</p>
-                    {% endfor %}
-                </div>
-            {% endif %}
-        
             
             
             <form method="post" action="{% url 'seller_change_password' %}">
                 {% csrf_token %}
                 
                 <div class="col-md-12 col-lg-12">
-                    {% if messages %}
-                        <div class="alert alert-danger mb-3">
-                            {% for message in messages %}
-                                <p>{{ message }}</p>
-                            {% endfor %}
-                        </div>
-                    {% endif %}
+                   
                     <div class="row">
             
                         <div class="col-lg-3 form-group">

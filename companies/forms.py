@@ -101,7 +101,7 @@ class SellerProfileUpdateForm(forms.ModelForm):
         model = SellerProfile
         exclude = ['company_logo', 'company_license', 'tax_registration', 'utility_bill',
                     'bank_statement', 'user', 'company_address', 'full_name',
-                      'date_of_birth', 'gender', 'phone_number', 'email_address', 'address', 'country','profile_views'
+                      'date_of_birth', 'gender', 'phone_number', 'email_address', 'address', 'country','profile_views', 'daily_views', 'weekly_views'
                   ]
 
 

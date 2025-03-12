@@ -2,84 +2,15 @@
 {% load static %}
 <!-- <span class="title">Dark mode OFF</span>
 <button class="botao">Dark mode</button> -->
-
 <!-- #dd3333!important -->
 <section class="ftco-section" >
     <header class="header-container">
-        <div class="col-12 text-center mb-5 header-title-home-page">
+        <div class="col-12 text-center  header-title-home-page">
             
-            <img src="{% static 'assets/images/logo.png' %}" width="230" alt="">
-            <h1 class="animate__animated animate__fadeIn">Business Hub Magazine</h1>
+            <img src="{% static 'assets/images/logo.png' %}" width="170" alt="">
+            <!-- <h1 class="animate__animated animate__fadeIn">Business Hub Magazine</h1> -->
             <!-- <p class="animate__animated animate__fadeIn">Your Subtitle or Text</p> -->
         </div>
-        <!-- <div class="container-cont" style="max-width: 1890px;"> -->
-            <div class="row align-items-center d-flex justify-content-between">
-            <!-- Left: Social Icons -->
-                <div class="col-6  d-flex justify-content-start">
-                    <div>
-                        {% for link in social_media_links %}
-                        {% if 'facebook' in link.social_media_url %}
-                            <a href="{{ link.social_media_url }}" class="text-white mx-2">
-                                <i class="fa fa-facebook fa-2x header-social-icons" style="color: red;"></i>
-                            </a>
-                        {% elif 'linkedin' in link.social_media_url %}
-                            <a href="{{ link.social_media_url }}" class="text-white mx-2">
-                                <i class="fa fa-linkedin fa-2x header-social-icons" style="color: red;"></i>
-                            </a>
-                        {% elif 'instagram' in link.social_media_url %}
-                            <a href="{{ link.social_media_url }}" class="text-white mx-2">
-                                <i class="fa fa-instagram fa-2x header-social-icons" style="color: red;"></i>
-                            </a>
-                        {% elif 'youtube' in link.social_media_url %}
-                          
-                            <a href="{{ link.social_media_url }}" class="text-white mx-2">
-                                <i class="fa fa-youtube fa-2x header-social-icons" style="color: red;"></i>
-                            </a>
-                        {% endif %}
-                    {% empty %}
-                        <li>No social media links available</li>
-                    {% endfor %}
-                    </div>
-                </div>
-            <!-- Right: Search Bar -->
-                <!-- <div class="col-6 d-flex justify-content-end">
-                    <form class="search-bar mr-4">
-                        <div class="input-group" style="border-bottom: 2px solid red; max-width: 180px;">
-                            <input type="text" 
-                                class="form-control" 
-                                placeholder="Search..." 
-                                style="border: none; outline: none; box-shadow: none;">
-                            <div class="input-group-append">
-                                <button type="submit" 
-                                        class="btn animate__animated animate__bounceIn animate__delay-.5s" 
-                                        style="outline: none; box-shadow: none;">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div> -->
-                <div class="col-6 d-flex justify-content-end">
-                    <form class="search-bar mr-4" method="get" action="{% url 'search' %}">
-                        <div class="input-group" style="border-bottom: 2px solid red; max-width: 180px;">
-                            <input type="text" 
-                                class="form-control" 
-                                name="q" 
-                                placeholder="Search Products..." 
-                                style="border: none; outline: none; box-shadow: none;">
-                            <div class="input-group-append">
-                                <button type="submit" 
-                                        class="btn animate__animated animate__bounceIn animate__delay-.5s" 
-                                        style="outline: none; box-shadow: none;">
-                                    <i class="fa fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                
-            </div>
-        <!-- </div> -->
         
     </header>
     
@@ -108,28 +39,7 @@
                                     {% endfor %}
                                 </div>
                             </div>
-                            
-                            <!-- Subcategories Column -->
-                            <!-- <div class="col-md-10">
-                                <div class="row">
-                                    {% for category in categories %}
-                                        <div id="category{{ category.id }}" class="content-column-header" style="display: none;">
-                                            <div class="subcategory-container">
-                                                {% for subcategory in category.subcategories.all %}
-                                                    <div class="col-3 col-lg-2 col-md-2 mb-4"> 
-                                                        <div class="subcategory-item">
-                                                            <a href="{% url 'subcategory_products' subcategory.id %}" class="list-group-item list-group-item-action subcategory">
-                                                                <i class="fa {{ subcategory.icon }} fa-2x mb-2"></i> 
-                                                                <div>{{ subcategory.name }}</div>
-                                                            </a>
-                                                        </div>
-                                                    </div>
-                                                {% endfor %}
-                                            </div>
-                                        </div>
-                                    {% endfor %}
-                                </div>
-                            </div> -->
+                        
                             <div class="col-md-10">
                                 <div class="row text-center">
                                     {% for category in categories %}
@@ -166,8 +76,8 @@
     
         <div class="row align-items-center d-flex justify-content-between">
             <!-- Left: User Sign-In Icon (Buyer) -->
-            <div class="col-6 d-flex justify-content-start">
-                <div class="sign-in-icons ml-3">
+            <div class="col-4 d-flex justify-content-center">
+                <div class="sign-in-icons">
                     {% if request.user.is_authenticated %}
                         {% if request.user.user_type == "buyer" %}
                             <a href="{% url 'user_dashboard' %}" class="fa fa-user" title="User Dashboard"></a>
@@ -179,8 +89,8 @@
             </div>
         
             <!-- Right: Company Sign-In Icon (Seller) -->
-            <div class="col-6 d-flex justify-content-end">
-                <div class="sign-in-icons ml-3">
+            <div class="col-4 d-flex justify-content-center">
+                <div class="sign-in-icons">
                     {% if request.user.is_authenticated %}
                         {% if request.user.user_type == "seller" %}
                             <a href="{% url 'seller_dashboard' %}" class="fa fa-building" title="Company Dashboard"></a>
@@ -190,17 +100,55 @@
                     {% endif %}
                 </div>
             </div>
+            <div class="col-4 d-flex justify-content-end">
+                <button type="button" 
+                    class="btn search-btn"  
+                    data-toggle="modal" 
+                    data-target="#searchModal" 
+                    style="outline: none; box-shadow: none;">
+                <i class="fa fa-search"></i>
+                </button>
+            </div>
+            
         </div>
         
         
-        
+          
             
     </nav>
+      <!-- Button to trigger the modal -->
+            
+      <div class="modal fade" id="searchModal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content" style="background-color: #343a40;">
+               
+                <div class="modal-body" >
+                    <!-- Search Form Inside Modal -->
+                    <form method="get" action="{% url 'search' %}">
+                        <div class="input-group" style="border-bottom: 2px solid red; background-color: none;">
+                            <input type="text" 
+                                   class="form-control search-from-control" 
+                                   name="q" 
+                                   placeholder="Search Products..." 
+                                   style="border: none; outline: none; box-shadow: none; background-color: transparent;">
+                        </div>
+                        <!-- Submit Button for Form -->
+                        <div class="text-center mt-3">
+                            <button type="submit" class="btn btn-md btn-custom animate__animated animate__bounceIn animate__delay-.5s slider__button">Search</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </section>
 
 <style>
+    .search-from-control{
+        color: white !important;
+    }
     .sign-in-icons a {
-        font-size: 36px;  
+        font-size: 30px;  
         color: white;     
         transition: all 0.3s ease; 
     }
@@ -209,6 +157,15 @@
         color: #ff0000;  
     }
 
+    .search-btn{
+        font-size: 30px;  
+        color: white;     
+        transition: all 0.3s ease; 
+    }
+    .search-btn:hover{
+        color: #ff0000;  
+        background-color: transparent;
+    }
 
     .subcategory-container {
         display: flex;
@@ -261,58 +218,6 @@
 
 
 
-<!-- <script>
-    const botao = document.getElementsByClassName("botao")[0];
-
-    botao.addEventListener("click", function() {
-        const title = document.getElementsByClassName("title")[0];
-        const allElements = document.body.querySelectorAll("*");
-
-        if (title.textContent === "Dark mode OFF") {
-            title.textContent = "Dark mode ON";
-            document.body.style.backgroundColor = '#313131'; 
-
-            allElements.forEach((element) => {
-                if (!element.classList.contains("botao")) {
-                    element.style.color = '#fff'; 
-                }
-                element.style.backgroundColor = 'transparent'; 
-            });
-
-            botao.style.backgroundColor = '#fff';
-            botao.style.color = '#000';
-        } else {
-            title.textContent = "Dark mode OFF";
-            document.body.style.backgroundColor = '#fff';
-            allElements.forEach((element) => {
-                if (!element.classList.contains("botao")) {
-                    element.style.color = '#000';
-                }
-                element.style.backgroundColor = 'transparent'; 
-            });
-
-            botao.style.backgroundColor = '#000';
-            botao.style.color = '#fff';
-        }
-    });
-
-    botao.addEventListener("mouseover", function() {
-        botao.style.backgroundColor = '#a9b9c1';
-        botao.style.color = '#000';
-    });
-
-    botao.addEventListener("mouseout", function() {
-        const title = document.getElementsByClassName("title")[0];
-        if (title.textContent === "Dark mode OFF") {
-            botao.style.backgroundColor = '#000';
-            botao.style.color = '#fff';
-        } else {
-            botao.style.backgroundColor = '#fff';
-            botao.style.color = '#000';
-        }
-    });
-</script>
- -->
 
 
 
